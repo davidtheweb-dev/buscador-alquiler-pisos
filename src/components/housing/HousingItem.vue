@@ -3,11 +3,13 @@
     <h3>{{ title }}</h3>
     <h4>{{ rate }}€/mes</h4>
     <div>
-      <span v-for="tag in tags" :key="tag">{{ tag }}</span>
+      <base-badge v-for="tag in tags" :key="tag" :type="tag" :title="tag"></base-badge>
     </div>
     <div class="actions">
-      <router-link :to="housingContactLink">Contacto</router-link>
-      <router-link :to="housingDetailLink">Ver más</router-link>
+      <base-button mode="outline" link :to="housingContactLink"
+        >Contacto</base-button
+      >
+      <base-button link :to="housingDetailLink">Ver más</base-button>
     </div>
   </li>
 </template>
