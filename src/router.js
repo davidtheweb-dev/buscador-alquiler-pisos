@@ -16,7 +16,7 @@ const router = createRouter({
       path: '/viviendas/:id',
       component: HousingDetail,
       children: [
-        { path: '/contacto', component: HousingContact }, // /viviendas/id/contacto
+        { path: 'contacto', component: HousingContact }, // /viviendas/id/contacto
       ],
     },
     { path: '/registro', component: HousingRegistration },

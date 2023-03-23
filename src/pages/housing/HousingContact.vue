@@ -1,0 +1,3 @@
+<template>
+  HOUSING CONTACT
+</template>
