@@ -13,15 +13,15 @@ export default {
           tags: ['LGTB friendly', 'Baño privado', 'Admite parejas'],
           description:
             'Quis aenean mattis fermentum lacinia molestie pellentesque, dui dictumst libero gravida potenti tincidunt, venenatis nullam elementum.',
-          monthRate: 350,
+          rate: 350,
         },
         {
           id: '2',
           title: 'Lacinia curae facilisis dapibus',
-          tags: ['Baño privado', 'Admite parejas'],
+          tags: ['LGTB friendly', 'Admite parejas'],
           description:
             'Lorem ipsum dolor sit amet consectetur adipiscing elit mollis viverra elementum turpis vel, augue fames himenaeos sodales porttitor nibh.',
-          monthRate: 400,
+          rate: 400,
         },
       ],
     };

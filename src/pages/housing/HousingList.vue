@@ -1,10 +1,14 @@
 <template>
-  <section>FILTER COMPONENT</section>
+  <section>
+    <housing-filter @change-filter="setFilters"></housing-filter>
+  </section>
   <section>
     <base-card>
       <div class="controls">
         <base-button mode="outline">Actualizar</base-button>
-        <base-button link to="/registro">¿Quieres alquilar? ¡Regístrate!</base-button>
+        <base-button v-if="!isHousing" link to="/registro"
+          >¿Quieres alquilar? ¡Regístrate!</base-button
+        >
       </div>
       <ul v-if="hasHousing">
         <housing-item
@@ -12,7 +16,7 @@
           :key="housing.id"
           :id="housing.id"
           :title="housing.title"
-          :rate="housing.monthRate"
+          :rate="housing.rate"
           :tags="housing.tags"
         ></housing-item>
       </ul>
@@ -23,17 +27,51 @@
 
 <script>
 import HousingItem from '../../components/housing/HousingItem.vue';
+import HousingFilter from '../../components/housing/HousingFilter.vue';
 
 export default {
   components: {
     HousingItem,
+    HousingFilter,
+  },
+  data() {
+    return {
+      activeFilters: {
+        lgtb: true,
+        bath: true,
+        couples: true,
+      },
+    };
   },
   computed: {
     filteredHousing() {
-      return this.$store.getters['housing/getHousing'];
+      const housing = this.$store.getters['housing/getHousing'];
+      return housing.filter((housing) => {
+        if (this.activeFilters.lgtb && housing.tags.includes('LGTB friendly')) {
+          return true;
+        }
+        if (this.activeFilters.bath && housing.tags.includes('Baño privado')) {
+          return true;
+        }
+        if (
+          this.activeFilters.couples &&
+          housing.tags.includes('Admite parejas')
+        ) {
+          return true;
+        }
+        return false;
+      });
     },
     hasHousing() {
       return this.$store.getters['housing/hasHousing'];
+    },
+    isHousing() {
+      return this.$store.getters['housing/isHousing'];
+    },
+  },
+  methods: {
+    setFilters(updatedFilters) {
+      this.activeFilters = updatedFilters;
     },
   },
 };

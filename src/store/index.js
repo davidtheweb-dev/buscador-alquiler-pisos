@@ -8,6 +8,16 @@ const store = createStore({
     housing: housingModule,
     requests: requestsModule,
   },
+  state() {
+    return {
+      userId: '3',
+    };
+  },
+  getters: {
+    userId(state) {
+      return state.userId;
+    },
+  },
 });
 
 export default store;

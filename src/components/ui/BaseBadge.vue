@@ -11,11 +11,11 @@ export default {
     formattedType() {
       switch (this.type) {
         case 'LGTB friendly':
-          return 'style-a';
+          return 'lgtb';
         case 'Baño privado':
-          return 'style-b';
+          return 'bath';
         case 'Admite parejas':
-          return 'style-c';
+          return 'couples';
         default:
           return null;
       }
@@ -37,17 +37,17 @@ export default {
   margin-right: 0.5rem;
 }
 
-.style-a {
+.lgtb {
   background-color: #3d008d;
   color: white;
 }
 
-.style-b {
+.bath {
   background-color: #71008d;
   color: white;
 }
 
-.style-c {
+.couples {
   background-color: #8d006e;
   color: white;
 }

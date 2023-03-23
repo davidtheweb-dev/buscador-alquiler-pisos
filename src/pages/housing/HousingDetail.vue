@@ -40,7 +40,7 @@ export default {
       return this.selectedHousing.title;
     },
     rate() {
-      return this.selectedHousing.monthRate;
+      return this.selectedHousing.rate;
     },
     tags() {
       return this.selectedHousing.tags;
