@@ -15,6 +15,7 @@ const router = createRouter({
     {
       path: '/viviendas/:id',
       component: HousingDetail,
+      props: true,
       children: [
         { path: 'contacto', component: HousingContact }, // /viviendas/id/contacto
       ],
