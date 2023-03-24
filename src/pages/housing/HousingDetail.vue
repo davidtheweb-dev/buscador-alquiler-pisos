@@ -53,7 +53,7 @@ export default {
     },
   },
   created() {
-    this.selectedHousing = this.$store.getters['housing/getHousing'].find(
+    this.selectedHousing = this.$store.getters['housing/housing'].find(
       (housing) => housing.id === this.id
     );
   },

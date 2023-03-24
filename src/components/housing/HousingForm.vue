@@ -15,15 +15,15 @@
     <div class="form-control">
       <h3>Características</h3>
       <div>
-        <input type="checkbox" id="lgtb" value="lgtb" v-model="tags" />
+        <input type="checkbox" id="lgtb" value="LGTB friendly" v-model="tags" />
         <label for="lgtb">LGTB friendly</label>
       </div>
       <div>
-        <input type="checkbox" id="bath" value="bath" v-model="tags" />
+        <input type="checkbox" id="bath" value="Baño privado" v-model="tags" />
         <label for="bath">Baño privado</label>
       </div>
       <div>
-        <input type="checkbox" id="couples" value="couples" v-model="tags" />
+        <input type="checkbox" id="couples" value="Admite parejas" v-model="tags" />
         <label for="couples">Admite parejas</label>
       </div>
     </div>

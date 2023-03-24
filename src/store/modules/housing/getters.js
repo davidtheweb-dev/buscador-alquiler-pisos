@@ -1,5 +1,5 @@
 export default {
-  getHousing(state) {
+  housing(state) {
     return state.housing;
   },
   hasHousing(state) {

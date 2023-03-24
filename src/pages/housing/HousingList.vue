@@ -45,7 +45,7 @@ export default {
   },
   computed: {
     filteredHousing() {
-      const housing = this.$store.getters['housing/getHousing'];
+      const housing = this.$store.getters['housing/housing'];
       return housing.filter((housing) => {
         if (this.activeFilters.lgtb && housing.tags.includes('LGTB friendly')) {
           return true;
