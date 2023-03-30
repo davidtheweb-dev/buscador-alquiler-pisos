@@ -5,12 +5,17 @@
   <section>
     <base-card>
       <div class="controls">
-        <base-button mode="outline" @click="loadHousing">Actualizar</base-button>
-        <base-button v-if="!isHousing" link to="/registro"
+        <base-button mode="outline" @click="loadHousing"
+          >Actualizar</base-button
+        >
+        <base-button v-if="!isHousing && !isLoading" link to="/registro"
           >¿Quieres alquilar? ¡Regístrate!</base-button
         >
       </div>
-      <ul v-if="hasHousing">
+      <div v-if="isLoading">
+        <base-spinner></base-spinner>
+      </div>
+      <ul v-else-if="hasHousing">
         <housing-item
           v-for="housing in filteredHousing"
           :key="housing.id"
@@ -36,6 +41,7 @@ export default {
   },
   data() {
     return {
+      isLoading: false,
       activeFilters: {
         lgtb: true,
         bath: true,
@@ -63,7 +69,7 @@ export default {
       });
     },
     hasHousing() {
-      return this.$store.getters['housing/hasHousing'];
+      return !this.isLoading && this.$store.getters['housing/hasHousing'];
     },
     isHousing() {
       return this.$store.getters['housing/isHousing'];
@@ -76,8 +82,10 @@ export default {
     setFilters(updatedFilters) {
       this.activeFilters = updatedFilters;
     },
-    loadHousing() {
-      this.$store.dispatch('housing/loadHousing');
+    async loadHousing() {
+      this.isLoading = true;
+      await this.$store.dispatch('housing/loadHousing');
+      this.isLoading = false;
     },
   },
 };
