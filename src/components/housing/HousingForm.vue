@@ -8,7 +8,7 @@
         v-model.trim="title.value"
         @blur="clearValidity('title')"
       />
-      <p v-if="!title.isValid">El título no puede estar vacío</p>
+      <p v-if="!title.isValid" class="errors">El título no puede estar vacío</p>
     </div>
     <div class="form-control" :class="{ invalid: !description.isValid }">
       <label for="description">Descripción</label>
@@ -18,7 +18,7 @@
         v-model.trim="description.value"
         @blur="clearValidity('description')"
       ></textarea>
-      <p v-if="!description.isValid">La descripción no puede estar vacía</p>
+      <p v-if="!description.isValid" class="errors">La descripción no puede estar vacía</p>
     </div>
     <div class="form-control" :class="{ invalid: !rate.isValid }">
       <label for="rate">Precio mensual (€)</label>
@@ -28,7 +28,7 @@
         v-model.number="rate.value"
         @blur="clearValidity('rate')"
       />
-      <p v-if="!rate.isValid">El precio debe ser mayor de 0</p>
+      <p v-if="!rate.isValid" class="errors">El precio debe ser mayor de 0</p>
     </div>
     <div class="form-control">
       <h3>Características</h3>
@@ -184,5 +184,10 @@ h3 {
 .invalid input,
 .invalid textarea {
   border: 1px solid red;
+}
+
+.errors {
+  font-weight: bold;
+  color: red;
 }
 </style>
