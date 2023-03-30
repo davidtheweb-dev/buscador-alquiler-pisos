@@ -1,4 +1,11 @@
 <template>
+  <base-dialog
+    :show="!!error"
+    title="Por favor, contacta con soporte indicando el error"
+    @close="handleDialogError"
+  >
+    <p>{{ error }}</p>
+  </base-dialog>
   <section>
     <housing-filter @change-filter="setFilters"></housing-filter>
   </section>
@@ -42,6 +49,7 @@ export default {
   data() {
     return {
       isLoading: false,
+      error: null,
       activeFilters: {
         lgtb: true,
         bath: true,
@@ -84,8 +92,16 @@ export default {
     },
     async loadHousing() {
       this.isLoading = true;
-      await this.$store.dispatch('housing/loadHousing');
+      try {
+        await this.$store.dispatch('housing/loadHousing');
+      } catch (error) {
+        this.error =
+          error.message || 'Error inesperado al cargar las viviendas';
+      }
       this.isLoading = false;
+    },
+    handleDialogError() {
+      this.error = null;
     },
   },
 };
