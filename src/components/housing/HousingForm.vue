@@ -1,32 +1,68 @@
 <template>
   <form @submit.prevent="submitForm">
-    <div class="form-control">
+    <div class="form-control" :class="{ invalid: !title.isValid }">
       <label for="title">Título</label>
-      <input type="text" id="title" v-model.trim="title" />
+      <input
+        type="text"
+        id="title"
+        v-model.trim="title.value"
+        @blur="clearValidity('title')"
+      />
+      <p v-if="!title.isValid">El título no puede estar vacío</p>
     </div>
-    <div class="form-control">
+    <div class="form-control" :class="{ invalid: !description.isValid }">
       <label for="description">Descripción</label>
-      <textarea id="description" rows="5" v-model.trim="description"></textarea>
+      <textarea
+        id="description"
+        rows="5"
+        v-model.trim="description.value"
+        @blur="clearValidity('description')"
+      ></textarea>
+      <p v-if="!description.isValid">La descripción no puede estar vacía</p>
     </div>
-    <div class="form-control">
+    <div class="form-control" :class="{ invalid: !rate.isValid }">
       <label for="rate">Precio mensual (€)</label>
-      <input type="number" id="rate" v-model.number="rate" />
+      <input
+        type="number"
+        id="rate"
+        v-model.number="rate.value"
+        @blur="clearValidity('rate')"
+      />
+      <p v-if="!rate.isValid">El precio debe ser mayor de 0</p>
     </div>
     <div class="form-control">
       <h3>Características</h3>
       <div>
-        <input type="checkbox" id="lgtb" value="LGTB friendly" v-model="tags" />
+        <input
+          type="checkbox"
+          id="lgtb"
+          value="LGTB friendly"
+          v-model="tags.value"
+        />
         <label for="lgtb">LGTB friendly</label>
       </div>
       <div>
-        <input type="checkbox" id="bath" value="Baño privado" v-model="tags" />
+        <input
+          type="checkbox"
+          id="bath"
+          value="Baño privado"
+          v-model="tags.value"
+        />
         <label for="bath">Baño privado</label>
       </div>
       <div>
-        <input type="checkbox" id="couples" value="Admite parejas" v-model="tags" />
+        <input
+          type="checkbox"
+          id="couples"
+          value="Admite parejas"
+          v-model="tags.value"
+        />
         <label for="couples">Admite parejas</label>
       </div>
     </div>
+    <p v-if="!formIsValid">
+      Por favor, corrige los campos y vuelve a intentarlo
+    </p>
     <base-button>Registrarme</base-button>
   </form>
 </template>
@@ -36,19 +72,56 @@ export default {
   emits: ['save-data'],
   data() {
     return {
-      title: '',
-      description: '',
-      rate: null,
-      tags: [],
+      title: {
+        value: '',
+        isValid: true,
+      },
+      description: {
+        value: '',
+        isValid: true,
+      },
+      rate: {
+        value: null,
+        isValid: true,
+      },
+      tags: {
+        value: [],
+        isValid: true,
+      },
+      formIsValid: true,
     };
   },
   methods: {
+    clearValidity(input) {
+      this[input].isValid = true;
+    },
+    validateForm() {
+      this.formIsValid = true;
+      if (this.title.value === '') {
+        this.title.isValid = false;
+        this.formIsValid = false;
+      }
+      if (this.description.value === '') {
+        this.description.isValid = false;
+        this.formIsValid = false;
+      }
+      if (!this.rate.value || this.rate.value < 0) {
+        this.rate.isValid = false;
+        this.formIsValid = false;
+      }
+    },
     submitForm() {
+      this.validateForm();
+
+      if (!this.formIsValid) {
+        return;
+      }
+
       const formData = {
-        title: this.title,
-        description: this.description,
-        rate: this.rate,
-        tags: this.tags,
+        title: this.title.value,
+        description: this.description.value,
+        rate: this.rate.value,
+        tags: this.tags.value,
       };
 
       this.$emit('save-data', formData);
