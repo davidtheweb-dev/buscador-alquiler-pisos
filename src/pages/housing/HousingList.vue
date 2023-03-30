@@ -5,7 +5,7 @@
   <section>
     <base-card>
       <div class="controls">
-        <base-button mode="outline">Actualizar</base-button>
+        <base-button mode="outline" @click="loadHousing">Actualizar</base-button>
         <base-button v-if="!isHousing" link to="/registro"
           >¿Quieres alquilar? ¡Regístrate!</base-button
         >
@@ -69,9 +69,15 @@ export default {
       return this.$store.getters['housing/isHousing'];
     },
   },
+  created() {
+    this.loadHousing();
+  },
   methods: {
     setFilters(updatedFilters) {
       this.activeFilters = updatedFilters;
+    },
+    loadHousing() {
+      this.$store.dispatch('housing/loadHousing');
     },
   },
 };

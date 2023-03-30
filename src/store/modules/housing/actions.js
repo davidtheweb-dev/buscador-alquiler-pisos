@@ -27,4 +27,30 @@ export default {
       id: userId,
     });
   },
+  async loadHousing(context) {
+    const response = await fetch(
+      `https://student-rent-finder-default-rtdb.europe-west1.firebasedatabase.app/housing.json`
+    );
+
+    const responseData = await response.json();
+
+    if (!response.ok) {
+      // TODO: error
+    }
+
+    const housing = [];
+
+    for (const key in responseData) {
+      const house = {
+        id: key,
+        title: responseData[key].title,
+        description: responseData[key].description,
+        rate: responseData[key].rate,
+        tags: responseData[key].tags,
+      };
+      housing.push(house);
+    }
+
+    context.commit('setHousing', housing);
+  },
 };
