@@ -27,7 +27,11 @@ export default {
       id: userId,
     });
   },
-  async loadHousing(context) {
+  async loadHousing(context, payload) {
+    if (!payload.forceRefresh && !context.getters.shouldUpdate) {
+      return;
+    }
+
     const response = await fetch(
       `https://student-rent-finder-default-rtdb.europe-west1.firebasedatabase.app/housing.json`
     );
@@ -35,7 +39,9 @@ export default {
     const responseData = await response.json();
 
     if (!response.ok) {
-      const error = new Error(responseData.message || 'Error inesperado al cargar las viviendas');
+      const error = new Error(
+        responseData.message || 'Error inesperado al cargar las viviendas'
+      );
       throw error;
     }
 
@@ -53,5 +59,6 @@ export default {
     }
 
     context.commit('setHousing', housing);
+    context.commit('setFetchTimestamp');
   },
 };

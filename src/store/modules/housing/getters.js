@@ -10,4 +10,13 @@ export default {
     const userId = rootGetters.userId;
     return housing.some((housing) => housing.id === userId);
   },
+  shouldUpdate(state) {
+    const minSecondsToUpdate = 300; // The minimum that must pass to be able to re-fetch the list of flats
+    const lastFetch = state.lastFetch;
+    if (!lastFetch) {
+      return true;
+    }
+    const currentTimeStamp = new Date().getTime();
+    return (currentTimeStamp - lastFetch) / 1000 > minSecondsToUpdate;
+  },
 };

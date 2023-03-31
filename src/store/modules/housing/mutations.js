@@ -5,4 +5,7 @@ export default {
   setHousing(state, payload) {
     state.housing = payload;
   },
+  setFetchTimestamp(state) {
+    state.lastFetch = new Date().getTime();
+  },
 };

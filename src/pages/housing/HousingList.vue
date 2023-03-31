@@ -12,7 +12,7 @@
   <section>
     <base-card>
       <div class="controls">
-        <base-button mode="outline" @click="loadHousing"
+        <base-button mode="outline" @click="loadHousing(true)"
           >Actualizar</base-button
         >
         <base-button v-if="!isHousing && !isLoading" link to="/registro"
@@ -90,10 +90,12 @@ export default {
     setFilters(updatedFilters) {
       this.activeFilters = updatedFilters;
     },
-    async loadHousing() {
+    async loadHousing(refresh = false) {
       this.isLoading = true;
       try {
-        await this.$store.dispatch('housing/loadHousing');
+        await this.$store.dispatch('housing/loadHousing', {
+          forceRefresh: refresh,
+        });
       } catch (error) {
         this.error =
           error.message || 'Error inesperado al cargar las viviendas';
