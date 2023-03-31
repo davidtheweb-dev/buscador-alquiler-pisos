@@ -1,40 +1,42 @@
 <template>
-  <base-dialog
-    :show="!!error"
-    title="Por favor, contacta con soporte indicando el error"
-    @close="handleDialogError"
-  >
-    <p>{{ error }}</p>
-  </base-dialog>
-  <section>
-    <housing-filter @change-filter="setFilters"></housing-filter>
-  </section>
-  <section>
-    <base-card>
-      <div class="controls">
-        <base-button mode="outline" @click="loadHousing(true)"
-          >Actualizar</base-button
-        >
-        <base-button v-if="!isHousing && !isLoading" link to="/registro"
-          >¿Quieres alquilar? ¡Regístrate!</base-button
-        >
-      </div>
-      <div v-if="isLoading">
-        <base-spinner></base-spinner>
-      </div>
-      <ul v-else-if="hasHousing">
-        <housing-item
-          v-for="housing in filteredHousing"
-          :key="housing.id"
-          :id="housing.id"
-          :title="housing.title"
-          :rate="housing.rate"
-          :tags="housing.tags"
-        ></housing-item>
-      </ul>
-      <h3 v-else>No se han encontrado viviendas.</h3>
-    </base-card>
-  </section>
+  <div>
+    <base-dialog
+      :show="!!error"
+      title="Por favor, contacta con soporte indicando el error"
+      @close="handleDialogError"
+    >
+      <p>{{ error }}</p>
+    </base-dialog>
+    <section>
+      <housing-filter @change-filter="setFilters"></housing-filter>
+    </section>
+    <section>
+      <base-card>
+        <div class="controls">
+          <base-button mode="outline" @click="loadHousing(true)"
+            >Actualizar</base-button
+          >
+          <base-button v-if="!isHousing && !isLoading" link to="/registro"
+            >¿Quieres alquilar? ¡Regístrate!</base-button
+          >
+        </div>
+        <div v-if="isLoading">
+          <base-spinner></base-spinner>
+        </div>
+        <ul v-else-if="hasHousing">
+          <housing-item
+            v-for="housing in filteredHousing"
+            :key="housing.id"
+            :id="housing.id"
+            :title="housing.title"
+            :rate="housing.rate"
+            :tags="housing.tags"
+          ></housing-item>
+        </ul>
+        <h3 v-else>No se han encontrado viviendas.</h3>
+      </base-card>
+    </section>
+  </div>
 </template>
 
 <script>

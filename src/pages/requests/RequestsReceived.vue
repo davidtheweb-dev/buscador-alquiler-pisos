@@ -1,28 +1,30 @@
 <template>
-  <base-dialog
-    :show="!!error"
-    title="Por favor, contacta con soporte indicando el error"
-    @close="handleDialogError"
-  >
-    <p>{{ error }}</p>
-  </base-dialog>
-  <section>
-    <base-card>
-      <header>
-        <h2>Solicitudes recibidas</h2>
-      </header>
-      <base-spinner v-if="isLoading"></base-spinner>
-      <ul v-else-if="hasRequests && !isLoading">
-        <requests-item
-          v-for="req in receivedRequests"
-          :key="req.id"
-          :email="req.email"
-          :message="req.message"
-        ></requests-item>
-      </ul>
-      <h3 v-else>No has recibido ninguna solicitud todavía</h3>
-    </base-card>
-  </section>
+  <div>
+    <base-dialog
+      :show="!!error"
+      title="Por favor, contacta con soporte indicando el error"
+      @close="handleDialogError"
+    >
+      <p>{{ error }}</p>
+    </base-dialog>
+    <section>
+      <base-card>
+        <header>
+          <h2>Solicitudes recibidas</h2>
+        </header>
+        <base-spinner v-if="isLoading"></base-spinner>
+        <ul v-else-if="hasRequests && !isLoading">
+          <requests-item
+            v-for="req in receivedRequests"
+            :key="req.id"
+            :email="req.email"
+            :message="req.message"
+          ></requests-item>
+        </ul>
+        <h3 v-else>No has recibido ninguna solicitud todavía</h3>
+      </base-card>
+    </section>
+  </div>
 </template>
 
 <script>
