@@ -5,6 +5,7 @@ import HousingDetail from './pages/housing/HousingDetail.vue';
 import HousingContact from './pages/housing/HousingContact.vue';
 import HousingRegistration from './pages/housing/HousingRegistration.vue';
 import RequestsReceived from './pages/requests/RequestsReceived.vue';
+import UserAuth from './pages/auth/UserAuth.vue';
 import NotFound from './pages/NotFound.vue';
 
 const router = createRouter({
@@ -22,6 +23,7 @@ const router = createRouter({
     },
     { path: '/registro', component: HousingRegistration },
     { path: '/solicitudes', component: RequestsReceived },
+    { path: '/autenticacion', component: UserAuth },
     { path: '/:notFound(.*)', component: NotFound },
   ],
 });
