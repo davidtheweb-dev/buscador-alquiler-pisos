@@ -74,14 +74,15 @@ export default {
       }
 
       this.isLoading = true;
+      const authActionPayload = {
+        email: this.email,
+        password: this.password,
+      };
       try {
         if (this.mode === 'login') {
-          // TODO
+          await this.$store.dispatch('login', authActionPayload);
         } else {
-          await this.$store.dispatch('signup', {
-            email: this.email,
-            password: this.password,
-          });
+          await this.$store.dispatch('signup', authActionPayload);
         }
       } catch (error) {
         this.error =
