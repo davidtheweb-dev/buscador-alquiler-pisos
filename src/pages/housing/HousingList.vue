@@ -16,8 +16,14 @@
           <base-button mode="outline" @click="loadHousing(true)"
             >Actualizar</base-button
           >
-          <base-button v-if="!isHousing && !isLoading" link to="/registro"
-            >¿Quieres alquilar? ¡Regístrate!</base-button
+          <base-button link to="/autenticacion" v-if="!isLoggedIn"
+            >¿Quieres alquilar? Inicia sesión</base-button
+          >
+          <base-button
+            v-if="isLoggedIn && !isHousing && !isLoading"
+            link
+            to="/registro"
+            >¿Quieres alquilar? ¡Sube tu piso!</base-button
           >
         </div>
         <div v-if="isLoading">
@@ -60,6 +66,9 @@ export default {
     };
   },
   computed: {
+    isLoggedIn() {
+      return this.$store.getters.isAuthenticated;
+    },
     filteredHousing() {
       const housing = this.$store.getters['housing/housing'];
       return housing.filter((housing) => {
