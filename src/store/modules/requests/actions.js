@@ -30,8 +30,10 @@ export default {
   async fetchRequests(context) {
     const userId = context.rootGetters.userId;
 
+    const token = context.rootGetters.token;
+
     const response = await fetch(
-      `https://student-rent-finder-default-rtdb.europe-west1.firebasedatabase.app/requests/${userId}.json`
+      `https://student-rent-finder-default-rtdb.europe-west1.firebasedatabase.app/requests/${userId}.json?auth=${token}`
     );
 
     const responseData = await response.json();

@@ -8,8 +8,10 @@ export default {
       tags: data.tags,
     };
 
+    const token = context.rootGetters.token;
+
     const response = await fetch(
-      `https://student-rent-finder-default-rtdb.europe-west1.firebasedatabase.app/housing/${userId}.json`,
+      `https://student-rent-finder-default-rtdb.europe-west1.firebasedatabase.app/housing/${userId}.json?auth=${token}`,
       {
         method: 'PUT',
         body: JSON.stringify(housingData),
