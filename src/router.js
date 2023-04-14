@@ -1,14 +1,22 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
-import HousingList from './pages/housing/HousingList.vue';
-import HousingDetail from './pages/housing/HousingDetail.vue';
-import HousingContact from './pages/housing/HousingContact.vue';
-import HousingRegistration from './pages/housing/HousingRegistration.vue';
-import RequestsReceived from './pages/requests/RequestsReceived.vue';
-import UserAuth from './pages/auth/UserAuth.vue';
-import NotFound from './pages/NotFound.vue';
+// import HousingList from './pages/housing/HousingList.vue';
+// import HousingDetail from './pages/housing/HousingDetail.vue';
+// import HousingContact from './pages/housing/HousingContact.vue';
+// import HousingRegistration from './pages/housing/HousingRegistration.vue';
+// import RequestsReceived from './pages/requests/RequestsReceived.vue';
+// import UserAuth from './pages/auth/UserAuth.vue';
+// import NotFound from './pages/NotFound.vue';
 
 import store from './store/index.js';
+
+const HousingList = () => import('./pages/housing/HousingList.vue');
+const HousingDetail = () => import('./pages/housing/HousingDetail.vue');
+const HousingContact = () => import('./pages/housing/HousingContact.vue');
+const HousingRegistration = () => import('./pages/housing/HousingRegistration.vue');
+const RequestsReceived = () => import('./pages/requests/RequestsReceived.vue');
+const UserAuth = () => import('./pages/auth/UserAuth.vue');
+const NotFound = () => import('./pages/NotFound.vue');
 
 const router = createRouter({
   history: createWebHistory(),
