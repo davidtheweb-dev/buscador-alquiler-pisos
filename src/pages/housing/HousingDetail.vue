@@ -51,7 +51,7 @@ export default {
       return this.selectedHousing.description;
     },
     contactLink() {
-      return this.$route.path + '/contacto';
+      return `/viviendas/${this.id}/contacto`;
     },
   },
   created() {
