@@ -18,7 +18,9 @@
         v-model.trim="description.value"
         @blur="clearValidity('description')"
       ></textarea>
-      <p v-if="!description.isValid" class="errors">La descripción no puede estar vacía</p>
+      <p v-if="!description.isValid" class="errors">
+        La descripción no puede estar vacía
+      </p>
     </div>
     <div class="form-control" :class="{ invalid: !rate.isValid }">
       <label for="rate">Precio mensual (€)</label>

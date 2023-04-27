@@ -13,7 +13,8 @@ import store from './store/index.js';
 const HousingList = () => import('./pages/housing/HousingList.vue');
 const HousingDetail = () => import('./pages/housing/HousingDetail.vue');
 const HousingContact = () => import('./pages/housing/HousingContact.vue');
-const HousingRegistration = () => import('./pages/housing/HousingRegistration.vue');
+const HousingRegistration = () =>
+  import('./pages/housing/HousingRegistration.vue');
 const RequestsReceived = () => import('./pages/requests/RequestsReceived.vue');
 const UserAuth = () => import('./pages/auth/UserAuth.vue');
 const NotFound = () => import('./pages/NotFound.vue');

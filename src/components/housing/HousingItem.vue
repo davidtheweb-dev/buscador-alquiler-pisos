@@ -3,7 +3,12 @@
     <h3>{{ title }}</h3>
     <h4>{{ rate }}€/mes</h4>
     <div>
-      <base-badge v-for="tag in tags" :key="tag" :type="tag" :title="tag"></base-badge>
+      <base-badge
+        v-for="tag in tags"
+        :key="tag"
+        :type="tag"
+        :title="tag"
+      ></base-badge>
     </div>
     <div class="actions">
       <base-button mode="outline" link :to="housingContactLink"

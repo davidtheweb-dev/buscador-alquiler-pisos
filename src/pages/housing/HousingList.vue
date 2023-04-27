@@ -16,7 +16,10 @@
           <base-button mode="outline" @click="loadHousing(true)"
             >Actualizar</base-button
           >
-          <base-button link to="/autenticacion?redirect=registro" v-if="!isLoggedIn"
+          <base-button
+            link
+            to="/autenticacion?redirect=registro"
+            v-if="!isLoggedIn"
             >¿Quieres alquilar? Inicia sesión</base-button
           >
           <base-button
