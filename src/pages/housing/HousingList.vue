@@ -8,21 +8,29 @@
       <p>{{ error }}</p>
     </base-dialog>
     <section>
-      <housing-filter @change-filter="setFilters"></housing-filter>
+      <housing-filter
+        data-cy="housing-filter"
+        @change-filter="setFilters"
+      ></housing-filter>
     </section>
     <section>
       <base-card>
         <div class="controls">
-          <base-button mode="outline" @click="loadHousing(true)"
+          <base-button
+            data-cy="housing-reload-btn"
+            mode="outline"
+            @click="loadHousing(true)"
             >Actualizar</base-button
           >
           <base-button
+            data-cy="housing-login-btn"
             link
             to="/autenticacion?redirect=registro"
             v-if="!isLoggedIn"
             >¿Quieres alquilar? Inicia sesión</base-button
           >
           <base-button
+            data-cy="housing-upload-btn"
             v-if="isLoggedIn && !isHousing && !isLoading"
             link
             to="/registro"
@@ -34,6 +42,7 @@
         </div>
         <ul v-else-if="hasHousing">
           <housing-item
+            data-cy="housing-item"
             v-for="housing in filteredHousing"
             :key="housing.id"
             :id="housing.id"
