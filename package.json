@@ -14,8 +14,12 @@
     "vuex": "^4.0.2"
   },
   "devDependencies": {
+    "vite": "^4.3.2",
     "@vitejs/plugin-vue": "^4.1.0",
-    "cypress": "^12.12.0",
-    "vite": "^4.3.2"
+    "vite-plugin-eslint": "^1.8.1",
+    "eslint": "^8.42.0",
+    "eslint-plugin-vue": "^9.14.1",
+    "eslint-config-prettier": "^8.8.0",
+    "cypress": "^12.12.0"
   }
 }
