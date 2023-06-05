@@ -14,15 +14,15 @@
       <form @submit.prevent="submitForm">
         <div class="form-control">
           <label for="email">Correo electrónico</label>
-          <input type="email" id="email" v-model.trim="email" />
+          <input id="email" v-model.trim="email" type="email" />
         </div>
         <div class="form-control">
           <label for="password">Contraseña</label>
-          <input type="password" id="password" v-model.trim="password" />
+          <input id="password" v-model.trim="password" type="password" />
         </div>
         <p v-if="!formIsValid">
-          Por favor, introduce un correo y contraseña válido (debe contener un
-          mínimo de 6 carácteres).
+          Por favor, introduce un correo y contraseña válido (debe contener un mínimo de 6
+          carácteres).
         </p>
         <base-button>{{ submitButtonCaption }}</base-button>
         <base-button type="button" mode="flat" @click="switchAuthMode">{{
@@ -64,11 +64,7 @@ export default {
   methods: {
     async submitForm() {
       this.formIsValid = true;
-      if (
-        this.email === '' ||
-        !this.email.includes('@') ||
-        this.password.length < 6
-      ) {
+      if (this.email === '' || !this.email.includes('@') || this.password.length < 6) {
         this.formIsValid = false;
         return;
       }
@@ -87,8 +83,7 @@ export default {
         const redirectUrl = '/' + (this.$route.query.redirect || 'viviendas');
         this.$router.replace(redirectUrl);
       } catch (error) {
-        this.error =
-          error.message || 'Error inesperado al intentar autenticarte.';
+        this.error = error.message || 'Error inesperado al intentar autenticarte.';
       }
       this.isLoading = false;
     },

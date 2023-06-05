@@ -2,15 +2,15 @@
   <base-card>
     <h2>¡Encuentra tu piso!</h2>
     <span class="filter-option">
-      <input type="checkbox" id="lgtb" checked @change="setFilter" />
+      <input id="lgtb" type="checkbox" checked @change="setFilter" />
       <label for="lgtb">LGTB friendly</label>
     </span>
     <span class="filter-option">
-      <input type="checkbox" id="bath" checked @change="setFilter" />
+      <input id="bath" type="checkbox" checked @change="setFilter" />
       <label for="bath">Baño privado</label>
     </span>
     <span class="filter-option">
-      <input type="checkbox" id="couples" checked @change="setFilter" />
+      <input id="couples" type="checkbox" checked @change="setFilter" />
       <label for="couples">Admite parejas</label>
     </span>
   </base-card>

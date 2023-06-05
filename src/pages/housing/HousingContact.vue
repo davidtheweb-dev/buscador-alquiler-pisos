@@ -2,15 +2,13 @@
   <form @submit.prevent="submitForm">
     <div>
       <label for="email">Correo electrónico</label>
-      <input type="email" id="email" v-model.trim="email" />
+      <input id="email" v-model.trim="email" type="email" />
     </div>
     <div class="form-control">
       <label for="message">Mensaje</label>
-      <textarea id="message" rows="5" v-model.trim="message"></textarea>
+      <textarea id="message" v-model.trim="message" rows="5"></textarea>
     </div>
-    <p class="errors" v-if="!formIsValid">
-      Por favor, introduce un email y mensaje válidos
-    </p>
+    <p v-if="!formIsValid" class="errors">Por favor, introduce un email y mensaje válidos</p>
     <div class="actions">
       <base-button>Envía tu mensaje</base-button>
     </div>
@@ -29,11 +27,7 @@ export default {
   methods: {
     submitForm() {
       this.formIsValid = true;
-      if (
-        this.email === '' ||
-        !this.email.includes('@') ||
-        this.message === ''
-      ) {
+      if (this.email === '' || !this.email.includes('@') || this.message === '') {
         this.formIsValid = false;
         return;
       }

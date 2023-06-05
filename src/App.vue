@@ -19,15 +19,15 @@ export default {
       return this.$store.getters.didAutoLogout;
     },
   },
-  created() {
-    this.$store.dispatch('autoLogin');
-  },
   watch: {
     didAutoLogout(currentValue, oldValue) {
       if (currentValue && currentValue !== oldValue) {
         this.$router.replace('/viviendas');
       }
     },
+  },
+  created() {
+    this.$store.dispatch('autoLogin');
   },
 };
 </script>

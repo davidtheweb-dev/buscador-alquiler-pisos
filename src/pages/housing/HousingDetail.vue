@@ -17,12 +17,7 @@
     </section>
     <section>
       <base-card>
-        <base-badge
-          v-for="tag in tags"
-          :key="tag"
-          :type="tag"
-          :title="tag"
-        ></base-badge>
+        <base-badge v-for="tag in tags" :key="tag" :type="tag" :title="tag"></base-badge>
         <p>{{ description }}</p>
       </base-card>
     </section>

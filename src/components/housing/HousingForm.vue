@@ -2,69 +2,40 @@
   <form @submit.prevent="submitForm">
     <div class="form-control" :class="{ invalid: !title.isValid }">
       <label for="title">Título</label>
-      <input
-        type="text"
-        id="title"
-        v-model.trim="title.value"
-        @blur="clearValidity('title')"
-      />
+      <input id="title" v-model.trim="title.value" type="text" @blur="clearValidity('title')" />
       <p v-if="!title.isValid" class="errors">El título no puede estar vacío</p>
     </div>
     <div class="form-control" :class="{ invalid: !description.isValid }">
       <label for="description">Descripción</label>
       <textarea
         id="description"
-        rows="5"
         v-model.trim="description.value"
+        rows="5"
         @blur="clearValidity('description')"
       ></textarea>
-      <p v-if="!description.isValid" class="errors">
-        La descripción no puede estar vacía
-      </p>
+      <p v-if="!description.isValid" class="errors">La descripción no puede estar vacía</p>
     </div>
     <div class="form-control" :class="{ invalid: !rate.isValid }">
       <label for="rate">Precio mensual (€)</label>
-      <input
-        type="number"
-        id="rate"
-        v-model.number="rate.value"
-        @blur="clearValidity('rate')"
-      />
+      <input id="rate" v-model.number="rate.value" type="number" @blur="clearValidity('rate')" />
       <p v-if="!rate.isValid" class="errors">El precio debe ser mayor de 0</p>
     </div>
     <div class="form-control">
       <h3>Características</h3>
       <div>
-        <input
-          type="checkbox"
-          id="lgtb"
-          value="LGTB friendly"
-          v-model="tags.value"
-        />
+        <input id="lgtb" v-model="tags.value" type="checkbox" value="LGTB friendly" />
         <label for="lgtb">LGTB friendly</label>
       </div>
       <div>
-        <input
-          type="checkbox"
-          id="bath"
-          value="Baño privado"
-          v-model="tags.value"
-        />
+        <input id="bath" v-model="tags.value" type="checkbox" value="Baño privado" />
         <label for="bath">Baño privado</label>
       </div>
       <div>
-        <input
-          type="checkbox"
-          id="couples"
-          value="Admite parejas"
-          v-model="tags.value"
-        />
+        <input id="couples" v-model="tags.value" type="checkbox" value="Admite parejas" />
         <label for="couples">Admite parejas</label>
       </div>
     </div>
-    <p v-if="!formIsValid">
-      Por favor, corrige los campos y vuelve a intentarlo
-    </p>
+    <p v-if="!formIsValid">Por favor, corrige los campos y vuelve a intentarlo</p>
     <base-button>Registrarme</base-button>
   </form>
 </template>

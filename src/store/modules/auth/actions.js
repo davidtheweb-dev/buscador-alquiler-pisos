@@ -35,9 +35,7 @@ export default {
     const responseData = await response.json();
 
     if (!response.ok) {
-      const error = new Error(
-        responseData.message || 'Error inesperado al intentar autenticarte.'
-      );
+      const error = new Error(responseData.message || 'Error inesperado al intentar autenticarte.');
       throw error;
     }
 

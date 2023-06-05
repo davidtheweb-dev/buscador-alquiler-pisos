@@ -3,18 +3,15 @@
     <h3 data-cy="housing-item-title">{{ title }}</h3>
     <h4 data-cy="housing-item-rate">{{ rate }}€/mes</h4>
     <div>
-      <base-badge
-        v-for="tag in tags"
-        :key="tag"
-        :type="tag"
-        :title="tag"
-      ></base-badge>
+      <base-badge v-for="tag in tags" :key="tag" :type="tag" :title="tag"></base-badge>
     </div>
     <div class="actions">
       <base-button data-cy="housing-item-contact-btn" mode="outline" link :to="housingContactLink"
         >Contacto</base-button
       >
-      <base-button data-cy="housing-item-show-btn" link :to="housingDetailLink">Ver más</base-button>
+      <base-button data-cy="housing-item-show-btn" link :to="housingDetailLink"
+        >Ver más</base-button
+      >
     </div>
   </li>
 </template>

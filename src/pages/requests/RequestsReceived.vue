@@ -39,9 +39,6 @@ export default {
       error: null,
     };
   },
-  created() {
-    this.loadRequests();
-  },
   computed: {
     receivedRequests() {
       return this.$store.getters['requests/requests'];
@@ -49,6 +46,9 @@ export default {
     hasRequests() {
       return this.$store.getters['requests/hasRequests'];
     },
+  },
+  created() {
+    this.loadRequests();
   },
   methods: {
     async loadRequests() {

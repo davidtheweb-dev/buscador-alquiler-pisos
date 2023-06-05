@@ -16,9 +16,7 @@ export default {
     const responseData = await response.json();
 
     if (!response.ok) {
-      const error = new Error(
-        responseData.message || 'Error inesperado al enviar el mensaje'
-      );
+      const error = new Error(responseData.message || 'Error inesperado al enviar el mensaje');
       throw error;
     }
 
@@ -39,9 +37,7 @@ export default {
     const responseData = await response.json();
 
     if (!response.ok) {
-      const error = new Error(
-        responseData.message || 'Error inesperado al cargar los mensajes'
-      );
+      const error = new Error(responseData.message || 'Error inesperado al cargar los mensajes');
       throw error;
     }
 

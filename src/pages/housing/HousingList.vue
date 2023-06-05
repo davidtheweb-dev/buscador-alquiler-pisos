@@ -8,30 +8,24 @@
       <p>{{ error }}</p>
     </base-dialog>
     <section>
-      <housing-filter
-        data-cy="housing-filter"
-        @change-filter="setFilters"
-      ></housing-filter>
+      <housing-filter data-cy="housing-filter" @change-filter="setFilters"></housing-filter>
     </section>
     <section>
       <base-card>
         <div class="controls">
-          <base-button
-            data-cy="housing-reload-btn"
-            mode="outline"
-            @click="loadHousing(true)"
+          <base-button data-cy="housing-reload-btn" mode="outline" @click="loadHousing(true)"
             >Actualizar</base-button
           >
           <base-button
+            v-if="!isLoggedIn"
             data-cy="housing-login-btn"
             link
             to="/autenticacion?redirect=registro"
-            v-if="!isLoggedIn"
             >¿Quieres alquilar? Inicia sesión</base-button
           >
           <base-button
-            data-cy="housing-upload-btn"
             v-if="isLoggedIn && !isHousing && !isLoading"
+            data-cy="housing-upload-btn"
             link
             to="/registro"
             >¿Quieres alquilar? ¡Sube tu piso!</base-button
@@ -42,10 +36,10 @@
         </div>
         <ul v-else-if="hasHousing">
           <housing-item
-            data-cy="housing-item"
             v-for="housing in filteredHousing"
-            :key="housing.id"
             :id="housing.id"
+            :key="housing.id"
+            data-cy="housing-item"
             :title="housing.title"
             :rate="housing.rate"
             :tags="housing.tags"
@@ -90,10 +84,7 @@ export default {
         if (this.activeFilters.bath && housing.tags.includes('Baño privado')) {
           return true;
         }
-        if (
-          this.activeFilters.couples &&
-          housing.tags.includes('Admite parejas')
-        ) {
+        if (this.activeFilters.couples && housing.tags.includes('Admite parejas')) {
           return true;
         }
         return false;
@@ -120,8 +111,7 @@ export default {
           forceRefresh: refresh,
         });
       } catch (error) {
-        this.error =
-          error.message || 'Error inesperado al cargar las viviendas';
+        this.error = error.message || 'Error inesperado al cargar las viviendas';
       }
       this.isLoading = false;
     },

@@ -41,9 +41,7 @@ export default {
     const responseData = await response.json();
 
     if (!response.ok) {
-      const error = new Error(
-        responseData.message || 'Error inesperado al cargar las viviendas'
-      );
+      const error = new Error(responseData.message || 'Error inesperado al cargar las viviendas');
       throw error;
     }
 
