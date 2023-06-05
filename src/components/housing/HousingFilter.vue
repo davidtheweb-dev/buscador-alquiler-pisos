@@ -16,31 +16,25 @@
   </base-card>
 </template>
 
-<script>
-export default {
-  emits: ['change-filter'],
-  data() {
-    return {
-      filters: {
-        lgtb: true,
-        bath: true,
-        couples: true,
-      },
-    };
-  },
-  methods: {
-    setFilter(event) {
-      const inputId = event.target.id;
-      const isActive = event.target.checked;
-      const updatedFilters = {
-        ...this.filters,
-        [inputId]: isActive,
-      };
-      this.filters = updatedFilters;
-      this.$emit('change-filter', updatedFilters);
-    },
-  },
+<script setup>
+const emit = defineEmits(['change-filter']);
+
+let filters = {
+  lgtb: true,
+  bath: true,
+  couples: true,
 };
+
+function setFilter(event) {
+  const inputId = event.target.id;
+  const isActive = event.target.checked;
+  const updatedFilters = {
+    ...filters,
+    [inputId]: isActive, // Overrides the filter that changed (inputId) and its new value (isActive)
+  };
+  filters = updatedFilters;
+  emit('change-filter', updatedFilters);
+}
 </script>
 
 <style scoped>

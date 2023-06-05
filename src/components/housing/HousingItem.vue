@@ -16,18 +16,38 @@
   </li>
 </template>
 
-<script>
-export default {
-  props: ['id', 'title', 'rate', 'tags'],
-  computed: {
-    housingContactLink() {
-      return this.$route.path + '/' + this.id + '/contacto';
-    },
-    housingDetailLink() {
-      return this.$route.path + '/' + this.id;
-    },
+<script setup>
+import { computed } from 'vue';
+import { useRoute } from 'vue-router';
+
+const props = defineProps({
+  id: {
+    type: String,
+    default: 'error',
   },
-};
+  title: {
+    type: String,
+    default: 'Error al cargar el nombre del piso',
+  },
+  rate: {
+    type: Number,
+    default: null,
+  },
+  tags: {
+    type: Array,
+    default: null,
+  },
+});
+
+const route = useRoute();
+
+const housingContactLink = computed(() => {
+  return route.path + '/' + props.id + '/contacto';
+});
+
+const housingDetailLink = computed(() => {
+  return route.path + '/' + props.id;
+});
 </script>
 
 <style scoped>
