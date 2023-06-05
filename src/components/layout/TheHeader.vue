@@ -20,20 +20,22 @@
   </header>
 </template>
 
-<script>
-export default {
-  computed: {
-    isLoggedIn() {
-      return this.$store.getters.isAuthenticated;
-    },
-  },
-  methods: {
-    logout() {
-      this.$store.dispatch('logout');
-      this.$router.replace('/viviendas');
-    },
-  },
-};
+<script setup>
+import { computed } from 'vue';
+import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
+
+const store = useStore();
+const router = useRouter();
+
+const isLoggedIn = computed(() => {
+  return store.getters.isAuthenticated;
+});
+
+function logout() {
+  store.dispatch('logout');
+  router.replace('/viviendas');
+}
 </script>
 
 <style scoped>

@@ -7,15 +7,23 @@
   </li>
 </template>
 
-<script>
-export default {
-  props: ['email', 'message'],
-  computed: {
-    emailLink() {
-      return 'mailto:' + this.email;
-    },
+<script setup>
+import { computed } from 'vue';
+
+const props = defineProps({
+  email: {
+    type: String,
+    default: 'Error al cargar la dirección de mail',
   },
-};
+  message: {
+    type: String,
+    default: 'Error al cargar el mensaje del correo',
+  },
+});
+
+const emailLink = computed(() => {
+  return 'mailto:' + props.email;
+});
 </script>
 
 <style scoped>
