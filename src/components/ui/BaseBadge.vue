@@ -4,27 +4,36 @@
   </span>
 </template>
 
-<script>
-export default {
-  props: ['type', 'title'],
-  computed: {
-    formattedType() {
-      switch (this.type) {
-        case 'LGTB friendly':
-          return 'lgtb';
-        case 'Baño privado':
-          return 'bath';
-        case 'Admite parejas':
-          return 'couples';
-        default:
-          return null;
-      }
-    },
-    text() {
-      return this.title.toUpperCase();
-    },
+<script setup>
+import { computed } from 'vue';
+
+const props = defineProps({
+  type: {
+    type: String,
+    default: 'error',
   },
-};
+  title: {
+    type: String,
+    default: 'error al cargar',
+  },
+});
+
+const formattedType = computed(() => {
+  switch (props.type) {
+    case 'LGTB friendly':
+      return 'lgtb';
+    case 'Baño privado':
+      return 'bath';
+    case 'Admite parejas':
+      return 'couples';
+    default:
+      return 'error';
+  }
+});
+
+const text = computed(() => {
+  return props.title.toUpperCase();
+});
 </script>
 
 <style scoped>
@@ -49,6 +58,11 @@ export default {
 
 .couples {
   background-color: #8d006e;
+  color: white;
+}
+
+.error {
+  background-color: #8d0000;
   color: white;
 }
 </style>

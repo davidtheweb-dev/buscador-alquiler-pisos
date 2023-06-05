@@ -13,7 +13,7 @@
         </section>
         <menu v-if="!fixed">
           <slot name="actions">
-            <base-button @click="tryClose">Close</base-button>
+            <base-button @click="tryClose">Cerrar</base-button>
           </slot>
         </menu>
       </dialog>
@@ -21,33 +21,32 @@
   </teleport>
 </template>
 
-<script>
-export default {
-  props: {
-    show: {
-      type: Boolean,
-      required: true,
-    },
-    title: {
-      type: String,
-      required: false,
-    },
-    fixed: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
+<script setup>
+defineProps({
+  show: {
+    type: Boolean,
+    required: true,
   },
-  emits: ['close'],
-  methods: {
-    tryClose() {
-      if (this.fixed) {
-        return;
-      }
-      this.$emit('close');
-    },
+  title: {
+    type: String,
+    required: false,
+    default: null,
   },
-};
+  fixed: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
+});
+
+const emit = defineEmits(['close']);
+
+function tryClose() {
+  if (this.fixed) {
+    return;
+  }
+  emit('close');
+}
 </script>
 
 <style scoped>
