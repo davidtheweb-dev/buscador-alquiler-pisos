@@ -33,72 +33,75 @@
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      email: '',
-      password: '',
-      formIsValid: true,
-      mode: 'login',
-      isLoading: false,
-      error: null,
-    };
-  },
-  computed: {
-    submitButtonCaption() {
-      if (this.mode === 'login') {
-        return 'Iniciar sesión';
-      } else {
-        return 'Registrarse';
-      }
-    },
-    switchModeButtonCaption() {
-      if (this.mode === 'login') {
-        return '¿No tienes cuenta todavía? Regístrate';
-      } else {
-        return '¿Estás registrado? Inicia sesión';
-      }
-    },
-  },
-  methods: {
-    async submitForm() {
-      this.formIsValid = true;
-      if (this.email === '' || !this.email.includes('@') || this.password.length < 6) {
-        this.formIsValid = false;
-        return;
-      }
+<script setup>
+import { ref, computed } from 'vue';
+import { useStore } from 'vuex';
+import { useRoute, useRouter } from 'vue-router';
 
-      this.isLoading = true;
-      const authActionPayload = {
-        email: this.email,
-        password: this.password,
-      };
-      try {
-        if (this.mode === 'login') {
-          await this.$store.dispatch('login', authActionPayload);
-        } else {
-          await this.$store.dispatch('signup', authActionPayload);
-        }
-        const redirectUrl = '/' + (this.$route.query.redirect || 'viviendas');
-        this.$router.replace(redirectUrl);
-      } catch (error) {
-        this.error = error.message || 'Error inesperado al intentar autenticarte.';
-      }
-      this.isLoading = false;
-    },
-    switchAuthMode() {
-      if (this.mode === 'login') {
-        this.mode = 'signup';
-      } else {
-        this.mode = 'login';
-      }
-    },
-    handleDialogError() {
-      this.error = null;
-    },
-  },
-};
+const store = useStore();
+const route = useRoute();
+const router = useRouter();
+
+const email = ref('');
+const password = ref('');
+const formIsValid = ref(true);
+const mode = ref('login');
+const isLoading = ref(false);
+const error = ref(null);
+
+const submitButtonCaption = computed(() => {
+  if (mode.value === 'login') {
+    return 'Iniciar sesión';
+  } else {
+    return 'Registrarse';
+  }
+});
+
+const switchModeButtonCaption = computed(() => {
+  if (mode.value === 'login') {
+    return '¿No tienes cuenta todavía? Regístrate';
+  } else {
+    return '¿Estás registrado? Inicia sesión';
+  }
+});
+
+function switchAuthMode() {
+  if (mode.value === 'login') {
+    mode.value = 'signup';
+  } else {
+    mode.value = 'login';
+  }
+}
+
+function handleDialogError() {
+  error.value = null;
+}
+
+async function submitForm() {
+  formIsValid.value = true;
+  if (email.value === '' || !email.value.includes('@') || password.value.length < 6) {
+    formIsValid.value = false;
+    return;
+  }
+
+  isLoading.value = true;
+  const authActionPayload = {
+    email: email.value,
+    password: password.value,
+  };
+  try {
+    if (mode.value === 'login') {
+      await store.dispatch('login', authActionPayload);
+    } else {
+      await store.dispatch('signup', authActionPayload);
+    }
+    const redirectUrl = '/' + (route.query.redirect || 'viviendas');
+    router.replace(redirectUrl);
+  } catch (err) {
+    error.value = err.message || 'Error inesperado al intentar autenticarte.';
+  }
+  isLoading.value = false;
+}
 </script>
 
 <style scoped>

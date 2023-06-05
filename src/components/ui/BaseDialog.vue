@@ -22,7 +22,7 @@
 </template>
 
 <script setup>
-defineProps({
+const props = defineProps({
   show: {
     type: Boolean,
     required: true,
@@ -42,7 +42,7 @@ defineProps({
 const emit = defineEmits(['close']);
 
 function tryClose() {
-  if (this.fixed) {
+  if (props.fixed) {
     return;
   }
   emit('close');
