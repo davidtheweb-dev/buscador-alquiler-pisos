@@ -1,13 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
-// import HousingList from './pages/housing/HousingList.vue';
-// import HousingDetail from './pages/housing/HousingDetail.vue';
-// import HousingContact from './pages/housing/HousingContact.vue';
-// import HousingRegistration from './pages/housing/HousingRegistration.vue';
-// import RequestsReceived from './pages/requests/RequestsReceived.vue';
-// import UserAuth from './pages/auth/UserAuth.vue';
-// import NotFound from './pages/NotFound.vue';
-
 import store from './store/index.js';
 
 const HousingList = () => import('./pages/housing/HousingList.vue');
@@ -45,6 +37,13 @@ const router = createRouter({
       path: '/autenticacion',
       component: UserAuth,
       meta: { requiresUnauth: true },
+    },
+    {
+      path: '/viviendas/error',
+      component: NotFound,
+      children: [
+        { path: 'contacto', component: NotFound }, // /viviendas/error/contacto
+      ],
     },
     { path: '/:notFound(.*)', component: NotFound },
   ],
