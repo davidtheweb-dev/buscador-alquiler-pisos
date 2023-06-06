@@ -24,37 +24,44 @@
   </div>
 </template>
 
-<script>
-export default {
-  props: ['id'],
-  data() {
-    return {
-      selectedHousing: null,
-    };
-  },
-  computed: {
-    title() {
-      return this.selectedHousing.title;
-    },
-    rate() {
-      return this.selectedHousing.rate;
-    },
-    tags() {
-      return this.selectedHousing.tags;
-    },
-    description() {
-      return this.selectedHousing.description;
-    },
-    contactLink() {
-      return `/viviendas/${this.id}/contacto`;
-    },
-  },
-  created() {
-    this.selectedHousing = this.$store.getters['housing/housing'].find(
-      (housing) => housing.id === this.id
-    );
-  },
-};
-</script>
+<script setup>
+import { ref, computed, onBeforeMount } from 'vue';
+import { useStore } from 'vuex';
 
-<style scoped></style>
+const props = defineProps({
+  id: {
+    type: String,
+    default: 'error',
+  },
+});
+
+const store = useStore();
+
+let selectedHousing = null;
+
+onBeforeMount(() => {
+  selectedHousing = ref(
+    store.getters['housing/housing'].find((housing) => housing.id === props.id)
+  );
+});
+
+const title = computed(() => {
+  return selectedHousing.value.title;
+});
+
+const rate = computed(() => {
+  return selectedHousing.value.rate;
+});
+
+const tags = computed(() => {
+  return selectedHousing.value.tags;
+});
+
+const description = computed(() => {
+  return selectedHousing.value.description;
+});
+
+const contactLink = computed(() => {
+  return `/viviendas/${props.id}/contacto`;
+});
+</script>

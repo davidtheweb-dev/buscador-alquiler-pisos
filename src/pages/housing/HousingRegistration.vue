@@ -7,18 +7,17 @@
   </section>
 </template>
 
-<script>
+<script setup>
+import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
+
 import HousingForm from '../../components/housing/HousingForm.vue';
 
-export default {
-  components: {
-    HousingForm,
-  },
-  methods: {
-    saveData(data) {
-      this.$store.dispatch('housing/registerHousing', data);
-      this.$router.replace('/viviendas');
-    },
-  },
-};
+const store = useStore();
+const router = useRouter();
+
+function saveData(data) {
+  store.dispatch('housing/registerHousing', data);
+  router.replace('/viviendas');
+}
 </script>

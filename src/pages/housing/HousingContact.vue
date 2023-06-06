@@ -15,31 +15,32 @@
   </form>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      email: '',
-      message: '',
-      formIsValid: true,
-    };
-  },
-  methods: {
-    submitForm() {
-      this.formIsValid = true;
-      if (this.email === '' || !this.email.includes('@') || this.message === '') {
-        this.formIsValid = false;
-        return;
-      }
-      this.$store.dispatch('requests/contactHousing', {
-        email: this.email,
-        message: this.message,
-        housingId: this.$route.params.id,
-      });
-      this.$router.replace('/viviendas');
-    },
-  },
-};
+<script setup>
+import { ref } from 'vue';
+import { useStore } from 'vuex';
+import { useRoute, useRouter } from 'vue-router';
+
+const store = useStore();
+const route = useRoute();
+const router = useRouter();
+
+const email = ref('');
+const message = ref('');
+const formIsValid = ref(true);
+
+function submitForm() {
+  formIsValid.value = true;
+  if (email.value === '' || !email.value.includes('@') || message.value === '') {
+    formIsValid.value = false;
+    return;
+  }
+  store.dispatch('requests/contactHousing', {
+    email: email.value,
+    message: message.value,
+    housingId: route.params.id,
+  });
+  router.replace('/viviendas');
+}
 </script>
 
 <style scoped>
