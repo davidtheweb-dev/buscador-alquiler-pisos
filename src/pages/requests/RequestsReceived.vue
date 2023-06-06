@@ -27,44 +27,42 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, computed, onBeforeMount } from 'vue';
+import { useStore } from 'vuex';
+
 import RequestsItem from '../../components/requests/RequestsItem.vue';
-export default {
-  components: {
-    RequestsItem,
-  },
-  data() {
-    return {
-      isLoading: false,
-      error: null,
-    };
-  },
-  computed: {
-    receivedRequests() {
-      return this.$store.getters['requests/requests'];
-    },
-    hasRequests() {
-      return this.$store.getters['requests/hasRequests'];
-    },
-  },
-  created() {
-    this.loadRequests();
-  },
-  methods: {
-    async loadRequests() {
-      this.isLoading = true;
-      try {
-        await this.$store.dispatch('requests/fetchRequests');
-      } catch (error) {
-        this.error = error.message || 'Error inesperado al cargar los mensajes';
-      }
-      this.isLoading = false;
-    },
-    handleDialogError() {
-      this.error = null;
-    },
-  },
-};
+
+const store = useStore();
+
+const isLoading = ref(false);
+const error = ref(null);
+
+onBeforeMount(() => {
+  loadRequests();
+});
+
+const receivedRequests = computed(() => {
+  return store.getters['requests/requests'];
+});
+
+const hasRequests = computed(() => {
+  return store.getters['requests/hasRequests'];
+});
+
+async function loadRequests() {
+  isLoading.value = true;
+  try {
+    await store.dispatch('requests/fetchRequests');
+  } catch (err) {
+    error.value = err.message || 'Error inesperado al cargar los mensajes';
+  }
+  isLoading.value = false;
+}
+
+function handleDialogError() {
+  error.value = null;
+}
 </script>
 
 <style scoped>
