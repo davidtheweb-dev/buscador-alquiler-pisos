@@ -7,29 +7,29 @@
   </router-view>
 </template>
 
-<script>
+<script setup>
+import { computed, watch, onBeforeMount } from 'vue';
+import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
+
 import TheHeader from './components/layout/TheHeader.vue';
 
-export default {
-  components: {
-    TheHeader,
-  },
-  computed: {
-    didAutoLogout() {
-      return this.$store.getters.didAutoLogout;
-    },
-  },
-  watch: {
-    didAutoLogout(currentValue, oldValue) {
-      if (currentValue && currentValue !== oldValue) {
-        this.$router.replace('/viviendas');
-      }
-    },
-  },
-  created() {
-    this.$store.dispatch('autoLogin');
-  },
-};
+const store = useStore();
+const router = useRouter();
+
+onBeforeMount(() => {
+  store.dispatch('autoLogin');
+});
+
+const didAutoLogout = computed(() => {
+  return store.getters.didAutoLogout;
+});
+
+watch(didAutoLogout, (currentValue, oldValue) => {
+  if (currentValue && currentValue !== oldValue) {
+    router.replace('/viviendas');
+  }
+});
 </script>
 
 <style>
