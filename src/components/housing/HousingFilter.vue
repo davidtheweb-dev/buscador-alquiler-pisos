@@ -28,10 +28,12 @@ let filters = {
 function setFilter(event) {
   const inputId = event.target.id;
   const isActive = event.target.checked;
+
   const updatedFilters = {
     ...filters,
     [inputId]: isActive, // Overrides the filter that changed (inputId) and its new value (isActive)
   };
+
   filters = updatedFilters;
   emit('change-filter', updatedFilters);
 }

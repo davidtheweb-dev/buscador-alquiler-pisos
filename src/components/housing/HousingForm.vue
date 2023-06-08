@@ -92,14 +92,17 @@ function validateForm() {
     title.isValid = false;
     formIsValid = false;
   }
+
   if (description.value === '') {
     description.isValid = false;
     formIsValid = false;
   }
+
   if (!rate.value || rate.value < 0) {
     rate.isValid = false;
     formIsValid = false;
   }
+
   if (tags.value.length === 0) {
     tags.isValid = false;
     formIsValid = false;
