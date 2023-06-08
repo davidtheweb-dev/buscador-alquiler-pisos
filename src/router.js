@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
-import store from './store/index.js';
+import { useAuthStore } from './stores/auth/AuthStore';
 
 const HousingList = () => import('./pages/housing/HousingList.vue');
 const HousingDetail = () => import('./pages/housing/HousingDetail.vue');
@@ -50,9 +50,9 @@ const router = createRouter({
 });
 
 router.beforeEach(function (to, _, next) {
-  if (to.meta.requiresAuth && !store.getters.isAuthenticated) {
+  if (to.meta.requiresAuth && !useAuthStore().isAuthenticated) {
     next('/autenticacion');
-  } else if (to.meta.requiresUnauth && store.getters.isAuthenticated) {
+  } else if (to.meta.requiresUnauth && useAuthStore().isAuthenticated) {
     next('/viviendas');
   } else {
     next();

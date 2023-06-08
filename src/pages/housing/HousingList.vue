@@ -53,12 +53,14 @@
 
 <script setup>
 import { ref, reactive, computed, onBeforeMount } from 'vue';
-import { useStore } from 'vuex';
+import { useAuthStore } from '../../stores/auth/AuthStore';
+import { useHousingStore } from '../../stores/housing/HousingStore';
 
 import HousingItem from '../../components/housing/HousingItem.vue';
 import HousingFilter from '../../components/housing/HousingFilter.vue';
 
-const store = useStore();
+const authStore = useAuthStore();
+const housingStore = useHousingStore();
 
 const isLoading = ref(false);
 const error = ref(null);
@@ -74,7 +76,7 @@ onBeforeMount(() => {
 });
 
 const isLoggedIn = computed(() => {
-  return store.getters.isAuthenticated;
+  return authStore.isAuthenticated;
 });
 
 const hasHousing = computed(() => {
@@ -82,11 +84,11 @@ const hasHousing = computed(() => {
 });
 
 const isHousing = computed(() => {
-  return store.getters['housing/isHousing'];
+  return housingStore.isHousing;
 });
 
 const filteredHousing = computed(() => {
-  const housing = store.getters['housing/housing'];
+  const housing = housingStore.getHousing;
   return housing.filter((housing) => {
     if (activeFilters.lgtb && housing.tags.includes('LGTB friendly')) {
       return true;
@@ -110,9 +112,7 @@ function setFilters(updatedFilters) {
 async function loadHousing(refresh = false) {
   isLoading.value = true;
   try {
-    await store.dispatch('housing/loadHousing', {
-      forceRefresh: refresh,
-    });
+    await housingStore.loadHousing(refresh);
   } catch (err) {
     error.value = err.message || 'Error inesperado al cargar las viviendas';
   }

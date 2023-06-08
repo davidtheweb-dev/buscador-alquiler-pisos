@@ -35,10 +35,10 @@
 
 <script setup>
 import { ref, computed } from 'vue';
-import { useStore } from 'vuex';
+import { useAuthStore } from '../../stores/auth/AuthStore';
 import { useRoute, useRouter } from 'vue-router';
 
-const store = useStore();
+const authStore = useAuthStore();
 const route = useRoute();
 const router = useRouter();
 
@@ -91,9 +91,9 @@ async function submitForm() {
   };
   try {
     if (mode.value === 'login') {
-      await store.dispatch('login', authActionPayload);
+      await authStore.login(authActionPayload);
     } else {
-      await store.dispatch('signup', authActionPayload);
+      await authStore.signup(authActionPayload);
     }
     const redirectUrl = '/' + (route.query.redirect || 'viviendas');
     router.replace(redirectUrl);

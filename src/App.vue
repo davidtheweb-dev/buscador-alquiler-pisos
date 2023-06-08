@@ -9,20 +9,20 @@
 
 <script setup>
 import { computed, watch, onBeforeMount } from 'vue';
-import { useStore } from 'vuex';
+import { useAuthStore } from './stores/auth/AuthStore';
 import { useRouter } from 'vue-router';
 
 import TheHeader from './components/layout/TheHeader.vue';
 
-const store = useStore();
+const authStore = useAuthStore();
 const router = useRouter();
 
 onBeforeMount(() => {
-  store.dispatch('autoLogin');
+  authStore.autoLogin();
 });
 
 const didAutoLogout = computed(() => {
-  return store.getters.didAutoLogout;
+  return authStore.getDidAutoLogout;
 });
 
 watch(didAutoLogout, (currentValue, oldValue) => {

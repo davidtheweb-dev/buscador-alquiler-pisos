@@ -1,13 +1,16 @@
+import { useAuthStore } from '../auth/AuthStore';
+
 export default {
-  housing(state) {
+  getHousing(state) {
     return state.housing;
   },
   hasHousing(state) {
     return state.housing && state.housing.length > 0;
   },
-  isHousing(_, getters, _2, rootGetters) {
-    const housing = getters.housing;
-    const userId = rootGetters.userId;
+  isHousing() {
+    const authStore = useAuthStore();
+    const userId = authStore.getUserId;
+    const housing = this.getHousing;
     return housing.some((housing) => housing.id === userId);
   },
   shouldUpdate(state) {

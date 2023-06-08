@@ -1,19 +1,19 @@
 let timer;
 
 export default {
-  async login(context, payload) {
-    return context.dispatch('auth', {
+  async login(payload) {
+    return this.auth({
       ...payload,
       mode: 'login',
     });
   },
-  async signup(context, payload) {
-    return context.dispatch('auth', {
+  async signup(payload) {
+    return this.auth({
       ...payload,
       mode: 'signup',
     });
   },
-  async auth(context, payload) {
+  async auth(payload) {
     const mode = payload.mode;
     let url =
       'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyArHzkVU4L-a9gxFt-cyMy2pNGSqxRqTks';
@@ -46,16 +46,16 @@ export default {
     localStorage.setItem('userId', responseData.localId);
     localStorage.setItem('tokenExpiration', expirationDate);
 
+    const that = this;
     timer = setTimeout(function () {
-      context.dispatch('autoLogout');
+      that.autoLogout();
     }, expiresIn);
 
-    context.commit('setUser', {
-      token: responseData.idToken,
-      userId: responseData.localId,
-    });
+    this.token = responseData.idToken;
+    this.userId = responseData.localId;
+    this.didAutoLogout = false;
   },
-  autoLogin(context) {
+  autoLogin() {
     const token = localStorage.getItem('token');
     const userId = localStorage.getItem('userId');
     const tokenExpiration = localStorage.getItem('tokenExpiration');
@@ -66,31 +66,30 @@ export default {
       return;
     }
 
+    const that = this;
     timer = setTimeout(function () {
-      context.dispatch('autoLogout');
+      that.autoLogout();
     }, expiresIn);
 
     if (token && userId) {
-      context.commit('setUser', {
-        token: token,
-        userId: userId,
-      });
+      this.token = token;
+      this.userId = userId;
+      this.didAutoLogout = false;
     }
   },
-  autoLogout(context) {
-    context.dispatch('logout');
-    context.commit('setAutoLogout');
+  autoLogout() {
+    this.logout();
+    this.didAutoLogout = true;
   },
-  logout(context) {
+  logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
     localStorage.removeItem('tokenExpiration');
 
     clearTimeout(timer);
 
-    context.commit('setUser', {
-      token: null,
-      userId: null,
-    });
+    this.token = null;
+    this.userId = null;
+    this.didAutoLogout = false;
   },
 };

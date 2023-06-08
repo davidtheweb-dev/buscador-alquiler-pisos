@@ -22,18 +22,18 @@
 
 <script setup>
 import { computed } from 'vue';
-import { useStore } from 'vuex';
+import { useAuthStore } from '../../stores/auth/AuthStore';
 import { useRouter } from 'vue-router';
 
-const store = useStore();
+const authStore = useAuthStore();
 const router = useRouter();
 
 const isLoggedIn = computed(() => {
-  return store.getters.isAuthenticated;
+  return authStore.isAuthenticated;
 });
 
 function logout() {
-  store.dispatch('logout');
+  authStore.logout();
   router.replace('/viviendas');
 }
 </script>

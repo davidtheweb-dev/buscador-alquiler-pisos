@@ -29,11 +29,11 @@
 
 <script setup>
 import { ref, computed, onBeforeMount } from 'vue';
-import { useStore } from 'vuex';
+import { useRequestsStore } from '../../stores/requests/RequestsStore';
 
 import RequestsItem from '../../components/requests/RequestsItem.vue';
 
-const store = useStore();
+const requestsStore = useRequestsStore();
 
 const isLoading = ref(false);
 const error = ref(null);
@@ -43,17 +43,17 @@ onBeforeMount(() => {
 });
 
 const receivedRequests = computed(() => {
-  return store.getters['requests/requests'];
+  return requestsStore.getRequests;
 });
 
 const hasRequests = computed(() => {
-  return store.getters['requests/hasRequests'];
+  return requestsStore.hasRequests;
 });
 
 async function loadRequests() {
   isLoading.value = true;
   try {
-    await store.dispatch('requests/fetchRequests');
+    await requestsStore.fetchRequests();
   } catch (err) {
     error.value = err.message || 'Error inesperado al cargar los mensajes';
   }

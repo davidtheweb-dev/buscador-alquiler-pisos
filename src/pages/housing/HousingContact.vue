@@ -17,10 +17,10 @@
 
 <script setup>
 import { ref } from 'vue';
-import { useStore } from 'vuex';
+import { useRequestsStore } from '../../stores/requests/RequestsStore';
 import { useRoute, useRouter } from 'vue-router';
 
-const store = useStore();
+const requestsStore = useRequestsStore();
 const route = useRoute();
 const router = useRouter();
 
@@ -34,7 +34,7 @@ function submitForm() {
     formIsValid.value = false;
     return;
   }
-  store.dispatch('requests/contactHousing', {
+  requestsStore.contactHousing({
     email: email.value,
     message: message.value,
     housingId: route.params.id,

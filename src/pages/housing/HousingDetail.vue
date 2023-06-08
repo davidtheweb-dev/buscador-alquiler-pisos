@@ -26,7 +26,7 @@
 
 <script setup>
 import { ref, computed, onBeforeMount } from 'vue';
-import { useStore } from 'vuex';
+import { useHousingStore } from '../../stores/housing/HousingStore';
 
 const props = defineProps({
   id: {
@@ -35,14 +35,12 @@ const props = defineProps({
   },
 });
 
-const store = useStore();
+const housingStore = useHousingStore();
 
 let selectedHousing = null;
 
 onBeforeMount(() => {
-  selectedHousing = ref(
-    store.getters['housing/housing'].find((housing) => housing.id === props.id)
-  );
+  selectedHousing = ref(housingStore.getHousing.find((housing) => housing.id === props.id));
 });
 
 const title = computed(() => {

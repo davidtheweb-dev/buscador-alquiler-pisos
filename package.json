@@ -11,15 +11,15 @@
   "dependencies": {
     "vue": "^3.2.47",
     "vue-router": "^4.0.13",
-    "vuex": "^4.0.2"
+    "pinia": "^2.1.3"
   },
   "devDependencies": {
     "vite": "^4.3.2",
-    "@vitejs/plugin-vue": "^4.1.0",
     "vite-plugin-eslint": "^1.8.1",
+    "@vitejs/plugin-vue": "^4.1.0",
     "eslint": "^8.42.0",
-    "eslint-plugin-vue": "^9.14.1",
     "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-vue": "^9.14.1",
     "cypress": "^12.12.0"
   }
 }

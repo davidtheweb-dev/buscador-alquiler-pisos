@@ -8,16 +8,16 @@
 </template>
 
 <script setup>
-import { useStore } from 'vuex';
+import { useHousingStore } from '../../stores/housing/HousingStore';
 import { useRouter } from 'vue-router';
 
 import HousingForm from '../../components/housing/HousingForm.vue';
 
-const store = useStore();
+const housingStore = useHousingStore();
 const router = useRouter();
 
 function saveData(data) {
-  store.dispatch('housing/registerHousing', data);
+  housingStore.registerHousing(data);
   router.replace('/viviendas');
 }
 </script>
