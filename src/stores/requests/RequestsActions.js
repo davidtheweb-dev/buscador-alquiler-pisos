@@ -1,7 +1,7 @@
 import { useAuthStore } from '../auth/AuthStore';
 
 export default {
-  async contactHousing(newRequestData) {
+  async addRequest(newRequestData) {
     const newRequest = {
       email: newRequestData.email,
       message: newRequestData.message,

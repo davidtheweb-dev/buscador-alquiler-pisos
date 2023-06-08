@@ -1,7 +1,7 @@
 import { useAuthStore } from '../auth/AuthStore';
 
 export default {
-  async registerHousing(newHousingData) {
+  async addHousing(newHousingData) {
     const authStore = useAuthStore();
     const userId = authStore.getUserId;
     const token = authStore.getToken;

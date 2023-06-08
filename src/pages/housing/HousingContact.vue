@@ -35,7 +35,7 @@ function submitForm() {
     return;
   }
 
-  requestsStore.contactHousing({
+  requestsStore.addRequest({
     email: email.value,
     message: message.value,
     housingId: route.params.id,

@@ -17,7 +17,7 @@ const housingStore = useHousingStore();
 const router = useRouter();
 
 function saveData(newHousingData) {
-  housingStore.registerHousing(newHousingData);
+  housingStore.addHousing(newHousingData);
 
   router.replace('/viviendas');
 }
