@@ -50,9 +50,10 @@ const router = createRouter({
 });
 
 router.beforeEach(function (to, _, next) {
-  if (to.meta.requiresAuth && !useAuthStore().isAuthenticated) {
+  const authStore = useAuthStore();
+  if (to.meta.requiresAuth && !authStore.getIsAuthenticated) {
     next('/autenticacion');
-  } else if (to.meta.requiresUnauth && useAuthStore().isAuthenticated) {
+  } else if (to.meta.requiresUnauth && authStore.getIsAuthenticated) {
     next('/viviendas');
   } else {
     next();

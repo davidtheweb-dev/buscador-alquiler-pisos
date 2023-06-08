@@ -29,7 +29,7 @@ const authStore = useAuthStore();
 const router = useRouter();
 
 const isLoggedIn = computed(() => {
-  return authStore.isAuthenticated;
+  return authStore.getIsAuthenticated;
 });
 
 function logout() {

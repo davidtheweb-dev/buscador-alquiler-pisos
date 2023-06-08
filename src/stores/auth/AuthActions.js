@@ -1,20 +1,22 @@
 let timer;
 
 export default {
-  async login(payload) {
+  async login(authCredentials) {
     return this.auth({
-      ...payload,
+      ...authCredentials,
       mode: 'login',
     });
   },
-  async signup(payload) {
+
+  async signup(authCredentials) {
     return this.auth({
-      ...payload,
+      ...authCredentials,
       mode: 'signup',
     });
   },
-  async auth(payload) {
-    const mode = payload.mode;
+
+  async auth(authCredentials) {
+    const mode = authCredentials.mode;
     let url =
       'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyArHzkVU4L-a9gxFt-cyMy2pNGSqxRqTks';
 
@@ -26,8 +28,8 @@ export default {
     const response = await fetch(url, {
       method: 'POST',
       body: JSON.stringify({
-        email: payload.email,
-        password: payload.password,
+        email: authCredentials.email,
+        password: authCredentials.password,
         returnSecureToken: true,
       }),
     });
@@ -55,6 +57,7 @@ export default {
     this.userId = responseData.localId;
     this.didAutoLogout = false;
   },
+
   autoLogin() {
     const token = localStorage.getItem('token');
     const userId = localStorage.getItem('userId');
@@ -77,10 +80,12 @@ export default {
       this.didAutoLogout = false;
     }
   },
+
   autoLogout() {
     this.logout();
     this.didAutoLogout = true;
   },
+
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('userId');

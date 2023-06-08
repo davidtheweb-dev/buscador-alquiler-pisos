@@ -13,7 +13,7 @@
           <h2>Solicitudes recibidas</h2>
         </header>
         <base-spinner v-if="isLoading"></base-spinner>
-        <ul v-else-if="hasRequests && !isLoading">
+        <ul v-else-if="userHasRequests && !isLoading">
           <requests-item
             v-for="req in receivedRequests"
             :key="req.id"
@@ -46,8 +46,8 @@ const receivedRequests = computed(() => {
   return requestsStore.getRequests;
 });
 
-const hasRequests = computed(() => {
-  return requestsStore.hasRequests;
+const userHasRequests = computed(() => {
+  return requestsStore.getUserHasRequests;
 });
 
 async function loadRequests() {

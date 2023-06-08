@@ -1,14 +1,14 @@
 import { useAuthStore } from '../auth/AuthStore';
 
 export default {
-  async contactHousing(data) {
+  async contactHousing(newRequestData) {
     const newRequest = {
-      email: data.email,
-      message: data.message,
+      email: newRequestData.email,
+      message: newRequestData.message,
     };
 
     const response = await fetch(
-      `https://student-rent-finder-default-rtdb.europe-west1.firebasedatabase.app/requests/${data.housingId}.json`,
+      `https://student-rent-finder-default-rtdb.europe-west1.firebasedatabase.app/requests/${newRequestData.housingId}.json`,
       {
         method: 'POST',
         body: JSON.stringify(newRequest),
@@ -23,10 +23,11 @@ export default {
     }
 
     newRequest.id = responseData.name;
-    newRequest.housingId = data.housingId;
+    newRequest.housingId = newRequestData.housingId;
 
     this.requests.push(newRequest);
   },
+
   async fetchRequests() {
     const authStore = useAuthStore();
     const userId = authStore.getUserId;
@@ -44,7 +45,6 @@ export default {
     }
 
     const requests = [];
-
     for (const key in responseData) {
       const request = {
         id: key,

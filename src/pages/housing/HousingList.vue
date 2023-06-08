@@ -24,7 +24,7 @@
             >¿Quieres alquilar? Inicia sesión</base-button
           >
           <base-button
-            v-if="isLoggedIn && !isHousing && !isLoading"
+            v-if="isLoggedIn && !userHasHousing && !isLoading"
             data-cy="housing-upload-btn"
             link
             to="/registro"
@@ -76,15 +76,15 @@ onBeforeMount(() => {
 });
 
 const isLoggedIn = computed(() => {
-  return authStore.isAuthenticated;
+  return authStore.getIsAuthenticated;
 });
 
 const hasHousing = computed(() => {
   return !isLoading.value && filteredHousing.value.length > 0;
 });
 
-const isHousing = computed(() => {
-  return housingStore.isHousing;
+const userHasHousing = computed(() => {
+  return housingStore.getUserHasHousing;
 });
 
 const filteredHousing = computed(() => {
@@ -112,7 +112,7 @@ function setFilters(updatedFilters) {
 async function loadHousing(refresh = false) {
   isLoading.value = true;
   try {
-    await housingStore.loadHousing(refresh);
+    await housingStore.fetchHousing(refresh);
   } catch (err) {
     error.value = err.message || 'Error inesperado al cargar las viviendas';
   }
