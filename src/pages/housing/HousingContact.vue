@@ -34,11 +34,13 @@ function submitForm() {
     formIsValid.value = false;
     return;
   }
+
   requestsStore.contactHousing({
     email: email.value,
     message: message.value,
     housingId: route.params.id,
   });
+
   router.replace('/viviendas');
 }
 </script>

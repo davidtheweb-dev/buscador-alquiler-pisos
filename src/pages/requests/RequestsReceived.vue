@@ -52,11 +52,13 @@ const userHasRequests = computed(() => {
 
 async function loadRequests() {
   isLoading.value = true;
+
   try {
     await requestsStore.fetchRequests();
   } catch (err) {
     error.value = err.message || 'Error inesperado al cargar los mensajes';
   }
+
   isLoading.value = false;
 }
 

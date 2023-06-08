@@ -85,21 +85,24 @@ async function submitForm() {
   }
 
   isLoading.value = true;
-  const authActionPayload = {
+
+  const authCredentials = {
     email: email.value,
     password: password.value,
   };
+
   try {
     if (mode.value === 'login') {
-      await authStore.login(authActionPayload);
+      await authStore.login(authCredentials);
     } else {
-      await authStore.signup(authActionPayload);
+      await authStore.signup(authCredentials);
     }
     const redirectUrl = '/' + (route.query.redirect || 'viviendas');
     router.replace(redirectUrl);
   } catch (err) {
     error.value = err.message || 'Error inesperado al intentar autenticarte.';
   }
+
   isLoading.value = false;
 }
 </script>

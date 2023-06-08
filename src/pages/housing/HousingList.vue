@@ -34,7 +34,7 @@
         <div v-if="isLoading">
           <base-spinner></base-spinner>
         </div>
-        <ul v-else-if="hasHousing">
+        <ul v-else-if="filterHasHousing">
           <housing-item
             v-for="housing in filteredHousing"
             :id="housing.id"
@@ -79,7 +79,7 @@ const isLoggedIn = computed(() => {
   return authStore.getIsAuthenticated;
 });
 
-const hasHousing = computed(() => {
+const filterHasHousing = computed(() => {
   return !isLoading.value && filteredHousing.value.length > 0;
 });
 
@@ -111,11 +111,13 @@ function setFilters(updatedFilters) {
 
 async function loadHousing(refresh = false) {
   isLoading.value = true;
+
   try {
     await housingStore.fetchHousing(refresh);
   } catch (err) {
     error.value = err.message || 'Error inesperado al cargar las viviendas';
   }
+
   isLoading.value = false;
 }
 

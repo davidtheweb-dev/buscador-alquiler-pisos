@@ -16,8 +16,9 @@ import HousingForm from '../../components/housing/HousingForm.vue';
 const housingStore = useHousingStore();
 const router = useRouter();
 
-function saveData(data) {
-  housingStore.registerHousing(data);
+function saveData(newHousingData) {
+  housingStore.registerHousing(newHousingData);
+
   router.replace('/viviendas');
 }
 </script>
