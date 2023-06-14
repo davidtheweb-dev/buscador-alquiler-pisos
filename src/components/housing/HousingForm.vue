@@ -148,15 +148,14 @@ input,
 textarea {
   display: block;
   width: 100%;
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-white-100);
   font: inherit;
 }
 
 input:focus,
 textarea:focus {
-  background-color: #f0e6fd;
   outline: none;
-  border-color: #3d008d;
+  border-color: var(--color-primary-600);
 }
 
 input[type='checkbox'] {
@@ -166,7 +165,7 @@ input[type='checkbox'] {
 }
 
 input[type='checkbox']:focus {
-  outline: #3d008d solid 1px;
+  outline: var(--color-primary-600) solid 1px;
 }
 
 h3 {

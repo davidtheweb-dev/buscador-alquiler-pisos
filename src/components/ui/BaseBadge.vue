@@ -38,31 +38,32 @@ const text = computed(() => {
 
 <style scoped>
 .badge {
-  background-color: #ccc;
-  color: #252525;
+  background-color: var(--color-surface-300);
+  color: var(--color-white-100);
   border-radius: 30px;
   padding: 0.5rem 1.5rem;
   display: inline-block;
   margin-right: 0.5rem;
+  font-weight: bold;
 }
 
 .lgtb {
-  background-color: #3d008d;
-  color: white;
+  background-color: var(--color-badge-500-1);
+  color: var(--color-surface-100);
 }
 
 .bath {
-  background-color: #71008d;
-  color: white;
+  background-color: var(--color-badge-500-2);
+  color: var(--color-surface-100);
 }
 
 .couples {
-  background-color: #8d006e;
-  color: white;
+  background-color: var(--color-badge-500-3);
+  color: var(--color-surface-100);
 }
 
 .error {
-  background-color: #8d0000;
-  color: white;
+  background-color: var(--color-surface-300);
+  color: var(--color-white-100);
 }
 </style>
