@@ -29,19 +29,20 @@ const emailLink = computed(() => {
 <style scoped>
 li {
   margin: 1rem 0;
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-surface-600);
+  border-radius: 4px;
   padding: 1rem;
 }
 
 a {
-  color: #3d008d;
+  color: var(--color-primary-500);
   text-decoration: none;
   font-weight: bold;
 }
 
 a:hover,
 a:active {
-  color: #8d007a;
+  color: var(--color-primary-600);
 }
 
 p {

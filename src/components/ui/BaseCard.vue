@@ -11,5 +11,7 @@
   padding: 1rem;
   margin: 2rem auto;
   max-width: 40rem;
+  background-color: var(--color-surface-200);
+  color: var(--color-white-100);
 }
 </style>

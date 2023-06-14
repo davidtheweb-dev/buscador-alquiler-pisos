@@ -48,7 +48,7 @@ function submitForm() {
 <style scoped>
 form {
   margin: 1rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-surface-600);
   border-radius: 12px;
   padding: 1rem;
 }
@@ -68,14 +68,13 @@ textarea {
   display: block;
   width: 100%;
   font: inherit;
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-white-100);
   padding: 0.15rem;
 }
 
 input:focus,
 textarea:focus {
-  border-color: #3d008d;
-  background-color: #faf6ff;
+  border-color: var(--color-primary-600);
   outline: none;
 }
 

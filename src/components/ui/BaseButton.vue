@@ -33,39 +33,40 @@ a {
   text-decoration: none;
   padding: 0.75rem 1.5rem;
   font: inherit;
-  background-color: #3a0061;
-  border: 1px solid #3a0061;
-  color: white;
+  background-color: var(--color-primary-500);
+  color: var(--color-surface-100);
   cursor: pointer;
   border-radius: 30px;
   margin-right: 0.5rem;
   display: inline-block;
+  font-weight: bold;
+  border: 1px solid;
 }
 
 a:hover,
 a:active,
 button:hover,
 button:active {
-  background-color: #270041;
-  border-color: #270041;
+  /* box-shadow: 0px 0px 20px 2px; */
 }
 
 .flat {
   background-color: transparent;
-  color: #3a0061;
+  color: var(--color-primary-500);
   border: none;
 }
 
 .outline {
   background-color: transparent;
-  border-color: #270041;
-  color: #270041;
+  border-color: transparent;
+  font-weight: bold;
+  color: var(--color-primary-500);
 }
 
 .flat:hover,
 .flat:active,
 .outline:hover,
 .outline:active {
-  background-color: #edd2ff;
+  border-color: var(--color-primary-500);
 }
 </style>

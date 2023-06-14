@@ -56,7 +56,7 @@ function tryClose() {
   left: 0;
   height: 100vh;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: var(--color-overlay-100);
   z-index: 10;
 }
 
@@ -72,12 +72,12 @@ dialog {
   padding: 0;
   margin: 0;
   overflow: hidden;
-  background-color: white;
+  background-color: var(--color-surface-300);
 }
 
 header {
-  background-color: #3a0061;
-  color: white;
+  background-color: var(--color-primary-500);
+  color: var(--color-surface-100);
   width: 100%;
   padding: 1rem;
 }
@@ -88,6 +88,7 @@ header h2 {
 
 section {
   padding: 1rem;
+  color: var(--color-white-100);
 }
 
 menu {
