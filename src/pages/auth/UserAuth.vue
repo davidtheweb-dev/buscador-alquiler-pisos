@@ -24,10 +24,17 @@
           Por favor, introduce un correo y contraseña válido (debe contener un mínimo de 6
           carácteres).
         </p>
-        <base-button>{{ submitButtonCaption }}</base-button>
-        <base-button type="button" mode="flat" @click="switchAuthMode">{{
-          switchModeButtonCaption
-        }}</base-button>
+        <base-button class="submit-button">{{ submitButtonCaption }}</base-button>
+
+        <div class="change-mode-container">
+          <base-button
+            class="change-mode-button"
+            type="button"
+            mode="flat"
+            @click="switchAuthMode"
+            >{{ switchModeButtonCaption }}</base-button
+          >
+        </div>
       </form>
     </base-card>
   </div>
@@ -59,7 +66,7 @@ const submitButtonCaption = computed(() => {
 
 const switchModeButtonCaption = computed(() => {
   if (mode.value === 'login') {
-    return '¿No tienes cuenta todavía? Regístrate';
+    return '¿No tienes cuenta aún? Regístrate';
   } else {
     return '¿Estás registrado? Inicia sesión';
   }
@@ -109,9 +116,8 @@ async function submitForm() {
 
 <style scoped>
 form {
-  margin: 1rem;
   border-radius: 12px;
-  padding: 1rem;
+  padding: 0.5rem;
 }
 
 .form-control {
@@ -129,14 +135,26 @@ textarea {
   display: block;
   width: 100%;
   font: inherit;
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-white-100);
   padding: 0.15rem;
+  border-radius: 3px;
+  margin-bottom: 2rem;
 }
 
 input:focus,
 textarea:focus {
-  border-color: #3d008d;
-  background-color: #faf6ff;
+  border-color: var(--color-primary-600);
   outline: none;
+}
+
+.submit-button {
+  margin-bottom: 1rem;
+}
+
+.change-mode-container {
+  text-align: center;
+}
+.change-mode-button {
+  margin: 0;
 }
 </style>
