@@ -47,10 +47,10 @@ function submitForm() {
 
 <style scoped>
 form {
-  margin: 1rem;
+  margin: 1rem auto 1rem auto;
   border: 1px solid var(--color-surface-600);
   border-radius: 12px;
-  padding: 1rem;
+  padding: 2rem 1.5rem 2rem 1.5rem;
 }
 
 .form-control {
@@ -70,6 +70,8 @@ textarea {
   font: inherit;
   border: 1px solid var(--color-white-100);
   padding: 0.15rem;
+  margin-bottom: 1.5rem;
+  border-radius: 3px;
 }
 
 input:focus,

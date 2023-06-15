@@ -21,14 +21,14 @@
             data-cy="housing-login-btn"
             link
             to="/autenticacion?redirect=registro"
-            >¿Quieres alquilar? Inicia sesión</base-button
+            >¡Sube tu piso!</base-button
           >
           <base-button
             v-if="isLoggedIn && !userHasHousing && !isLoading"
             data-cy="housing-upload-btn"
             link
             to="/registro"
-            >¿Quieres alquilar? ¡Sube tu piso!</base-button
+            >¡Sube tu piso!</base-button
           >
         </div>
         <div v-if="isLoading">

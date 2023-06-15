@@ -45,6 +45,8 @@ const text = computed(() => {
   display: inline-block;
   margin-right: 0.5rem;
   font-weight: bold;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .lgtb {

@@ -46,6 +46,7 @@ h2 {
 
 .filter-option {
   margin-right: 1rem;
+  white-space: nowrap;
 }
 
 .filter-option label,
