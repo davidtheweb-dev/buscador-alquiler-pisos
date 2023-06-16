@@ -7,7 +7,7 @@
           <router-link to="/viviendas">Anuncios</router-link>
         </li>
         <li>
-          <router-link to="/">Mis anuncios</router-link>
+          <router-link to="/mis-anuncios">Mis anuncios</router-link>
         </li>
         <li v-if="isLoggedIn">
           <router-link to="/solicitudes">Mensajes</router-link>
@@ -35,7 +35,7 @@
             <router-link to="/viviendas">Anuncios</router-link>
           </li>
           <li>
-            <router-link to="/">Mis anuncios</router-link>
+            <router-link to="/mis-anuncios">Mis anuncios</router-link>
           </li>
           <li v-if="isLoggedIn">
             <router-link to="/solicitudes">Mensajes</router-link>
