@@ -14,6 +14,15 @@ export default {
     return housing.some((housing) => housing.id === userId);
   },
 
+  getUserHousing() {
+    const authStore = useAuthStore();
+    const userId = authStore.getUserId;
+
+    const housing = this.getHousing;
+
+    return housing.filter((housing) => housing.id === userId);
+  },
+
   getShouldUpdate(state) {
     const minSecondsToUpdate = 300; // The minimum that must pass to be able to re-fetch the list of flats
     const lastFetch = state.lastFetch;

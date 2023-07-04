@@ -33,6 +33,27 @@ export default {
     });
   },
 
+  async deleteHousing() {
+    const authStore = useAuthStore();
+    const userId = authStore.getUserId;
+    const token = authStore.getToken;
+
+    const response = await fetch(
+      `https://student-rent-finder-default-rtdb.europe-west1.firebasedatabase.app/housing/${userId}.json?auth=${token}`,
+      {
+        method: 'DELETE',
+      }
+    );
+
+    // const responseData = await response.json();
+
+    if (!response.ok) {
+      // TODO: error
+    }
+
+    this.fetchHousing(true);
+  },
+
   async fetchHousing(forceRefresh) {
     if (!forceRefresh && !this.getShouldUpdate) {
       return;

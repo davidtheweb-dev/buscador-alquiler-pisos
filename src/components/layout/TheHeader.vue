@@ -1,16 +1,22 @@
 <template>
   <header>
     <nav>
-      <h1><router-link to="/">UNICASA</router-link></h1>
+      <h1><router-link to="/">UNIPISO</router-link></h1>
       <ul v-if="!mobile">
         <li>
-          <router-link to="/viviendas">Viviendas</router-link>
+          <router-link to="/viviendas">Anuncios</router-link>
+        </li>
+        <li>
+          <router-link to="/mis-anuncios">Mis anuncios</router-link>
         </li>
         <li v-if="isLoggedIn">
-          <router-link to="/solicitudes">Solicitudes</router-link>
+          <router-link to="/solicitudes">Mensajes</router-link>
         </li>
-        <li v-else>
-          <router-link to="/autenticacion">Inicia sesión</router-link>
+        <li>
+          <router-link to="/">Preferencias</router-link>
+        </li>
+        <li v-if="!isLoggedIn">
+          <base-button @click="login">Inicia sesión</base-button>
         </li>
         <li v-if="isLoggedIn">
           <base-button @click="logout">Cerrar sesión</base-button>
@@ -26,13 +32,19 @@
       <transition name="mobile-nav">
         <ul v-if="mobileNav" class="dropdown-nav" @click.prevent="toggleMobileNav">
           <li>
-            <router-link to="/viviendas">Viviendas</router-link>
+            <router-link to="/viviendas">Anuncios</router-link>
+          </li>
+          <li>
+            <router-link to="/mis-anuncios">Mis anuncios</router-link>
           </li>
           <li v-if="isLoggedIn">
-            <router-link to="/solicitudes">Solicitudes</router-link>
+            <router-link to="/solicitudes">Mensajes</router-link>
           </li>
-          <li v-else>
-            <router-link to="/autenticacion">Inicia sesión</router-link>
+          <li>
+            <router-link to="/">Preferencias</router-link>
+          </li>
+          <li v-if="!isLoggedIn">
+            <base-button class="base-button" @click="login">Inicia sesión</base-button>
           </li>
           <li v-if="isLoggedIn">
             <base-button class="base-button" @click="logout">Cerrar sesión</base-button>
@@ -61,6 +73,10 @@ function logout() {
   router.replace('/viviendas');
 }
 
+function login() {
+  router.replace('/autenticacion');
+}
+
 const mobile = ref(false);
 const mobileNav = ref(false);
 const windowWidth = ref(null);
@@ -72,7 +88,7 @@ onBeforeMount(() => {
 
 function checkScreen() {
   windowWidth.value = window.innerWidth;
-  if (windowWidth.value <= 750) {
+  if (windowWidth.value <= 1050) {
     mobile.value = true;
   } else {
     mobile.value = false;
