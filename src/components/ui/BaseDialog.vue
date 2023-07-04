@@ -13,6 +13,9 @@
         </section>
         <menu v-if="!fixed">
           <slot name="actions">
+            <base-button v-if="props.delete" mode="outline" @click="tryDelete"
+              >Eliminar</base-button
+            >
             <base-button @click="tryClose">Cerrar</base-button>
           </slot>
         </menu>
@@ -37,15 +40,27 @@ const props = defineProps({
     required: false,
     default: false,
   },
+  delete: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
 });
 
-const emit = defineEmits(['close']);
+const emit = defineEmits(['close', 'delete']);
 
 function tryClose() {
   if (props.fixed) {
     return;
   }
   emit('close');
+}
+
+function tryDelete() {
+  if (props.fixed) {
+    return;
+  }
+  emit('delete');
 }
 </script>
 
