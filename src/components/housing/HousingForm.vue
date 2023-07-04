@@ -55,14 +55,34 @@
       <p v-if="!tags.isValid" class="errors">Debes seleccionar al menos una característica</p>
     </div>
     <p v-if="!formIsValid">Por favor, corrige los campos y vuelve a intentarlo</p>
-    <base-button>Registrarme</base-button>
+    <base-button>Guardar</base-button>
   </form>
 </template>
 
 <script setup>
-import { reactive } from 'vue';
+import { reactive, onBeforeMount } from 'vue';
+
+const props = defineProps({
+  housingInfo: {
+    type: Object,
+    default: () => ({
+      registration: true,
+    }),
+  },
+});
 
 const emit = defineEmits(['save-data']);
+
+const housingInfoLocal = { ...props.housingInfo[0] };
+
+onBeforeMount(() => {
+  if (!props.housingInfo.registration) {
+    title.value = housingInfoLocal.title;
+    description.value = housingInfoLocal.description;
+    rate.value = housingInfoLocal.rate;
+    tags.value = housingInfoLocal.tags;
+  }
+});
 
 const title = reactive({
   value: '',
