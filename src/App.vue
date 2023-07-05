@@ -27,7 +27,7 @@ const didAutoLogout = computed(() => {
 
 watch(didAutoLogout, (currentValue, oldValue) => {
   if (currentValue && currentValue !== oldValue) {
-    router.replace('/viviendas');
+    router.replace('/pisos');
   }
 });
 </script>

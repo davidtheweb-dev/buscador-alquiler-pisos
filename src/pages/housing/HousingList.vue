@@ -27,7 +27,7 @@
             v-if="isLoggedIn && !userHasHousing && !isLoading"
             data-cy="housing-upload-btn"
             link
-            to="/registro"
+            to="/registro-piso"
             >¡Sube tu piso!</base-button
           >
         </div>

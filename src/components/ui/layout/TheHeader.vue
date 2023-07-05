@@ -4,7 +4,7 @@
       <h1><router-link to="/">UNIPISO</router-link></h1>
       <ul v-if="!mobile">
         <li>
-          <router-link to="/viviendas">Anuncios</router-link>
+          <router-link to="/pisos">Anuncios</router-link>
         </li>
         <li>
           <router-link to="/mis-anuncios">Mis anuncios</router-link>
@@ -32,7 +32,7 @@
       <transition name="mobile-nav">
         <ul v-if="mobileNav" class="dropdown-nav" @click.prevent="toggleMobileNav">
           <li>
-            <router-link to="/viviendas">Anuncios</router-link>
+            <router-link to="/pisos">Anuncios</router-link>
           </li>
           <li>
             <router-link to="/mis-anuncios">Mis anuncios</router-link>
@@ -70,7 +70,7 @@ const isLoggedIn = computed(() => {
 
 function logout() {
   authStore.logout();
-  router.replace('/viviendas');
+  router.replace('/pisos');
 }
 
 function login() {

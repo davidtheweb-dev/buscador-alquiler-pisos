@@ -26,7 +26,9 @@
           encontrarás a alguien en un plis!
         </p>
         <div class="center__container">
-          <base-button mode="outline" link :to="'/registro'">Añade tu piso en 5 min</base-button>
+          <base-button mode="outline" link :to="'/registro-piso'"
+            >Añade tu piso en 5 min</base-button
+          >
         </div>
       </div>
     </base-card>
