@@ -13,7 +13,7 @@
           <router-link to="/solicitudes">Mensajes</router-link>
         </li>
         <li>
-          <router-link to="/">Preferencias</router-link>
+          <router-link to="/preferencias">Preferencias</router-link>
         </li>
         <li v-if="!isLoggedIn">
           <base-button @click="login">Inicia sesión</base-button>
@@ -41,7 +41,7 @@
             <router-link to="/solicitudes">Mensajes</router-link>
           </li>
           <li>
-            <router-link to="/">Preferencias</router-link>
+            <router-link to="/preferencias">Preferencias</router-link>
           </li>
           <li v-if="!isLoggedIn">
             <base-button class="base-button" @click="login">Inicia sesión</base-button>
