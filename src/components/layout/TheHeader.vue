@@ -188,7 +188,7 @@ header i {
   border-right: 1px solid var(--color-surface-400);
   top: 0;
   left: 0;
-  z-index: 1;
+  z-index: 2;
 }
 
 .dropdown-nav li,
@@ -223,6 +223,6 @@ header i {
   left: 0;
   top: 0;
   background-color: var(--color-overlay-200);
-  z-index: 0;
+  z-index: 1;
 }
 </style>
