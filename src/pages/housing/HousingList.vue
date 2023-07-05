@@ -8,7 +8,7 @@
       <p>{{ error }}</p>
     </base-dialog>
     <section>
-      <housing-filter data-cy="housing-filter" @change-filter="setFilters"></housing-filter>
+      <the-filter data-cy="housing-filter" @change-filter="setFilters"></the-filter>
     </section>
     <section>
       <base-card>
@@ -57,7 +57,7 @@ import { useAuthStore } from '../../stores/auth/AuthStore';
 import { useHousingStore } from '../../stores/housing/HousingStore';
 
 import HousingItem from '../../components/housing/HousingItem.vue';
-import HousingFilter from '../../components/housing/HousingFilter.vue';
+import TheFilter from '../../components/ui/layout/TheFilter.vue';
 
 const authStore = useAuthStore();
 const housingStore = useHousingStore();

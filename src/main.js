@@ -4,11 +4,11 @@ import App from './App.vue';
 import router from './router.js';
 import pinia from './stores/index';
 
-import BaseCard from './components/ui/BaseCard.vue';
-import BaseButton from './components/ui/BaseButton.vue';
-import BaseBadge from './components/ui/BaseBadge.vue';
-import BaseSpinner from './components/ui/BaseSpinner.vue';
-import BaseDialog from './components/ui/BaseDialog.vue';
+import BaseCard from './components/ui/base/BaseCard.vue';
+import BaseButton from './components/ui/base/BaseButton.vue';
+import BaseBadge from './components/ui/base/BaseBadge.vue';
+import BaseSpinner from './components/ui/base/BaseSpinner.vue';
+import BaseDialog from './components/ui/base/BaseDialog.vue';
 
 const app = createApp(App);
 

@@ -12,7 +12,7 @@ import { computed, watch, onBeforeMount } from 'vue';
 import { useAuthStore } from './stores/auth/AuthStore';
 import { useRouter } from 'vue-router';
 
-import TheHeader from './components/layout/TheHeader.vue';
+import TheHeader from './components/ui/layout/TheHeader.vue';
 
 const authStore = useAuthStore();
 const router = useRouter();
