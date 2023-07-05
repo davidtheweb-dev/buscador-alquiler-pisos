@@ -10,6 +10,7 @@ const HousingEdit = () => import('./pages/housing/HousingEdit.vue');
 const RequestsReceived = () => import('./pages/requests/RequestsReceived.vue');
 const MyAds = () => import('./pages/MyAds.Vue');
 const UserAuth = () => import('./pages/auth/UserAuth.vue');
+const SettingOptions = () => import('./pages/SettingOptions.vue');
 const NotFound = () => import('./pages/NotFound.vue');
 
 const router = createRouter({
@@ -17,7 +18,6 @@ const router = createRouter({
   routes: [
     { path: '/', redirect: '/viviendas' },
     { path: '/viviendas', component: HousingList },
-    { path: '/mis-anuncios', component: MyAds },
     {
       path: '/viviendas/:id',
       component: HousingDetail,
@@ -26,6 +26,8 @@ const router = createRouter({
         { path: 'contacto', component: HousingContact }, // /viviendas/id/contacto
       ],
     },
+    { path: '/mis-anuncios', component: MyAds },
+    { path: '/preferencias', component: SettingOptions },
     {
       path: '/registro',
       component: HousingRegistration,
