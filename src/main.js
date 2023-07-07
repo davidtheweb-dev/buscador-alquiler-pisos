@@ -9,6 +9,7 @@ import BaseButton from './components/ui/base/BaseButton.vue';
 import BaseBadge from './components/ui/base/BaseBadge.vue';
 import BaseSpinner from './components/ui/base/BaseSpinner.vue';
 import BaseDialog from './components/ui/base/BaseDialog.vue';
+import BaseLike from './components/ui/base/BaseLike.vue';
 
 const app = createApp(App);
 
@@ -20,5 +21,6 @@ app.component('BaseButton', BaseButton);
 app.component('BaseBadge', BaseBadge);
 app.component('BaseSpinner', BaseSpinner);
 app.component('BaseDialog', BaseDialog);
+app.component('BaseLike', BaseLike);
 
 app.mount('#app');
