@@ -43,7 +43,7 @@
         @blur="clearValidity(startMonth)"
       >
         <option value=""></option>
-        <option v-for="month in monthsOptions" :key="month" value="month">{{ month }}</option>
+        <option v-for="month in monthsOptions" :key="month" :value="month">{{ month }}</option>
       </select>
       <p v-if="!startMonth.isValid" class="errors">Selecciona una opción</p>
     </div>
@@ -246,7 +246,10 @@ const monthsOptions = computed(() => {
     let thisMonth = today.toLocaleString('es-ES', {
       month: 'long',
     });
-    months.push(thisMonth);
+
+    const upperThisMonth = thisMonth.charAt(0).toUpperCase() + thisMonth.slice(1);
+
+    months.push(upperThisMonth);
   }
   return months;
 });
