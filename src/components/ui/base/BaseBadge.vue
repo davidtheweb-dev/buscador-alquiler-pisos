@@ -21,19 +21,19 @@ const props = defineProps({
 const text = computed(() => {
   switch (props.title) {
     case 'bath':
-      return '🚽';
+      return props.type === 'small' ? '🚽' : '🚽 Baño privado';
     case 'internet':
-      return '🌐';
+      return props.type === 'small' ? '🌐' : '🌐 Internet WiFi';
     case 'cleaner':
-      return '🪠';
+      return props.type === 'small' ? '🪠' : '🪠 Limpieza incl.';
     case 'couples':
-      return '💑';
+      return props.type === 'small' ? '💑' : '💑 Admite parejas';
     case 'air':
-      return '❄️';
+      return props.type === 'small' ? '❄️' : '❄️ Climatizador';
     case 'lgtb':
-      return '🏳️‍🌈';
+      return props.type === 'small' ? '🏳️‍🌈' : '🏳️‍🌈 LGTB Friendly';
     case 'elevator':
-      return '🛗';
+      return props.type === 'small' ? '🛗' : '🛗 Ascensor';
     default:
       return 'error';
   }
@@ -81,5 +81,11 @@ function showInfo() {
   font-weight: bold;
   margin-top: 5px;
   margin-bottom: 5px;
+}
+
+.big {
+  padding: 0.5rem 1rem;
+  font-weight: 200;
+  font-size: 0.9rem;
 }
 </style>
