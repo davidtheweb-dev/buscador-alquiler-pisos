@@ -21,6 +21,7 @@
         <option value=""></option>
         <option value="boy">Chico</option>
         <option value="girl">Chica</option>
+        <option value="other">Otro</option>
       </select>
       <p v-if="!genre.isValid" class="errors">Selecciona una opción</p>
     </div>
@@ -99,11 +100,11 @@
           <option :value="null"></option>
           <option :value="1">1</option>
           <option :value="2">2</option>
-          <option :value="4">3</option>
-          <option :value="5">4</option>
-          <option :value="6">5</option>
-          <option :value="7">6</option>
-          <option :value="8">Más de 6</option>
+          <option :value="3">3</option>
+          <option :value="4">4</option>
+          <option :value="5">5</option>
+          <option :value="6">6</option>
+          <option :value="7">Más de 6</option>
           <option :value="0">Indiferente</option>
         </select>
         <p v-if="!typeRoom.isValid" class="errors">Selecciona una opción</p>
@@ -163,37 +164,84 @@
       <p v-if="!isPet.isValid" class="errors">Selecciona una opción</p>
     </div>
     <div class="form-control" :class="{ invalid: !tags.isValid }">
-      <h3>Características</h3>
+      <h3>Características que necesito</h3>
       <div>
         <input
-          id="lgtb"
+          id="elevator"
           v-model="tags.value"
           type="checkbox"
-          value="LGTB friendly"
+          value="elevator"
           @blur="clearValidity(tags)"
         />
-        <label for="lgtb">LGTB friendly</label>
+        <label for="elevator">Ascensor</label>
       </div>
-      <div>
-        <input
-          id="bath"
-          v-model="tags.value"
-          type="checkbox"
-          value="Baño privado"
-          @blur="clearValidity(tags)"
-        />
-        <label for="bath">Baño privado</label>
-      </div>
+
       <div>
         <input
           id="couples"
           v-model="tags.value"
           type="checkbox"
-          value="Admite parejas"
+          value="couples"
           @blur="clearValidity(tags)"
         />
         <label for="couples">Admite parejas</label>
       </div>
+
+      <div>
+        <input
+          id="air"
+          v-model="tags.value"
+          type="checkbox"
+          value="air"
+          @blur="clearValidity(tags)"
+        />
+        <label for="air">Climatizador</label>
+      </div>
+
+      <div>
+        <input
+          id="internet"
+          v-model="tags.value"
+          type="checkbox"
+          value="internet"
+          @blur="clearValidity(tags)"
+        />
+        <label for="internet">Internet WiFi</label>
+      </div>
+
+      <div>
+        <input
+          id="cleaner"
+          v-model="tags.value"
+          type="checkbox"
+          value="cleaner"
+          @blur="clearValidity(tags)"
+        />
+        <label for="cleaner">Limpieza incluida</label>
+      </div>
+
+      <div>
+        <input
+          id="bath"
+          v-model="tags.value"
+          type="checkbox"
+          value="bath"
+          @blur="clearValidity(tags)"
+        />
+        <label for="bath">Baño privado</label>
+      </div>
+
+      <div>
+        <input
+          id="lgtb"
+          v-model="tags.value"
+          type="checkbox"
+          value="lgtb"
+          @blur="clearValidity(tags)"
+        />
+        <label for="lgtb">LGTB friendly</label>
+      </div>
+
       <p v-if="!tags.isValid" class="errors">Debes seleccionar al menos una característica</p>
     </div>
 
