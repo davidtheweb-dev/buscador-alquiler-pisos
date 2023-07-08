@@ -14,7 +14,7 @@
     <div>
       <base-badge v-for="tag in partner.tags" :key="tag" type="small" :title="tag"></base-badge>
     </div>
-    <div class="actions">
+    <div v-if="!modeMyAds" class="actions">
       <base-button mode="outline" link :to="partnerContactLink">Contacto</base-button>
       <base-button link :to="partnerDetailLink">Ver más</base-button>
     </div>
@@ -29,6 +29,10 @@ const props = defineProps({
   partner: {
     type: Object,
     default: null,
+  },
+  modeMyAds: {
+    type: Boolean,
+    default: false,
   },
 });
 
