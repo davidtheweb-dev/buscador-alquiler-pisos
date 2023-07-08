@@ -24,33 +24,79 @@
       <h3>Características</h3>
       <div>
         <input
-          id="lgtb"
-          v-model="tags.value"
-          type="checkbox"
-          value="LGTB friendly"
-          @blur="clearValidity(tags)"
-        />
-        <label for="lgtb">LGTB friendly</label>
-      </div>
-      <div>
-        <input
           id="bath"
           v-model="tags.value"
           type="checkbox"
-          value="Baño privado"
+          value="bath"
           @blur="clearValidity(tags)"
         />
         <label for="bath">Baño privado</label>
       </div>
+
+      <div>
+        <input
+          id="internet"
+          v-model="tags.value"
+          type="checkbox"
+          value="internet"
+          @blur="clearValidity(tags)"
+        />
+        <label for="lgtb">Internet WiFi</label>
+      </div>
+
+      <div>
+        <input
+          id="cleaner"
+          v-model="tags.value"
+          type="checkbox"
+          value="cleaner"
+          @blur="clearValidity(tags)"
+        />
+        <label for="lgtb">Limpieza incluida</label>
+      </div>
+
       <div>
         <input
           id="couples"
           v-model="tags.value"
           type="checkbox"
-          value="Admite parejas"
+          value="couples"
           @blur="clearValidity(tags)"
         />
         <label for="couples">Admite parejas</label>
+      </div>
+
+      <div>
+        <input
+          id="air"
+          v-model="tags.value"
+          type="checkbox"
+          value="air"
+          @blur="clearValidity(tags)"
+        />
+        <label for="air">Aire acondicionado</label>
+      </div>
+
+      <div>
+        <input
+          id="lgtb"
+          v-model="tags.value"
+          type="checkbox"
+          value="lgtb"
+          @blur="clearValidity(tags)"
+        />
+        <label for="lgtb">LGTB friendly</label>
+      </div>
+
+      <div>
+        <input
+          id="elevator"
+          v-model="tags.value"
+          type="checkbox"
+          value="elevator"
+          @blur="clearValidity(tags)"
+        />
+        <label for="elevator">Ascensor</label>
       </div>
       <p v-if="!tags.isValid" class="errors">Debes seleccionar al menos una característica</p>
     </div>
