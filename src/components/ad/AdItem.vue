@@ -1,10 +1,20 @@
 <template>
   <section>
     <div class="overlayer"></div>
-    <p>{{ adLocal }}</p>
+    <ul v-if="type === 'partner'">
+      <partner-item :partner="adLocal" :mode-my-ads="true"></partner-item>
+    </ul>
+    <ul v-if="type === 'housing'">
+      <housing-item :housing="adLocal"></housing-item>
+    </ul>
     <div class="actions">
       <div class="container">
-        <base-button mode="outline" link :to="'/editar-piso'">Editar</base-button>
+        <base-button
+          mode="outline"
+          link
+          :to="type === 'housing' ? '/editar-piso' : '/editar-companero'"
+          >Editar</base-button
+        >
         <base-button @click="deleteAd">Eliminar</base-button>
       </div>
     </div>
@@ -12,12 +22,19 @@
 </template>
 
 <script setup>
+import PartnerItem from '../partner/PartnerItem.vue';
+import HousingItem from '../housing/HousingItem.vue';
+
 const props = defineProps({
   ad: {
     type: Object,
     default: () => ({
       mode: 'error',
     }),
+  },
+  type: {
+    type: String,
+    default: 'error',
   },
 });
 
@@ -34,13 +51,21 @@ function deleteAd() {
 section {
   position: relative;
   margin: 1rem 0;
-  border: 1px solid var(--color-surface-600);
-  border-radius: 4px;
-  padding: 1rem;
 }
 
 p {
   margin: 0.5rem 0 0 0;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+li {
+  margin: 0px;
 }
 
 .actions {
@@ -63,6 +88,6 @@ p {
   top: 0%;
   left: 0%;
   background-color: var(--color-overlay-200);
-  border-radius: 4px;
+  border-radius: 12px;
 }
 </style>

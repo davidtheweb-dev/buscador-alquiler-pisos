@@ -60,6 +60,6 @@ const description = computed(() => {
 });
 
 const contactLink = computed(() => {
-  return `/viviendas/${props.id}/contacto`;
+  return `/pisos/${props.id}/contacto`;
 });
 </script>

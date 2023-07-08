@@ -41,7 +41,7 @@ function submitForm() {
     housingId: route.params.id,
   });
 
-  router.replace('/pisos');
+  router.replace('/companeros');
 }
 </script>
 
