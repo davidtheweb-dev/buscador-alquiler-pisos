@@ -104,7 +104,7 @@ async function submitForm() {
     } else {
       await authStore.signup(authCredentials);
     }
-    const redirectUrl = '/' + (route.query.redirect || 'viviendas');
+    const redirectUrl = '/' + (route.query.redirect || 'pisos');
     router.replace(redirectUrl);
   } catch (err) {
     error.value = err.message || 'Error inesperado al intentar autenticarte.';

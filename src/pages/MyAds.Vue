@@ -13,20 +13,43 @@
       <header>
         <h2>Búsqueda de alojamiento</h2>
       </header>
-      <!-- <ad-item :ad="adData"></ad-item> -->
+      <ad-item
+        v-if="userHasPartner"
+        :ad="userPartner"
+        type="partner"
+        @delete-ad="tryDeleteAd('partner')"
+      ></ad-item>
+      <div v-else class="add__ad">
+        <p>
+          Sube tu anuncio contándonos sobre ti, qué tipo de piso buscas... ¡Y encontrarás a alguien
+          que busque un compañero como tu!
+        </p>
+        <div class="center__container">
+          <base-button mode="outline" link :to="'/registro-companero'"
+            >Añade tu anuncio en 5 min</base-button
+          >
+        </div>
+      </div>
     </base-card>
     <base-card>
       <header>
         <h2>Alquilo piso/habitación</h2>
       </header>
-      <ad-item v-if="userHasHousing" :ad="userHousing" @delete-ad="tryDeleteAd"></ad-item>
+      <ad-item
+        v-if="userHasHousing"
+        :ad="userHousing"
+        type="housing"
+        @delete-ad="tryDeleteAd('housing')"
+      ></ad-item>
       <div v-else class="add__ad">
         <p>
           ¿A qué esperas? Sube tu piso, cuéntanos qué tipo de compañero buscas, cuántos sois... ¡Y
           encontrarás a alguien en un plis!
         </p>
         <div class="center__container">
-          <base-button mode="outline" link :to="'/registro'">Añade tu piso en 5 min</base-button>
+          <base-button mode="outline" link :to="'/registro-piso'"
+            >Añade tu piso en 5 min</base-button
+          >
         </div>
       </div>
     </base-card>
@@ -36,21 +59,33 @@
 <script setup>
 import { ref, computed, onBeforeMount } from 'vue';
 import { useHousingStore } from '../stores/housing/HousingStore';
+import { usePartnerStore } from '../stores/partner/PartnerStore';
 
 import AdItem from '../components/ad/AdItem.vue';
 
 const housingStore = useHousingStore();
+const partnerStore = usePartnerStore();
 
 const error = ref(null);
+const deleteSelector = ref('');
 const confirmDeleteShow = ref(false);
 
 onBeforeMount(() => {
   loadHousing(true);
+  loadPartner(true);
 });
 
 async function loadHousing(refresh = false) {
   try {
     await housingStore.fetchHousing(refresh);
+  } catch (err) {
+    error.value = err.message || 'Error inesperado al cargar los anuncios';
+  }
+}
+
+async function loadPartner(refresh = false) {
+  try {
+    await partnerStore.fetchPartner(refresh);
   } catch (err) {
     error.value = err.message || 'Error inesperado al cargar los anuncios';
   }
@@ -64,19 +99,33 @@ const userHousing = computed(() => {
   return housingStore.getUserHousing;
 });
 
-function tryDeleteAd() {
+const userHasPartner = computed(() => {
+  return partnerStore.getUserHasPartner;
+});
+
+const userPartner = computed(() => {
+  return partnerStore.getUserPartner;
+});
+
+function tryDeleteAd(deleteAdSelector) {
   error.value = 'No podrás recuperar tu anuncio una vez eliminado';
   confirmDeleteShow.value = true;
+  deleteSelector.value = deleteAdSelector;
 }
 
 function confirmDeleteAd() {
-  housingStore.deleteHousing();
+  if (deleteSelector.value === 'housing') {
+    housingStore.deleteHousing();
+  } else if (deleteSelector.value === 'partner') {
+    partnerStore.deletePartner();
+  }
   closeDialog();
 }
 
 function closeDialog() {
   error.value = null;
   confirmDeleteShow.value = false;
+  deleteSelector.value = '';
 }
 </script>
 

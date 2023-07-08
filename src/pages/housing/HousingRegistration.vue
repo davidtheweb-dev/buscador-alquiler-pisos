@@ -19,6 +19,6 @@ const router = useRouter();
 function saveData(newHousingData) {
   housingStore.addHousing(newHousingData);
 
-  router.replace('/viviendas');
+  router.replace('/pisos');
 }
 </script>
