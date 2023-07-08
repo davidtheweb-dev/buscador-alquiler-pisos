@@ -15,7 +15,7 @@ const PartnerRegistration = () => import('./pages/partner/PartnerRegistration.vu
 const PartnerEdit = () => import('./pages/partner/PartnerEdit.vue');
 
 const RequestsReceived = () => import('./pages/requests/RequestsReceived.vue');
-const MyAds = () => import('./pages/MyAds.Vue');
+const MyAds = () => import('./pages/MyAds.vue');
 const UserAuth = () => import('./pages/auth/UserAuth.vue');
 const SettingOptions = () => import('./pages/SettingOptions.vue');
 const NotFound = () => import('./pages/NotFound.vue');
