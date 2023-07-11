@@ -89,18 +89,19 @@ const userHasHousing = computed(() => {
 
 const filteredHousing = computed(() => {
   const housing = housingStore.getHousing;
-  return housing.filter((housing) => {
-    if (activeFilters.lgtb && housing.tags.includes('LGTB friendly')) {
-      return true;
-    }
-    if (activeFilters.bath && housing.tags.includes('Baño privado')) {
-      return true;
-    }
-    if (activeFilters.couples && housing.tags.includes('Admite parejas')) {
-      return true;
-    }
-    return false;
-  });
+  // return housing.filter((housing) => {
+  //   if (activeFilters.lgtb && housing.tags.includes('LGTB friendly')) {
+  //     return true;
+  //   }
+  //   if (activeFilters.bath && housing.tags.includes('Baño privado')) {
+  //     return true;
+  //   }
+  //   if (activeFilters.couples && housing.tags.includes('Admite parejas')) {
+  //     return true;
+  //   }
+  //   return false;
+  // });
+  return housing;
 });
 
 function setFilters(updatedFilters) {
