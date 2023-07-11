@@ -8,26 +8,16 @@
       <p>{{ error }}</p>
     </base-dialog>
     <section>
-      <the-filter data-cy="housing-filter" @change-filter="setFilters"></the-filter>
+      <the-filter @change-filter="setFilters"></the-filter>
     </section>
     <section>
       <base-card>
         <div class="controls">
-          <base-button data-cy="housing-reload-btn" mode="outline" @click="loadHousing(true)"
-            >Actualizar</base-button
-          >
-          <base-button
-            v-if="!isLoggedIn"
-            data-cy="housing-login-btn"
-            link
-            to="/autenticacion?redirect=registro"
+          <base-button mode="outline" @click="loadHousing(true)">Actualizar</base-button>
+          <base-button v-if="!isLoggedIn" link to="/autenticacion?redirect=registro"
             >¡Sube tu piso!</base-button
           >
-          <base-button
-            v-if="isLoggedIn && !userHasHousing && !isLoading"
-            data-cy="housing-upload-btn"
-            link
-            to="/registro-piso"
+          <base-button v-if="isLoggedIn && !userHasHousing && !isLoading" link to="/registro-piso"
             >¡Sube tu piso!</base-button
           >
         </div>
@@ -37,12 +27,8 @@
         <ul v-else-if="filterHasHousing">
           <housing-item
             v-for="housing in filteredHousing"
-            :id="housing.id"
             :key="housing.id"
-            data-cy="housing-item"
-            :title="housing.title"
-            :rate="housing.rate"
-            :tags="housing.tags"
+            :housing="housing"
           ></housing-item>
         </ul>
         <h3 v-else>No se han encontrado viviendas</h3>
