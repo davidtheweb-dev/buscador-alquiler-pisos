@@ -5,7 +5,7 @@
       <partner-item :partner="adLocal" :mode-my-ads="true"></partner-item>
     </ul>
     <ul v-if="type === 'housing'">
-      <housing-item :housing="adLocal"></housing-item>
+      <housing-item :housing="adLocal" :mode-my-ads="true"></housing-item>
     </ul>
     <div class="actions">
       <div class="container">
