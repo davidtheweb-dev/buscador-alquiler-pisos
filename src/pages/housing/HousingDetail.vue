@@ -41,6 +41,18 @@
       </base-card>
     </section>
 
+    <section class="mapa">
+      <iframe
+        :src="`https://maps.google.com/maps?hl=es&amp;q=${selectedHousing.address},%20${selectedHousing.postalCode}%20${selectedHousing.municipality},%20Espa%C3%B1a+()&amp;z=14&amp;ie=UTF8&amp;iwloc=&amp;output=embed`"
+        width="93%"
+        height="350"
+        style="border: 0; border-radius: 6px"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      ></iframe>
+    </section>
+
     <section>
       <base-card>
         <header>
@@ -168,5 +180,11 @@ function goToInstagram() {
 .contact-buttons {
   text-align: center;
   margin-bottom: 15px;
+}
+
+.mapa {
+  max-width: 43rem;
+  margin: 0 auto 0 auto;
+  text-align: center;
 }
 </style>
