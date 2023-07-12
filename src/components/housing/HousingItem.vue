@@ -1,17 +1,22 @@
 <template>
   <li>
-    <h3 data-cy="housing-item-title">{{ title }}</h3>
-    <h4 data-cy="housing-item-rate">{{ rate }}€/mes</h4>
+    <h3 class="title">
+      {{ housing.title }}
+      <div class="like"><base-like id="housing"></base-like></div>
+    </h3>
+    <h4 class="extra-gap">{{ housing.rate }}💶/mes</h4>
+    <p class="extra-gap">{{ housing.description }}</p>
+    <h4 class="extra-gap">
+      📌{{ housing.area }} 📆{{ housing.startMonth }} 🐕{{ housing.isPet ? 'Sí' : 'No' }} 🚬{{
+        housing.isSmoke ? 'Sí' : 'No'
+      }}
+    </h4>
     <div>
-      <base-badge v-for="tag in tags" :key="tag" :type="tag" :title="tag"></base-badge>
+      <base-badge v-for="tag in housing.tags" :key="tag" type="small" :title="tag"></base-badge>
     </div>
-    <div class="actions">
-      <base-button data-cy="housing-item-contact-btn" mode="outline" link :to="housingContactLink"
-        >Contacto</base-button
-      >
-      <base-button data-cy="housing-item-show-btn" link :to="housingDetailLink"
-        >Ver más</base-button
-      >
+    <div v-if="!modeMyAds" class="actions">
+      <base-button mode="outline" link :to="housingContactLink">Contacto</base-button>
+      <base-button link :to="housingDetailLink">Ver más</base-button>
     </div>
   </li>
 </template>
@@ -21,32 +26,24 @@ import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 
 const props = defineProps({
-  id: {
-    type: String,
-    default: 'error',
-  },
-  title: {
-    type: String,
-    default: 'Error al cargar el nombre del piso',
-  },
-  rate: {
-    type: Number,
+  housing: {
+    type: Object,
     default: null,
   },
-  tags: {
-    type: Array,
-    default: null,
+  modeMyAds: {
+    type: Boolean,
+    default: false,
   },
 });
 
 const route = useRoute();
 
 const housingContactLink = computed(() => {
-  return route.path + '/' + props.id + '/contacto';
+  return route.path + '/' + props.housing.id + '/contacto';
 });
 
 const housingDetailLink = computed(() => {
-  return route.path + '/' + props.id;
+  return route.path + '/' + props.housing.id;
 });
 </script>
 
@@ -63,15 +60,34 @@ h3 {
 }
 
 h3,
-h4 {
+h4,
+p {
   margin: 0.5rem 0;
+  margin-bottom: 0.5rem;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
 }
 
-div {
-  margin: 0.5rem 0;
+.title {
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow: visible;
+}
+
+.like {
+  margin: 0 -10px 0 0;
+}
+
+.extra-gap {
+  margin-bottom: 1rem;
 }
 
 .actions {
+  margin-top: 0.6rem;
   display: flex;
   justify-content: flex-end;
 }
