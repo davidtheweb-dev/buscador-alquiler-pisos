@@ -19,7 +19,7 @@
         </h4>
 
         <div v-if="selectedPartner.isShared">
-          <h4 v-if="selectedPartner.typeRoom != 0">
+          <h4 v-if="selectedPartner.numPartners != 0">
             🧑‍🦲 Busca compartir piso con ➡️ {{ numPartners }}
           </h4>
           <h4 v-if="selectedPartner.freePlaces != 0">🪪 Busca piso con ➡️ {{ freePlaces }}</h4>
