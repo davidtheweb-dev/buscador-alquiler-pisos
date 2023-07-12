@@ -56,6 +56,42 @@
       <p v-if="!area.isValid" class="errors">La zona no puede estar vacía</p>
     </div>
 
+    <div class="form-control" :class="{ invalid: !address.isValid }">
+      <label for="address">Dirección</label>
+      <input
+        id="address"
+        v-model.trim="address.value"
+        type="text"
+        placeholder="Calle Gran Vía / Calle Gran Vía, 28"
+        @blur="clearValidity(address)"
+      />
+      <p v-if="!address.isValid" class="errors">La dirección no puede estar vacía</p>
+    </div>
+
+    <div class="form-control" :class="{ invalid: !municipality.isValid }">
+      <label for="municipality">Municipio</label>
+      <input
+        id="municipality"
+        v-model.trim="municipality.value"
+        type="text"
+        placeholder="Madrid"
+        @blur="clearValidity(municipality)"
+      />
+      <p v-if="!municipality.isValid" class="errors">El municipio no puede estar vacío</p>
+    </div>
+
+    <div class="form-control" :class="{ invalid: !postalCode.isValid }">
+      <label for="postalCode">Código postal</label>
+      <input
+        id="postalCode"
+        v-model.number="postalCode.value"
+        type="number"
+        placeholder="28013"
+        @blur="clearValidity(postalCode)"
+      />
+      <p v-if="!postalCode.isValid" class="errors">El código postal no puede estar vacío</p>
+    </div>
+
     <div class="form-control" :class="{ invalid: !startMonth.isValid }">
       <label for="startMonth">Disponible en</label>
       <select
@@ -296,6 +332,9 @@ onBeforeMount(() => {
     isIncluded.value = housingInfoLocal.isIncluded;
     extraCosts.value = housingInfoLocal.extraCosts;
     area.value = housingInfoLocal.area;
+    address.value = housingInfoLocal.address;
+    municipality.value = housingInfoLocal.municipality;
+    postalCode.value = housingInfoLocal.postalCode;
     startMonth.value = housingInfoLocal.startMonth;
     endMonth.value = housingInfoLocal.endMonth;
     genre.value = housingInfoLocal.genre;
@@ -331,6 +370,18 @@ const extraCosts = reactive({
   isValid: true,
 });
 const area = reactive({
+  value: '',
+  isValid: true,
+});
+const address = reactive({
+  value: '',
+  isValid: true,
+});
+const municipality = reactive({
+  value: '',
+  isValid: true,
+});
+const postalCode = reactive({
   value: '',
   isValid: true,
 });
@@ -431,6 +482,21 @@ function validateForm() {
     formIsValid = false;
   }
 
+  if (address.value === '') {
+    address.isValid = false;
+    formIsValid = false;
+  }
+
+  if (municipality.value === '') {
+    municipality.isValid = false;
+    formIsValid = false;
+  }
+
+  if (!postalCode.value || postalCode.value < 0) {
+    postalCode.isValid = false;
+    formIsValid = false;
+  }
+
   if (startMonth.value === '') {
     startMonth.isValid = false;
     formIsValid = false;
@@ -501,6 +567,9 @@ function submitForm() {
     isIncluded: isIncluded.value,
     extraCosts: extraCosts.value,
     area: area.value,
+    address: address.value,
+    municipality: municipality.value,
+    postalCode: postalCode.value,
     startMonth: startMonth.value,
     endMonth: endMonth.value,
     genre: genre.value,
