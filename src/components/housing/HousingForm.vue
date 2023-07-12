@@ -229,6 +229,16 @@
       <p v-if="!isPet.isValid" class="errors">Selecciona una opción</p>
     </div>
 
+    <div class="form-control">
+      <label for="instagram">Instagram (opcional)</label>
+      <input id="instagram" v-model.trim="instagram.value" type="text" placeholder="tinder.urjc" />
+    </div>
+
+    <div class="form-control">
+      <label for="whatsapp">WhatsApp (opcional)</label>
+      <input id="whatsapp" v-model.number="whatsapp.value" type="number" placeholder="605347867" />
+    </div>
+
     <div class="form-control" :class="{ invalid: !tags.isValid }">
       <h3>Características</h3>
       <div>
@@ -345,6 +355,8 @@ onBeforeMount(() => {
     typeBed.value = housingInfoLocal.typeBed;
     isSmoke.value = housingInfoLocal.isSmoke;
     isPet.value = housingInfoLocal.isPet;
+    instagram.value = housingInfoLocal.instagram;
+    whatsapp.value = housingInfoLocal.whatsapp;
     tags.value = housingInfoLocal.tags;
   }
 });
@@ -438,6 +450,14 @@ const isSmoke = reactive({
 });
 const isPet = reactive({
   value: null,
+  isValid: true,
+});
+const instagram = reactive({
+  value: '',
+  isValid: true,
+});
+const whatsapp = reactive({
+  value: '',
   isValid: true,
 });
 const tags = reactive({
@@ -580,6 +600,8 @@ function submitForm() {
     typeBed: typeBed.value,
     isSmoke: isSmoke.value,
     isPet: isPet.value,
+    instagram: instagram.value,
+    whatsapp: whatsapp.value,
     tags: tags.value,
   };
 

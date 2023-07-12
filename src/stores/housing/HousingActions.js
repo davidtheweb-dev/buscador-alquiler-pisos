@@ -26,6 +26,8 @@ export default {
       typeBed: newHousingData.typeBed,
       isSmoke: newHousingData.isSmoke,
       isPet: newHousingData.isPet,
+      instagram: newHousingData.instagram,
+      whatsapp: newHousingData.whatsapp,
       tags: newHousingData.tags,
     };
 
@@ -109,6 +111,8 @@ export default {
         typeBed: responseData[key].typeBed,
         isSmoke: responseData[key].isSmoke,
         isPet: responseData[key].isPet,
+        instagram: responseData[key].instagram,
+        whatsapp: responseData[key].whatsapp,
         tags: responseData[key].tags,
       };
       housing.push(house);
