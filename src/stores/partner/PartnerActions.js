@@ -21,6 +21,8 @@ export default {
       typeBed: newPartnerData.typeBed,
       isSmoke: newPartnerData.isSmoke,
       isPet: newPartnerData.isPet,
+      instagram: newPartnerData.instagram,
+      whatsapp: newPartnerData.whatsapp,
       tags: newPartnerData.tags,
     };
 
@@ -99,6 +101,8 @@ export default {
         typeBed: responseData[key].typeBed,
         isSmoke: responseData[key].isSmoke,
         isPet: responseData[key].isPet,
+        instagram: responseData[key].instagram,
+        whatsapp: responseData[key].whatsapp,
         tags: responseData[key].tags,
       };
       partner.push(partn);

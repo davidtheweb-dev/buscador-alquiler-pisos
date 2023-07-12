@@ -34,13 +34,13 @@
         <header>
           <div class="contact-buttons">
             <h2>¿Te cuadro? ¡Háblame!</h2>
-            <base-button @click="goToWhatsapp"
+            <base-button :class="{ disabled: !selectedPartner.whatsapp }" @click="goToWhatsapp"
               ><i class="fa-brands fa-whatsapp fa-xl"></i
             ></base-button>
             <base-button link :to="contactLinkEmail"
               ><i class="fa-regular fa-envelope fa-xl"></i
             ></base-button>
-            <base-button @click="goToInstagram"
+            <base-button :class="{ disabled: !selectedPartner.instagram }" @click="goToInstagram"
               ><i class="fa-brands fa-instagram fa-xl"></i
             ></base-button>
           </div>
@@ -153,11 +153,11 @@ const contactLinkEmail = computed(() => {
 });
 
 function goToWhatsapp() {
-  window.open('https://www.whatsapp.com/', '_blank');
+  window.open(`https://wa.me/${selectedPartner.value.whatsapp}`, '_blank');
 }
 
 function goToInstagram() {
-  window.open('https://www.instagram.com/', '_blank');
+  window.open(`https://instagram.com/${selectedPartner.value.instagram}`, '_blank');
 }
 </script>
 
@@ -177,5 +177,10 @@ function goToInstagram() {
 .contact-buttons {
   text-align: center;
   margin-bottom: 15px;
+}
+
+.disabled {
+  background-color: var(--color-surface-600);
+  pointer-events: none;
 }
 </style>
