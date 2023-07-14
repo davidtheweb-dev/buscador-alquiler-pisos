@@ -2,7 +2,7 @@
   <li>
     <h3 class="title">
       {{ partner.title }} {{ emojiGenre }}
-      <div class="like"><base-like id="partner"></base-like></div>
+      <div class="like"><base-like :id="partner.id"></base-like></div>
     </h3>
     <h4 class="extra-gap">Máx. {{ partner.rate }}💶/mes</h4>
     <p class="extra-gap">{{ partner.description }}</p>
