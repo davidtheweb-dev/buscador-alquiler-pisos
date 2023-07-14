@@ -10,7 +10,7 @@
     <section>
       <base-card>
         <header>
-          <h2>Solicitudes recibidas</h2>
+          <h2>Mensajes recibidos</h2>
         </header>
         <base-spinner v-if="isLoading"></base-spinner>
         <ul v-else-if="userHasRequests && !isLoading">
@@ -21,7 +21,7 @@
             :message="req.message"
           ></requests-item>
         </ul>
-        <h3 v-else>No has recibido ninguna solicitud todavía</h3>
+        <h3 v-else>No has recibido ningún mensaje aún</h3>
       </base-card>
     </section>
   </div>
