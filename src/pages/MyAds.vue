@@ -130,7 +130,8 @@ function closeDialog() {
 </script>
 
 <style scoped>
-header {
+header,
+p {
   text-align: center;
 }
 
@@ -139,6 +140,11 @@ ul {
   margin: 2rem auto;
   padding: 0;
   max-width: 30rem;
+}
+
+p {
+  margin: 1rem 0.7rem 1rem 0.7rem;
+  font-size: 15px;
 }
 
 .add__ad {

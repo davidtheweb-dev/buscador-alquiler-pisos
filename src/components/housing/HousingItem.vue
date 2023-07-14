@@ -2,7 +2,7 @@
   <li>
     <h3 class="title">
       {{ housing.title }}
-      <div class="like"><base-like id="housing"></base-like></div>
+      <div class="like"><base-like :id="housing.id"></base-like></div>
     </h3>
     <h4 class="extra-gap">{{ housing.rate }}💶/mes</h4>
     <p class="extra-gap">{{ housing.description }}</p>
