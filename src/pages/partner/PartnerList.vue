@@ -83,7 +83,7 @@ function handleDialogError() {
     >
       <p>{{ error }}</p>
     </base-dialog>
-    <section>
+    <section class="sticky -top-20">
       <the-filter @change-filter="setFilters"></the-filter>
     </section>
     <section>
@@ -93,7 +93,10 @@ function handleDialogError() {
           <base-button v-if="!isLoggedIn" link to="/autenticacion?redirect=registro"
             >¡Sube tu anuncio!</base-button
           >
-          <base-button v-if="isLoggedIn && !userHasPartner && !isLoading" link to="/registro-piso"
+          <base-button
+            v-if="isLoggedIn && !userHasPartner && !isLoading"
+            link
+            to="/registro-companero"
             >¡Sube tu anuncio!</base-button
           >
         </div>

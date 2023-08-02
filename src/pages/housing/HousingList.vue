@@ -83,7 +83,7 @@ function handleDialogError() {
     >
       <p>{{ error }}</p>
     </base-dialog>
-    <section>
+    <section class="sticky -top-20">
       <the-filter @change-filter="setFilters"></the-filter>
     </section>
     <section>
