@@ -1,3 +1,4 @@
+<!-- eslint-disable tailwindcss/no-custom-classname -->
 <template>
   <div class="spinner">
     <div class="lds-roller">
@@ -20,7 +21,6 @@
   align-items: center;
   width: 100%;
 }
-
 .lds-roller {
   display: inline-block;
   position: relative;

@@ -1,61 +1,3 @@
-<template>
-  <div>
-    <base-dialog
-      :show="!!error || confirmDeleteShow"
-      title="¿Estás seguro de que deseas eliminar tu anuncio?"
-      :delete="true"
-      @delete="confirmDeleteAd"
-      @close="closeDialog"
-    >
-      <p>{{ error }}</p>
-    </base-dialog>
-    <base-card>
-      <header>
-        <h2>Búsqueda de alojamiento</h2>
-      </header>
-      <ad-item
-        v-if="userHasPartner"
-        :ad="userPartner"
-        type="partner"
-        @delete-ad="tryDeleteAd('partner')"
-      ></ad-item>
-      <div v-else class="add__ad">
-        <p>
-          Sube tu anuncio contándonos sobre ti, qué tipo de piso buscas... ¡Y encontrarás a alguien
-          que busque un compañero como tu!
-        </p>
-        <div class="center__container">
-          <base-button mode="outline" link :to="'/registro-companero'"
-            >Añade tu anuncio en 5 min</base-button
-          >
-        </div>
-      </div>
-    </base-card>
-    <base-card>
-      <header>
-        <h2>Alquilo piso/habitación</h2>
-      </header>
-      <ad-item
-        v-if="userHasHousing"
-        :ad="userHousing"
-        type="housing"
-        @delete-ad="tryDeleteAd('housing')"
-      ></ad-item>
-      <div v-else class="add__ad">
-        <p>
-          ¿A qué esperas? Sube tu piso, cuéntanos qué tipo de compañero buscas, cuántos sois... ¡Y
-          encontrarás a alguien en un plis!
-        </p>
-        <div class="center__container">
-          <base-button mode="outline" link :to="'/registro-piso'"
-            >Añade tu piso en 5 min</base-button
-          >
-        </div>
-      </div>
-    </base-card>
-  </div>
-</template>
-
 <script setup>
 import { ref, computed, onBeforeMount } from 'vue';
 import { useHousingStore } from '../stores/housing/HousingStore';
@@ -129,6 +71,64 @@ function closeDialog() {
 }
 </script>
 
+<template>
+  <div>
+    <base-dialog
+      :show="!!error || confirmDeleteShow"
+      title="¿Estás seguro de que deseas eliminar tu anuncio?"
+      :delete="true"
+      @delete="confirmDeleteAd"
+      @close="closeDialog"
+    >
+      <p>{{ error }}</p>
+    </base-dialog>
+    <base-card>
+      <header>
+        <h2>Búsqueda de alojamiento</h2>
+      </header>
+      <ad-item
+        v-if="userHasPartner"
+        :ad="userPartner"
+        type="partner"
+        @delete-ad="tryDeleteAd('partner')"
+      ></ad-item>
+      <div v-else class="relative mx-0 my-4 rounded border border-color-surface-600 p-4">
+        <p>
+          Sube tu anuncio contándonos sobre ti, qué tipo de piso buscas... ¡Y encontrarás a alguien
+          que busque un compañero como tu!
+        </p>
+        <div class="mx-auto mb-3 mt-5 text-center">
+          <base-button mode="outline" link :to="'/registro-companero'"
+            >Añade tu anuncio en 5 min</base-button
+          >
+        </div>
+      </div>
+    </base-card>
+    <base-card>
+      <header>
+        <h2>Alquilo piso/habitación</h2>
+      </header>
+      <ad-item
+        v-if="userHasHousing"
+        :ad="userHousing"
+        type="housing"
+        @delete-ad="tryDeleteAd('housing')"
+      ></ad-item>
+      <div v-else class="relative mx-0 my-4 rounded border border-color-surface-600 p-4">
+        <p>
+          ¿A qué esperas? Sube tu piso, cuéntanos qué tipo de compañero buscas, cuántos sois... ¡Y
+          encontrarás a alguien en un plis!
+        </p>
+        <div class="mx-auto mb-3 mt-5 text-center">
+          <base-button mode="outline" link :to="'/registro-piso'"
+            >Añade tu piso en 5 min</base-button
+          >
+        </div>
+      </div>
+    </base-card>
+  </div>
+</template>
+
 <style scoped>
 header,
 p {
@@ -145,18 +145,5 @@ ul {
 p {
   margin: 1rem 0.7rem 1rem 0.7rem;
   font-size: 15px;
-}
-
-.add__ad {
-  position: relative;
-  margin: 1rem 0;
-  border: 1px solid var(--color-surface-600);
-  border-radius: 4px;
-  padding: 1rem;
-}
-
-.center__container {
-  text-align: center;
-  margin: 20px auto 10px auto;
 }
 </style>

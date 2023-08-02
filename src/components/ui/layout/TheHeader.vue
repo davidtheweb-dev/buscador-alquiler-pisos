@@ -1,61 +1,3 @@
-<template>
-  <header>
-    <nav>
-      <h1><router-link to="/">UNIPISO</router-link></h1>
-      <ul v-if="!mobile">
-        <li>
-          <router-link to="/pisos">Anuncios</router-link>
-        </li>
-        <li>
-          <router-link to="/mis-anuncios">Mis anuncios</router-link>
-        </li>
-        <li v-if="isLoggedIn">
-          <router-link to="/solicitudes">Mensajes</router-link>
-        </li>
-        <li>
-          <router-link to="/preferencias">Preferencias</router-link>
-        </li>
-        <li v-if="!isLoggedIn">
-          <base-button @click="login">Inicia sesión</base-button>
-        </li>
-        <li v-if="isLoggedIn">
-          <base-button @click="logout">Cerrar sesión</base-button>
-        </li>
-      </ul>
-
-      <i
-        v-if="mobile"
-        class="fa-solid fa-bars"
-        :class="{ 'icon-active': mobileNav }"
-        @click="toggleMobileNav"
-      ></i>
-      <transition name="mobile-nav">
-        <ul v-if="mobileNav" class="dropdown-nav" @click.prevent="toggleMobileNav">
-          <li>
-            <router-link to="/pisos">Anuncios</router-link>
-          </li>
-          <li>
-            <router-link to="/mis-anuncios">Mis anuncios</router-link>
-          </li>
-          <li v-if="isLoggedIn">
-            <router-link to="/solicitudes">Mensajes</router-link>
-          </li>
-          <li>
-            <router-link to="/preferencias">Preferencias</router-link>
-          </li>
-          <li v-if="!isLoggedIn">
-            <base-button class="base-button" @click="login">Inicia sesión</base-button>
-          </li>
-          <li v-if="isLoggedIn">
-            <base-button class="base-button" @click="logout">Cerrar sesión</base-button>
-          </li>
-        </ul>
-      </transition>
-      <div v-if="mobileNav" class="overlayer" @click.prevent="toggleMobileNav"></div>
-    </nav>
-  </header>
-</template>
-
 <script setup>
 import { computed, onBeforeMount, ref } from 'vue';
 import { useAuthStore } from '../../../stores/auth/AuthStore';
@@ -100,6 +42,72 @@ function toggleMobileNav() {
   mobileNav.value = !mobileNav.value;
 }
 </script>
+
+<template>
+  <header>
+    <nav>
+      <h1><router-link to="/">UNIPISO</router-link></h1>
+      <ul v-if="!mobile">
+        <li>
+          <router-link to="/pisos">Anuncios</router-link>
+        </li>
+        <li>
+          <router-link to="/mis-anuncios">Mis anuncios</router-link>
+        </li>
+        <li v-if="isLoggedIn">
+          <router-link to="/solicitudes">Mensajes</router-link>
+        </li>
+        <li>
+          <router-link to="/preferencias">Preferencias</router-link>
+        </li>
+        <li v-if="!isLoggedIn">
+          <base-button @click="login">Inicia sesión</base-button>
+        </li>
+        <li v-if="isLoggedIn">
+          <base-button @click="logout">Cerrar sesión</base-button>
+        </li>
+      </ul>
+
+      <i
+        v-if="mobile"
+        class="fa-solid fa-bars"
+        :class="{ 'rotate-180': mobileNav }"
+        @click="toggleMobileNav"
+      ></i>
+      <transition name="mobile-nav">
+        <ul
+          v-if="mobileNav"
+          class="fixed left-0 top-0 z-10 flex h-full w-full max-w-xs flex-col bg-color-surface-200"
+          @click.prevent="toggleMobileNav"
+        >
+          <li class="mb-2 w-11/12 text-center">
+            <router-link to="/pisos">Anuncios</router-link>
+          </li>
+          <li class="mb-2 w-11/12 text-center">
+            <router-link to="/mis-anuncios">Mis anuncios</router-link>
+          </li>
+          <li v-if="isLoggedIn" class="mb-2 w-11/12 text-center">
+            <router-link to="/solicitudes">Mensajes</router-link>
+          </li>
+          <li class="mb-2 w-11/12 text-center">
+            <router-link to="/preferencias">Preferencias</router-link>
+          </li>
+          <li v-if="!isLoggedIn" class="mb-2 w-11/12 text-center">
+            <base-button class="m-0 w-11/12" @click="login">Inicia sesión</base-button>
+          </li>
+          <li v-if="isLoggedIn" class="mb-2 w-11/12 text-center">
+            <base-button class="m-0 w-11/12" @click="logout">Cerrar sesión</base-button>
+          </li>
+        </ul>
+      </transition>
+      <div
+        v-if="mobileNav"
+        class="fixed left-0 top-0 z-0 h-full w-full bg-color-overlay-200"
+        @click.prevent="toggleMobileNav"
+      ></div>
+    </nav>
+  </header>
+</template>
 
 <style scoped>
 header {
@@ -173,35 +181,6 @@ header i {
   transition: 0.8s ease all;
 }
 
-.icon-active {
-  transform: rotate(180deg);
-}
-
-.dropdown-nav {
-  display: flex;
-  flex-direction: column;
-  position: fixed;
-  width: 100%;
-  max-width: 250px;
-  height: 100%;
-  background-color: var(--color-surface-200);
-  border-right: 1px solid var(--color-surface-400);
-  top: 0;
-  left: 0;
-  z-index: 2;
-}
-
-.dropdown-nav li,
-.dropdown-nav a {
-  width: 90%;
-  margin-bottom: 8px;
-  text-align: center;
-}
-.base-button {
-  width: 90%;
-  margin: 0;
-}
-
 .mobile-nav-enter-active,
 .mobile-nav-leave-active {
   transition: 0.3s ease all;
@@ -214,15 +193,5 @@ header i {
 
 .mobile-nav-enter-to {
   transform: translateX(0);
-}
-
-.overlayer {
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  left: 0;
-  top: 0;
-  background-color: var(--color-overlay-200);
-  z-index: 1;
 }
 </style>

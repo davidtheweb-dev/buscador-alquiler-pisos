@@ -1,9 +1,3 @@
-<template>
-  <span class="badge" :class="type" @click="showInfo">
-    {{ text }}
-  </span>
-</template>
-
 <script setup>
 import { computed } from 'vue';
 
@@ -70,19 +64,17 @@ function showInfo() {
 }
 </script>
 
-<style scoped>
-.badge {
-  background-color: var(--color-surface-300);
-  color: var(--color-white-100);
-  border-radius: 30px;
-  padding: 0.5rem 0.8rem;
-  display: inline-block;
-  margin-right: 0.5rem;
-  font-weight: bold;
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
+<template>
+  <span
+    class="my-1 mr-2 inline-block rounded-2xl bg-color-surface-300 px-3 py-2 font-bold text-color-white-100"
+    :class="type"
+    @click="showInfo"
+  >
+    {{ text }}
+  </span>
+</template>
 
+<style scoped>
 .big {
   padding: 0.5rem 1rem;
   font-weight: 200;

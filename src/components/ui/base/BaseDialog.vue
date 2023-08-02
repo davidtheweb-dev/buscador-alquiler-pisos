@@ -1,29 +1,3 @@
-<template>
-  <teleport to="body">
-    <div v-if="show" class="backdrop" @click="tryClose"></div>
-    <transition name="dialog">
-      <dialog v-if="show" open>
-        <header>
-          <slot name="header">
-            <h2>{{ title }}</h2>
-          </slot>
-        </header>
-        <section>
-          <slot></slot>
-        </section>
-        <menu v-if="!fixed">
-          <slot name="actions">
-            <base-button v-if="props.delete" mode="outline" @click="tryDelete"
-              >Eliminar</base-button
-            >
-            <base-button @click="tryClose">Cerrar</base-button>
-          </slot>
-        </menu>
-      </dialog>
-    </transition>
-  </teleport>
-</template>
-
 <script setup>
 const props = defineProps({
   show: {
@@ -64,17 +38,37 @@ function tryDelete() {
 }
 </script>
 
-<style scoped>
-.backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100%;
-  background-color: var(--color-overlay-100);
-  z-index: 10;
-}
+<template>
+  <teleport to="body">
+    <div
+      v-if="show"
+      class="fixed left-0 top-0 z-10 h-screen w-full bg-color-overlay-100"
+      @click="tryClose"
+    ></div>
+    <transition name="dialog">
+      <dialog v-if="show" open>
+        <header>
+          <slot name="header">
+            <h2>{{ title }}</h2>
+          </slot>
+        </header>
+        <section>
+          <slot></slot>
+        </section>
+        <menu v-if="!fixed">
+          <slot name="actions">
+            <base-button v-if="props.delete" mode="outline" @click="tryDelete"
+              >Eliminar</base-button
+            >
+            <base-button @click="tryClose">Cerrar</base-button>
+          </slot>
+        </menu>
+      </dialog>
+    </transition>
+  </teleport>
+</template>
 
+<style scoped>
 dialog {
   position: fixed;
   top: 20vh;

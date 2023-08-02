@@ -1,12 +1,3 @@
-<template>
-  <button v-if="!link" :class="mode">
-    <slot></slot>
-  </button>
-  <router-link v-else :class="mode" :to="to">
-    <slot></slot>
-  </router-link>
-</template>
-
 <script setup>
 defineProps({
   mode: {
@@ -27,6 +18,15 @@ defineProps({
 });
 </script>
 
+<template>
+  <button v-if="!link" :class="mode">
+    <slot></slot>
+  </button>
+  <router-link v-else :class="mode" :to="to">
+    <slot></slot>
+  </router-link>
+</template>
+
 <style scoped>
 button,
 a {
@@ -41,13 +41,6 @@ a {
   display: inline-block;
   font-weight: bold;
   border: 1px solid;
-}
-
-a:hover,
-a:active,
-button:hover,
-button:active {
-  /* box-shadow: 0px 0px 20px 2px; */
 }
 
 .flat {
