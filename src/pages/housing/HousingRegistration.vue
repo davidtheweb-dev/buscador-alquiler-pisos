@@ -1,12 +1,3 @@
-<template>
-  <section>
-    <base-card>
-      <h2>¡Sube el anuncio de tu piso y encuentra compañero!</h2>
-      <housing-form @save-data="saveData"></housing-form>
-    </base-card>
-  </section>
-</template>
-
 <script setup>
 import { useHousingStore } from '../../stores/housing/HousingStore';
 import { useRouter } from 'vue-router';
@@ -22,3 +13,12 @@ function saveData(newHousingData) {
   router.replace('/mis-anuncios');
 }
 </script>
+
+<template>
+  <section>
+    <base-card>
+      <h2>¡Sube el anuncio de tu piso y encuentra compañero!</h2>
+      <housing-form @save-data="saveData"></housing-form>
+    </base-card>
+  </section>
+</template>

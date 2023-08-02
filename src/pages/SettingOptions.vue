@@ -1,3 +1,42 @@
+<script setup>
+// import { reactive } from 'vue';
+
+// const emit = defineEmits(['save-data']);
+
+// let formIsValid = true;
+
+// const email = reactive({
+//   value: '',
+//   isValid: true,
+// });
+
+// function clearValidity(input) {
+//   input.isValid = true;
+// }
+
+// function validateForm() {
+//   formIsValid = true;
+//   if (email.value === '') {
+//     email.isValid = false;
+//     formIsValid = false;
+//   }
+// }
+
+// function submitForm() {
+//   validateForm();
+
+//   if (!formIsValid) {
+//     return;
+//   }
+
+//   const formData = {
+//     email: email.value,
+//   };
+
+//   emit('save-data', formData);
+// }
+</script>
+
 <template>
   <section>
     <!-- <base-card>
@@ -44,45 +83,6 @@
     </base-card>
   </section>
 </template>
-
-<script setup>
-// import { reactive } from 'vue';
-
-// const emit = defineEmits(['save-data']);
-
-// let formIsValid = true;
-
-// const email = reactive({
-//   value: '',
-//   isValid: true,
-// });
-
-// function clearValidity(input) {
-//   input.isValid = true;
-// }
-
-// function validateForm() {
-//   formIsValid = true;
-//   if (email.value === '') {
-//     email.isValid = false;
-//     formIsValid = false;
-//   }
-// }
-
-// function submitForm() {
-//   validateForm();
-
-//   if (!formIsValid) {
-//     return;
-//   }
-
-//   const formData = {
-//     email: email.value,
-//   };
-
-//   emit('save-data', formData);
-// }
-</script>
 
 <style scoped>
 a {

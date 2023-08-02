@@ -1,45 +1,3 @@
-<template>
-  <div>
-    <base-dialog
-      :show="!!error"
-      title="Por favor, contacta con soporte indicando el error"
-      @close="handleDialogError"
-    >
-      <p>{{ error }}</p>
-    </base-dialog>
-    <base-dialog :show="isLoading" title="Autenticando..." fixed>
-      <base-spinner></base-spinner>
-    </base-dialog>
-    <base-card>
-      <form @submit.prevent="submitForm">
-        <div class="form-control">
-          <label for="email">Correo electrónico</label>
-          <input id="email" v-model.trim="email" type="email" />
-        </div>
-        <div class="form-control">
-          <label for="password">Contraseña</label>
-          <input id="password" v-model.trim="password" type="password" />
-        </div>
-        <p v-if="!formIsValid">
-          Por favor, introduce un correo y contraseña válido (debe contener un mínimo de 6
-          carácteres).
-        </p>
-        <base-button class="submit-button">{{ submitButtonCaption }}</base-button>
-
-        <div class="change-mode-container">
-          <base-button
-            class="change-mode-button"
-            type="button"
-            mode="flat"
-            @click="switchAuthMode"
-            >{{ switchModeButtonCaption }}</base-button
-          >
-        </div>
-      </form>
-    </base-card>
-  </div>
-</template>
-
 <script setup>
 import { ref, computed } from 'vue';
 import { useAuthStore } from '../../stores/auth/AuthStore';
@@ -114,47 +72,50 @@ async function submitForm() {
 }
 </script>
 
-<style scoped>
-form {
-  border-radius: 12px;
-  padding: 0.5rem;
-}
+<template>
+  <div>
+    <base-dialog
+      :show="!!error"
+      title="Por favor, contacta con soporte indicando el error"
+      @close="handleDialogError"
+    >
+      <p>{{ error }}</p>
+    </base-dialog>
+    <base-dialog :show="isLoading" title="Autenticando..." fixed>
+      <base-spinner></base-spinner>
+    </base-dialog>
+    <base-card>
+      <form class="rounded-xl p-2" @submit.prevent="submitForm">
+        <div class="my-2">
+          <label class="mb-2 block font-bold" for="email">Correo electrónico</label>
+          <input
+            id="email"
+            v-model.trim="email"
+            class="mb-8 block w-full rounded-sm border border-color-white-100 p-1 focus:border-color-primary-600 focus:outline-none"
+            type="email"
+          />
+        </div>
+        <div class="my-2">
+          <label class="mb-2 block font-bold" for="password">Contraseña</label>
+          <input
+            id="password"
+            v-model.trim="password"
+            class="mb-8 block w-full rounded-sm border border-color-white-100 p-1 focus:border-color-primary-600 focus:outline-none"
+            type="password"
+          />
+        </div>
+        <p v-if="!formIsValid">
+          Por favor, introduce un correo y contraseña válido (debe contener un mínimo de 6
+          carácteres).
+        </p>
+        <base-button class="mb-4">{{ submitButtonCaption }}</base-button>
 
-.form-control {
-  margin: 0.5rem 0;
-}
-
-label {
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  display: block;
-}
-
-input,
-textarea {
-  display: block;
-  width: 100%;
-  font: inherit;
-  border: 1px solid var(--color-white-100);
-  padding: 0.15rem;
-  border-radius: 3px;
-  margin-bottom: 2rem;
-}
-
-input:focus,
-textarea:focus {
-  border-color: var(--color-primary-600);
-  outline: none;
-}
-
-.submit-button {
-  margin-bottom: 1rem;
-}
-
-.change-mode-container {
-  text-align: center;
-}
-.change-mode-button {
-  margin: 0;
-}
-</style>
+        <div class="text-center">
+          <base-button class="m-0" type="button" mode="flat" @click="switchAuthMode">{{
+            switchModeButtonCaption
+          }}</base-button>
+        </div>
+      </form>
+    </base-card>
+  </div>
+</template>

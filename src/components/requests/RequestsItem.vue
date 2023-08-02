@@ -1,12 +1,3 @@
-<template>
-  <li>
-    <div>
-      <a :href="emailLink">{{ email }}</a>
-    </div>
-    <p>{{ message }}</p>
-  </li>
-</template>
-
 <script setup>
 import { computed } from 'vue';
 
@@ -26,26 +17,15 @@ const emailLink = computed(() => {
 });
 </script>
 
-<style scoped>
-li {
-  margin: 1rem 0;
-  border: 1px solid var(--color-surface-600);
-  border-radius: 4px;
-  padding: 1rem;
-}
-
-a {
-  color: var(--color-primary-500);
-  text-decoration: none;
-  font-weight: bold;
-}
-
-a:hover,
-a:active {
-  color: var(--color-primary-600);
-}
-
-p {
-  margin: 0.5rem 0 0 0;
-}
-</style>
+<template>
+  <li class="my-4 rounded border border-color-surface-600 p-4">
+    <div>
+      <a
+        class="font-bold text-color-primary-500 hover:text-color-primary-600 active:text-color-primary-600"
+        :href="emailLink"
+        >{{ email }}</a
+      >
+    </div>
+    <p class="mt-2">{{ message }}</p>
+  </li>
+</template>

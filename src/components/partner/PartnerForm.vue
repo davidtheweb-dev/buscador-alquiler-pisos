@@ -1,266 +1,3 @@
-<template>
-  <form @submit.prevent="submitForm">
-    <div class="form-control" :class="{ invalid: !title.isValid }">
-      <label for="title">Título</label>
-      <input id="title" v-model.trim="title.value" type="text" @blur="clearValidity(title)" />
-      <p v-if="!title.isValid" class="errors">El título no puede estar vacío</p>
-    </div>
-    <div class="form-control" :class="{ invalid: !description.isValid }">
-      <label for="description">Descripción</label>
-      <textarea
-        id="description"
-        v-model.trim="description.value"
-        rows="5"
-        @blur="clearValidity(description)"
-      ></textarea>
-      <p v-if="!description.isValid" class="errors">La descripción no puede estar vacía</p>
-    </div>
-    <div class="form-control" :class="{ invalid: !genre.isValid }">
-      <label for="genre">Soy</label>
-      <select id="genre" v-model.trim="genre.value" name="genre" @blur="clearValidity(genre)">
-        <option value=""></option>
-        <option value="boy">Chico</option>
-        <option value="girl">Chica</option>
-        <option value="other">Otro</option>
-      </select>
-      <p v-if="!genre.isValid" class="errors">Selecciona una opción</p>
-    </div>
-    <div class="form-control" :class="{ invalid: !rate.isValid }">
-      <label for="rate">Presupuesto mensual máximo (€)</label>
-      <input id="rate" v-model.number="rate.value" type="number" @blur="clearValidity(rate)" />
-      <p v-if="!rate.isValid" class="errors">El precio debe ser mayor de 0</p>
-    </div>
-    <div class="form-control" :class="{ invalid: !area.isValid }">
-      <label for="area">Zona</label>
-      <input id="area" v-model.trim="area.value" type="text" @blur="clearValidity(area)" />
-      <p v-if="!area.isValid" class="errors">La zona no puede estar vacía</p>
-    </div>
-    <div class="form-control" :class="{ invalid: !startMonth.isValid }">
-      <label for="startMonth">Busco piso para</label>
-      <select
-        id="startMonth"
-        v-model.trim="startMonth.value"
-        name="startMonth"
-        @blur="clearValidity(startMonth)"
-      >
-        <option value=""></option>
-        <option v-for="month in monthsOptions" :key="month" :value="month">{{ month }}</option>
-      </select>
-      <p v-if="!startMonth.isValid" class="errors">Selecciona una opción</p>
-    </div>
-    <div class="form-control" :class="{ invalid: !monthsDuration.isValid }">
-      <label for="monthsDuration">Quiero quedarme (meses)</label>
-      <input
-        id="monthsDuration"
-        v-model.number="monthsDuration.value"
-        type="number"
-        @blur="clearValidity(monthsDuration)"
-      />
-      <p v-if="!monthsDuration.isValid" class="errors">El número de meses debe ser mayor de 0</p>
-    </div>
-    <div class="form-control" :class="{ invalid: !isShared.isValid }">
-      <label for="isShared">Busco piso compartido con</label>
-      <select
-        id="isShared"
-        v-model.trim="isShared.value"
-        name="isShared"
-        @blur="clearValidity(isShared)"
-      >
-        <option :value="null"></option>
-        <option :value="true">Otros estudiántes y jóvenes</option>
-        <option :value="false">Estudio o apartamento pequeño (yo solo)</option>
-      </select>
-      <p v-if="!isShared.isValid" class="errors">Selecciona una opción</p>
-    </div>
-    <div v-if="isShared.value">
-      <div class="form-control" :class="{ invalid: !numPartners.isValid }">
-        <label for="numPartners">Busco compartir piso con</label>
-        <select
-          id="numPartners"
-          v-model.trim="numPartners.value"
-          name="numPartners"
-          @blur="clearValidity(numPartners)"
-        >
-          <option :value="null"></option>
-          <option :value="1">1 persona</option>
-          <option :value="2">2 personas</option>
-          <option :value="3">3 o más personas</option>
-          <option :value="0">Indiferente</option>
-        </select>
-        <p v-if="!numPartners.isValid" class="errors">Selecciona una opción</p>
-      </div>
-      <div class="form-control" :class="{ invalid: !freePlaces.isValid }">
-        <label for="freePlaces">Nº total de plazas libres en un mismo piso</label>
-        <select
-          id="freePlaces"
-          v-model.trim="freePlaces.value"
-          name="freePlaces"
-          @blur="clearValidity(freePlaces)"
-        >
-          <option :value="null"></option>
-          <option :value="1">1</option>
-          <option :value="2">2</option>
-          <option :value="3">3</option>
-          <option :value="4">4</option>
-          <option :value="5">5</option>
-          <option :value="6">6</option>
-          <option :value="7">Más de 6</option>
-          <option :value="0">Indiferente</option>
-        </select>
-        <p v-if="!typeRoom.isValid" class="errors">Selecciona una opción</p>
-      </div>
-      <div class="form-control" :class="{ invalid: !typeRoom.isValid }">
-        <label for="typeRoom">Busco una habitación</label>
-        <select
-          id="typeRoom"
-          v-model.trim="typeRoom.value"
-          name="typeRoom"
-          @blur="clearValidity(typeRoom)"
-        >
-          <option :value="null"></option>
-          <option :value="1">Individual</option>
-          <option :value="2">Doble</option>
-          <option :value="0">Indiferente</option>
-        </select>
-        <p v-if="!typeRoom.isValid" class="errors">Selecciona una opción</p>
-      </div>
-    </div>
-    <div class="form-control" :class="{ invalid: !typeBed.isValid }">
-      <label for="typeBed">Quiero una cama</label>
-      <select
-        id="typeBed"
-        v-model.trim="typeBed.value"
-        name="typeBed"
-        @blur="clearValidity(typeBed)"
-      >
-        <option :value="null"></option>
-        <option :value="1">Individual</option>
-        <option :value="2">Doble</option>
-        <option :value="0">Indiferente</option>
-      </select>
-      <p v-if="!typeBed.isValid" class="errors">Selecciona una opción</p>
-    </div>
-    <div class="form-control" :class="{ invalid: !isSmoke.isValid }">
-      <label for="isSmoke">¿Fumo?</label>
-      <select
-        id="isSmoke"
-        v-model.trim="isSmoke.value"
-        name="isSmoke"
-        @blur="clearValidity(isSmoke)"
-      >
-        <option :value="null"></option>
-        <option :value="true">Soy fumador</option>
-        <option :value="false">No fumador</option>
-      </select>
-      <p v-if="!isSmoke.isValid" class="errors">Selecciona una opción</p>
-    </div>
-    <div class="form-control" :class="{ invalid: !isPet.isValid }">
-      <label for="isPet">¿Tengo mascotas?</label>
-      <select id="isPet" v-model.trim="isPet.value" name="isPet" @blur="clearValidity(isPet)">
-        <option :value="null"></option>
-        <option :value="true">Con mascotas</option>
-        <option :value="false">Sin mascotas</option>
-      </select>
-      <p v-if="!isPet.isValid" class="errors">Selecciona una opción</p>
-    </div>
-
-    <div class="form-control">
-      <label for="instagram">Instagram (opcional)</label>
-      <input id="instagram" v-model.trim="instagram.value" type="text" placeholder="tinder.urjc" />
-    </div>
-
-    <div class="form-control">
-      <label for="whatsapp">WhatsApp (opcional)</label>
-      <input id="whatsapp" v-model.number="whatsapp.value" type="number" placeholder="605347867" />
-    </div>
-
-    <div class="form-control" :class="{ invalid: !tags.isValid }">
-      <h3>Características que necesito</h3>
-      <div>
-        <input
-          id="elevator"
-          v-model="tags.value"
-          type="checkbox"
-          value="elevator"
-          @blur="clearValidity(tags)"
-        />
-        <label for="elevator">Ascensor</label>
-      </div>
-
-      <div>
-        <input
-          id="couples"
-          v-model="tags.value"
-          type="checkbox"
-          value="couples"
-          @blur="clearValidity(tags)"
-        />
-        <label for="couples">Admite parejas</label>
-      </div>
-
-      <div>
-        <input
-          id="air"
-          v-model="tags.value"
-          type="checkbox"
-          value="air"
-          @blur="clearValidity(tags)"
-        />
-        <label for="air">Climatizador</label>
-      </div>
-
-      <div>
-        <input
-          id="internet"
-          v-model="tags.value"
-          type="checkbox"
-          value="internet"
-          @blur="clearValidity(tags)"
-        />
-        <label for="internet">Internet WiFi</label>
-      </div>
-
-      <div>
-        <input
-          id="cleaner"
-          v-model="tags.value"
-          type="checkbox"
-          value="cleaner"
-          @blur="clearValidity(tags)"
-        />
-        <label for="cleaner">Limpieza incluida</label>
-      </div>
-
-      <div>
-        <input
-          id="bath"
-          v-model="tags.value"
-          type="checkbox"
-          value="bath"
-          @blur="clearValidity(tags)"
-        />
-        <label for="bath">Baño privado</label>
-      </div>
-
-      <div>
-        <input
-          id="lgtb"
-          v-model="tags.value"
-          type="checkbox"
-          value="lgtb"
-          @blur="clearValidity(tags)"
-        />
-        <label for="lgtb">LGTB friendly</label>
-      </div>
-
-      <p v-if="!tags.isValid" class="errors">Debes seleccionar al menos una característica</p>
-    </div>
-
-    <p v-if="!formIsValid">Por favor, corrige los campos y vuelve a intentarlo</p>
-    <base-button>Guardar</base-button>
-  </form>
-</template>
-
 <script setup>
 import { reactive, computed, onBeforeMount } from 'vue';
 
@@ -275,6 +12,7 @@ const props = defineProps({
 
 const emit = defineEmits(['save-data']);
 
+// eslint-disable-next-line vue/no-setup-props-destructure
 const partnerInfoLocal = { ...props.partnerInfo[0] };
 
 onBeforeMount(() => {
@@ -498,11 +236,276 @@ function submitForm() {
 }
 </script>
 
-<style scoped>
-.form-control {
-  margin: 0.5rem 0;
-}
+<template>
+  <form @submit.prevent="submitForm">
+    <div :class="{ invalid: !title.isValid }">
+      <label for="title">Título</label>
+      <input id="title" v-model.trim="title.value" type="text" @blur="clearValidity(title)" />
+      <p v-if="!title.isValid" class="font-bold text-red-600">El título no puede estar vacío</p>
+    </div>
+    <div :class="{ invalid: !description.isValid }">
+      <label for="description">Descripción</label>
+      <textarea
+        id="description"
+        v-model.trim="description.value"
+        rows="5"
+        @blur="clearValidity(description)"
+      ></textarea>
+      <p v-if="!description.isValid" class="font-bold text-red-600">
+        La descripción no puede estar vacía
+      </p>
+    </div>
+    <div :class="{ invalid: !genre.isValid }">
+      <label for="genre">Soy</label>
+      <select id="genre" v-model.trim="genre.value" name="genre" @blur="clearValidity(genre)">
+        <option value=""></option>
+        <option value="boy">Chico</option>
+        <option value="girl">Chica</option>
+        <option value="other">Otro</option>
+      </select>
+      <p v-if="!genre.isValid" class="font-bold text-red-600">Selecciona una opción</p>
+    </div>
+    <div :class="{ invalid: !rate.isValid }">
+      <label for="rate">Presupuesto mensual máximo (€)</label>
+      <input id="rate" v-model.number="rate.value" type="number" @blur="clearValidity(rate)" />
+      <p v-if="!rate.isValid" class="font-bold text-red-600">El precio debe ser mayor de 0</p>
+    </div>
+    <div :class="{ invalid: !area.isValid }">
+      <label for="area">Zona</label>
+      <input id="area" v-model.trim="area.value" type="text" @blur="clearValidity(area)" />
+      <p v-if="!area.isValid" class="font-bold text-red-600">La zona no puede estar vacía</p>
+    </div>
+    <div :class="{ invalid: !startMonth.isValid }">
+      <label for="startMonth">Busco piso para</label>
+      <select
+        id="startMonth"
+        v-model.trim="startMonth.value"
+        name="startMonth"
+        @blur="clearValidity(startMonth)"
+      >
+        <option value=""></option>
+        <option v-for="month in monthsOptions" :key="month" :value="month">{{ month }}</option>
+      </select>
+      <p v-if="!startMonth.isValid" class="font-bold text-red-600">Selecciona una opción</p>
+    </div>
+    <div :class="{ invalid: !monthsDuration.isValid }">
+      <label for="monthsDuration">Quiero quedarme (meses)</label>
+      <input
+        id="monthsDuration"
+        v-model.number="monthsDuration.value"
+        type="number"
+        @blur="clearValidity(monthsDuration)"
+      />
+      <p v-if="!monthsDuration.isValid" class="font-bold text-red-600">
+        El número de meses debe ser mayor de 0
+      </p>
+    </div>
+    <div :class="{ invalid: !isShared.isValid }">
+      <label for="isShared">Busco piso compartido con</label>
+      <select
+        id="isShared"
+        v-model.trim="isShared.value"
+        name="isShared"
+        @blur="clearValidity(isShared)"
+      >
+        <option :value="null"></option>
+        <option :value="true">Otros estudiántes y jóvenes</option>
+        <option :value="false">Estudio o apartamento pequeño (yo solo)</option>
+      </select>
+      <p v-if="!isShared.isValid" class="font-bold text-red-600">Selecciona una opción</p>
+    </div>
+    <div v-if="isShared.value">
+      <div :class="{ invalid: !numPartners.isValid }">
+        <label for="numPartners">Busco compartir piso con</label>
+        <select
+          id="numPartners"
+          v-model.trim="numPartners.value"
+          name="numPartners"
+          @blur="clearValidity(numPartners)"
+        >
+          <option :value="null"></option>
+          <option :value="1">1 persona</option>
+          <option :value="2">2 personas</option>
+          <option :value="3">3 o más personas</option>
+          <option :value="0">Indiferente</option>
+        </select>
+        <p v-if="!numPartners.isValid" class="font-bold text-red-600">Selecciona una opción</p>
+      </div>
+      <div :class="{ invalid: !freePlaces.isValid }">
+        <label for="freePlaces">Nº total de plazas libres en un mismo piso</label>
+        <select
+          id="freePlaces"
+          v-model.trim="freePlaces.value"
+          name="freePlaces"
+          @blur="clearValidity(freePlaces)"
+        >
+          <option :value="null"></option>
+          <option :value="1">1</option>
+          <option :value="2">2</option>
+          <option :value="3">3</option>
+          <option :value="4">4</option>
+          <option :value="5">5</option>
+          <option :value="6">6</option>
+          <option :value="7">Más de 6</option>
+          <option :value="0">Indiferente</option>
+        </select>
+        <p v-if="!typeRoom.isValid" class="font-bold text-red-600">Selecciona una opción</p>
+      </div>
+      <div :class="{ invalid: !typeRoom.isValid }">
+        <label for="typeRoom">Busco una habitación</label>
+        <select
+          id="typeRoom"
+          v-model.trim="typeRoom.value"
+          name="typeRoom"
+          @blur="clearValidity(typeRoom)"
+        >
+          <option :value="null"></option>
+          <option :value="1">Individual</option>
+          <option :value="2">Doble</option>
+          <option :value="0">Indiferente</option>
+        </select>
+        <p v-if="!typeRoom.isValid" class="font-bold text-red-600">Selecciona una opción</p>
+      </div>
+    </div>
+    <div :class="{ invalid: !typeBed.isValid }">
+      <label for="typeBed">Quiero una cama</label>
+      <select
+        id="typeBed"
+        v-model.trim="typeBed.value"
+        name="typeBed"
+        @blur="clearValidity(typeBed)"
+      >
+        <option :value="null"></option>
+        <option :value="1">Individual</option>
+        <option :value="2">Doble</option>
+        <option :value="0">Indiferente</option>
+      </select>
+      <p v-if="!typeBed.isValid" class="font-bold text-red-600">Selecciona una opción</p>
+    </div>
+    <div :class="{ invalid: !isSmoke.isValid }">
+      <label for="isSmoke">¿Fumo?</label>
+      <select
+        id="isSmoke"
+        v-model.trim="isSmoke.value"
+        name="isSmoke"
+        @blur="clearValidity(isSmoke)"
+      >
+        <option :value="null"></option>
+        <option :value="true">Soy fumador</option>
+        <option :value="false">No fumador</option>
+      </select>
+      <p v-if="!isSmoke.isValid" class="font-bold text-red-600">Selecciona una opción</p>
+    </div>
+    <div :class="{ invalid: !isPet.isValid }">
+      <label for="isPet">¿Tengo mascotas?</label>
+      <select id="isPet" v-model.trim="isPet.value" name="isPet" @blur="clearValidity(isPet)">
+        <option :value="null"></option>
+        <option :value="true">Con mascotas</option>
+        <option :value="false">Sin mascotas</option>
+      </select>
+      <p v-if="!isPet.isValid" class="font-bold text-red-600">Selecciona una opción</p>
+    </div>
 
+    <div>
+      <label for="instagram">Instagram (opcional)</label>
+      <input id="instagram" v-model.trim="instagram.value" type="text" placeholder="tinder.urjc" />
+    </div>
+
+    <div>
+      <label for="whatsapp">WhatsApp (opcional)</label>
+      <input id="whatsapp" v-model.number="whatsapp.value" type="number" placeholder="605347867" />
+    </div>
+
+    <div :class="{ invalid: !tags.isValid }">
+      <h3>Características que necesito</h3>
+      <div>
+        <input
+          id="elevator"
+          v-model="tags.value"
+          type="checkbox"
+          value="elevator"
+          @blur="clearValidity(tags)"
+        />
+        <label for="elevator">Ascensor</label>
+      </div>
+
+      <div>
+        <input
+          id="couples"
+          v-model="tags.value"
+          type="checkbox"
+          value="couples"
+          @blur="clearValidity(tags)"
+        />
+        <label for="couples">Admite parejas</label>
+      </div>
+
+      <div>
+        <input
+          id="air"
+          v-model="tags.value"
+          type="checkbox"
+          value="air"
+          @blur="clearValidity(tags)"
+        />
+        <label for="air">Climatizador</label>
+      </div>
+
+      <div>
+        <input
+          id="internet"
+          v-model="tags.value"
+          type="checkbox"
+          value="internet"
+          @blur="clearValidity(tags)"
+        />
+        <label for="internet">Internet WiFi</label>
+      </div>
+
+      <div>
+        <input
+          id="cleaner"
+          v-model="tags.value"
+          type="checkbox"
+          value="cleaner"
+          @blur="clearValidity(tags)"
+        />
+        <label for="cleaner">Limpieza incluida</label>
+      </div>
+
+      <div>
+        <input
+          id="bath"
+          v-model="tags.value"
+          type="checkbox"
+          value="bath"
+          @blur="clearValidity(tags)"
+        />
+        <label for="bath">Baño privado</label>
+      </div>
+
+      <div>
+        <input
+          id="lgtb"
+          v-model="tags.value"
+          type="checkbox"
+          value="lgtb"
+          @blur="clearValidity(tags)"
+        />
+        <label for="lgtb">LGTB friendly</label>
+      </div>
+
+      <p v-if="!tags.isValid" class="font-bold text-red-600">
+        Debes seleccionar al menos una característica
+      </p>
+    </div>
+
+    <p v-if="!formIsValid">Por favor, corrige los campos y vuelve a intentarlo</p>
+    <base-button>Guardar</base-button>
+  </form>
+</template>
+
+<style scoped>
 label {
   font-weight: bold;
   display: block;
@@ -551,10 +554,5 @@ h3 {
 .invalid input,
 .invalid textarea {
   border: 1px solid red;
-}
-
-.errors {
-  font-weight: bold;
-  color: red;
 }
 </style>

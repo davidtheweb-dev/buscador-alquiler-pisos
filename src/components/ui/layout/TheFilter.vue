@@ -1,29 +1,3 @@
-<template>
-  <base-card>
-    <span class="filter-option">
-      <base-button link to="/pisos" :mode="buttonMode.housing">Habitaciones</base-button>
-      <base-button link to="/companeros" :mode="buttonMode.partner">Compañeros</base-button>
-    </span>
-    <span class="filter-option gap">
-      <div><i class="fa-solid fa-filter fa-xl"></i><button class="filter-button"></button></div>
-      <base-like id="filter"></base-like>
-    </span>
-
-    <!-- <span class="filter-option">
-      <input id="lgtb" type="checkbox" checked @change="setFilter" />
-      <label for="lgtb">LGTB friendly</label>
-    </span>
-    <span class="filter-option">
-      <input id="bath" type="checkbox" checked @change="setFilter" />
-      <label for="bath">Baño privado</label>
-    </span>
-    <span class="filter-option">
-      <input id="couples" type="checkbox" checked @change="setFilter" />
-      <label for="couples">Admite parejas</label>
-    </span> -->
-  </base-card>
-</template>
-
 <script setup>
 // const emit = defineEmits(['change-filter']);
 
@@ -71,22 +45,32 @@ function checkMode() {
 }
 </script>
 
-<style scoped>
-.filter-option {
-  padding: 0.7rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+<template>
+  <base-card>
+    <span class="flex items-center justify-center p-3">
+      <base-button link to="/pisos" :mode="buttonMode.housing">Habitaciones</base-button>
+      <base-button link to="/companeros" :mode="buttonMode.partner">Compañeros</base-button>
+    </span>
+    <span class="flex items-center justify-center gap-4 p-3">
+      <div>
+        <!-- eslint-disable-next-line tailwindcss/no-custom-classname -->
+        <i class="fa-solid fa-filter fa-xl"></i
+        ><button class="border-none bg-transparent font-bold text-color-white-100"></button>
+      </div>
+      <base-like id="filter"></base-like>
+    </span>
 
-.gap {
-  gap: 1rem;
-}
-
-.filter-button {
-  font-weight: bold;
-  color: var(--color-white-100);
-  background-color: transparent;
-  border: none;
-}
-</style>
+    <!-- <span class="filter-option">
+      <input id="lgtb" type="checkbox" checked @change="setFilter" />
+      <label for="lgtb">LGTB friendly</label>
+    </span>
+    <span class="filter-option">
+      <input id="bath" type="checkbox" checked @change="setFilter" />
+      <label for="bath">Baño privado</label>
+    </span>
+    <span class="filter-option">
+      <input id="couples" type="checkbox" checked @change="setFilter" />
+      <label for="couples">Admite parejas</label>
+    </span> -->
+  </base-card>
+</template>

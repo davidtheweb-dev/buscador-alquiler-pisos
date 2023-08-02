@@ -1,12 +1,3 @@
-<template>
-  <section>
-    <base-card>
-      <h2>¡Edita tu anuncio!</h2>
-      <partner-form :partner-info="userPartner" @save-data="saveData"></partner-form>
-    </base-card>
-  </section>
-</template>
-
 <script setup>
 import { computed } from 'vue';
 import { usePartnerStore } from '../../stores/partner/PartnerStore';
@@ -27,3 +18,12 @@ function saveData(newPartnerData) {
   router.replace('/mis-anuncios');
 }
 </script>
+
+<template>
+  <section>
+    <base-card>
+      <h2>¡Edita tu anuncio!</h2>
+      <partner-form :partner-info="userPartner" @save-data="saveData"></partner-form>
+    </base-card>
+  </section>
+</template>

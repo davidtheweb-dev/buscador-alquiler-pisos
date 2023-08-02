@@ -1,42 +1,3 @@
-<template>
-  <div>
-    <base-dialog
-      :show="!!error"
-      title="Por favor, contacta con soporte indicando el error"
-      @close="handleDialogError"
-    >
-      <p>{{ error }}</p>
-    </base-dialog>
-    <section>
-      <the-filter @change-filter="setFilters"></the-filter>
-    </section>
-    <section>
-      <base-card>
-        <div class="controls">
-          <base-button mode="outline" @click="loadHousing(true)">Actualizar</base-button>
-          <base-button v-if="!isLoggedIn" link to="/autenticacion?redirect=registro"
-            >¡Sube tu piso!</base-button
-          >
-          <base-button v-if="isLoggedIn && !userHasHousing && !isLoading" link to="/registro-piso"
-            >¡Sube tu piso!</base-button
-          >
-        </div>
-        <div v-if="isLoading">
-          <base-spinner></base-spinner>
-        </div>
-        <ul v-else-if="filterHasHousing">
-          <housing-item
-            v-for="housing in filteredHousing"
-            :key="housing.id"
-            :housing="housing"
-          ></housing-item>
-        </ul>
-        <h3 v-else>No se han encontrado viviendas</h3>
-      </base-card>
-    </section>
-  </div>
-</template>
-
 <script setup>
 import { ref, reactive, computed, onBeforeMount } from 'vue';
 import { useAuthStore } from '../../stores/auth/AuthStore';
@@ -113,15 +74,49 @@ function handleDialogError() {
 }
 </script>
 
+<template>
+  <div>
+    <base-dialog
+      :show="!!error"
+      title="Por favor, contacta con soporte indicando el error"
+      @close="handleDialogError"
+    >
+      <p>{{ error }}</p>
+    </base-dialog>
+    <section>
+      <the-filter @change-filter="setFilters"></the-filter>
+    </section>
+    <section>
+      <base-card>
+        <div class="flex justify-between">
+          <base-button mode="outline" @click="loadHousing(true)">Actualizar</base-button>
+          <base-button v-if="!isLoggedIn" link to="/autenticacion?redirect=registro"
+            >¡Sube tu piso!</base-button
+          >
+          <base-button v-if="isLoggedIn && !userHasHousing && !isLoading" link to="/registro-piso"
+            >¡Sube tu piso!</base-button
+          >
+        </div>
+        <div v-if="isLoading">
+          <base-spinner></base-spinner>
+        </div>
+        <ul v-else-if="filterHasHousing">
+          <housing-item
+            v-for="housing in filteredHousing"
+            :key="housing.id"
+            :housing="housing"
+          ></housing-item>
+        </ul>
+        <h3 v-else>No se han encontrado viviendas</h3>
+      </base-card>
+    </section>
+  </div>
+</template>
+
 <style scoped>
 ul {
   list-style: none;
   margin: 0;
   padding: 0;
-}
-
-.controls {
-  display: flex;
-  justify-content: space-between;
 }
 </style>

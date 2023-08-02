@@ -1,25 +1,32 @@
 {
   "name": "student-rent-finder",
   "version": "0.1.0",
-  "type": "module",
+  "description": "Rental search app that connects students looking for roommates with students looking for a room",
   "private": true,
+  "type": "module",
+  "author": "David Hermosilla Duro",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
-    "vue": "^3.2.47",
-    "vue-router": "^4.0.13",
-    "pinia": "^2.1.3"
+    "vue": "^3.3.4",
+    "pinia": "^2.1.6",
+    "vue-router": "^4.2.4"
   },
   "devDependencies": {
-    "vite": "^4.3.2",
+    "vite": "^4.4.7",
+    "@vitejs/plugin-vue": "^4.2.3",
     "vite-plugin-eslint": "^1.8.1",
-    "@vitejs/plugin-vue": "^4.1.0",
-    "eslint": "^8.42.0",
-    "eslint-config-prettier": "^8.8.0",
-    "eslint-plugin-vue": "^9.14.1",
-    "cypress": "^12.12.0"
+    "eslint": "^8.46.0",
+    "eslint-plugin-vue": "^9.16.0",
+    "eslint-config-prettier": "^8.9.0",
+    "eslint-plugin-tailwindcss": "^3.13.0",
+    "vue-eslint-parser": "^9.3.1",
+    "postcss": "^8.4.27",
+    "autoprefixer": "^10.4.14",
+    "tailwindcss": "^3.3.3",
+    "prettier-plugin-tailwindcss": "^0.4.1"
   }
 }
