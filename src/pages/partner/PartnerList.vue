@@ -1,42 +1,3 @@
-<template>
-  <div>
-    <base-dialog
-      :show="!!error"
-      title="Por favor, contacta con soporte indicando el error"
-      @close="handleDialogError"
-    >
-      <p>{{ error }}</p>
-    </base-dialog>
-    <section>
-      <the-filter @change-filter="setFilters"></the-filter>
-    </section>
-    <section>
-      <base-card>
-        <div class="controls">
-          <base-button mode="outline" @click="loadPartner(true)">Actualizar</base-button>
-          <base-button v-if="!isLoggedIn" link to="/autenticacion?redirect=registro"
-            >¡Sube tu anuncio!</base-button
-          >
-          <base-button v-if="isLoggedIn && !userHasPartner && !isLoading" link to="/registro-piso"
-            >¡Sube tu anuncio!</base-button
-          >
-        </div>
-        <div v-if="isLoading">
-          <base-spinner></base-spinner>
-        </div>
-        <ul v-else-if="filterHasPartner">
-          <partner-item
-            v-for="partner in filteredPartner"
-            :key="partner.id"
-            :partner="partner"
-          ></partner-item>
-        </ul>
-        <h3 v-else>No se han encontrado compañeros</h3>
-      </base-card>
-    </section>
-  </div>
-</template>
-
 <script setup>
 import { ref, reactive, computed, onBeforeMount } from 'vue';
 import { useAuthStore } from '../../stores/auth/AuthStore';
@@ -113,6 +74,48 @@ function handleDialogError() {
 }
 </script>
 
+<template>
+  <div>
+    <base-dialog
+      :show="!!error"
+      title="Por favor, contacta con soporte indicando el error"
+      @close="handleDialogError"
+    >
+      <p>{{ error }}</p>
+    </base-dialog>
+    <section class="sticky -top-20">
+      <the-filter @change-filter="setFilters"></the-filter>
+    </section>
+    <section>
+      <base-card>
+        <div class="flex justify-between">
+          <base-button mode="outline" @click="loadPartner(true)">Actualizar</base-button>
+          <base-button v-if="!isLoggedIn" link to="/autenticacion?redirect=registro"
+            >¡Sube tu anuncio!</base-button
+          >
+          <base-button
+            v-if="isLoggedIn && !userHasPartner && !isLoading"
+            link
+            to="/registro-companero"
+            >¡Sube tu anuncio!</base-button
+          >
+        </div>
+        <div v-if="isLoading">
+          <base-spinner></base-spinner>
+        </div>
+        <ul v-else-if="filterHasPartner">
+          <partner-item
+            v-for="partner in filteredPartner"
+            :key="partner.id"
+            :partner="partner"
+          ></partner-item>
+        </ul>
+        <h3 v-else>No se han encontrado compañeros</h3>
+      </base-card>
+    </section>
+  </div>
+</template>
+
 <style scoped>
 ul {
   list-style: none;
@@ -122,10 +125,5 @@ ul {
 
 h3 {
   text-align: center;
-}
-
-.controls {
-  display: flex;
-  justify-content: space-between;
 }
 </style>

@@ -1,18 +1,7 @@
 <template>
-  <div class="card">
+  <div
+    class="mx-auto my-8 w-11/12 max-w-2xl rounded-xl bg-color-surface-200 p-4 text-color-white-100 shadow-md"
+  >
     <slot></slot>
   </div>
 </template>
-
-<style scoped>
-.card {
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-  padding: 1rem;
-  margin: 2rem auto;
-  width: 93%;
-  max-width: 40rem;
-  background-color: var(--color-surface-200);
-  color: var(--color-white-100);
-}
-</style>

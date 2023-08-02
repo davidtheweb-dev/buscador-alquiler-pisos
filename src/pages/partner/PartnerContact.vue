@@ -1,20 +1,3 @@
-<template>
-  <form @submit.prevent="submitForm">
-    <div>
-      <label for="email">Correo electrónico</label>
-      <input id="email" v-model.trim="email" type="email" />
-    </div>
-    <div class="form-control">
-      <label for="message">Mensaje</label>
-      <textarea id="message" v-model.trim="message" rows="5"></textarea>
-    </div>
-    <p v-if="!formIsValid" class="errors">Por favor, introduce un email y mensaje válidos</p>
-    <div class="actions">
-      <base-button>Envía tu mensaje</base-button>
-    </div>
-  </form>
-</template>
-
 <script setup>
 import { ref } from 'vue';
 import { useRequestsStore } from '../../stores/requests/RequestsStore';
@@ -45,16 +28,31 @@ function submitForm() {
 }
 </script>
 
+<template>
+  <form @submit.prevent="submitForm">
+    <div>
+      <label for="email">Correo electrónico</label>
+      <input id="email" v-model.trim="email" type="email" />
+    </div>
+    <div class="my-2">
+      <label for="message">Mensaje</label>
+      <textarea id="message" v-model.trim="message" rows="5"></textarea>
+    </div>
+    <p v-if="!formIsValid" class="font-bold text-red-600">
+      Por favor, introduce un email y mensaje válidos
+    </p>
+    <div class="text-center">
+      <base-button>Envía tu mensaje</base-button>
+    </div>
+  </form>
+</template>
+
 <style scoped>
 form {
   margin: 1rem auto 1rem auto;
   border: 1px solid var(--color-surface-600);
   border-radius: 12px;
   padding: 2rem 1.5rem 2rem 1.5rem;
-}
-
-.form-control {
-  margin: 0.5rem 0;
 }
 
 label {
@@ -78,14 +76,5 @@ input:focus,
 textarea:focus {
   border-color: var(--color-primary-600);
   outline: none;
-}
-
-.errors {
-  font-weight: bold;
-  color: red;
-}
-
-.actions {
-  text-align: center;
 }
 </style>

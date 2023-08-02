@@ -1,3 +1,4 @@
+<!-- eslint-disable tailwindcss/no-custom-classname -->
 <template>
   <div>
     <input :id="id" class="checkbox" type="checkbox" />
