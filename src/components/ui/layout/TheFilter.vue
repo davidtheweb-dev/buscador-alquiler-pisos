@@ -20,33 +20,34 @@
 //   emit('change-filter', updatedFilters);
 // }
 
-import { ref, reactive, onMounted } from 'vue';
+import { ref, onBeforeMount } from 'vue';
 import { useRoute } from 'vue-router';
 import { useHousingStore } from '../../../stores/housing/HousingStore';
 import { usePartnerStore } from '../../../stores/partner/PartnerStore';
+import { AdjustmentsHorizontalIcon } from '@heroicons/vue/24/solid';
 
 const route = useRoute();
 const housingStore = useHousingStore();
 const partnerStore = usePartnerStore();
 
-const buttonMode = reactive({
-  housing: null,
-  partner: null,
-});
-
-onMounted(() => {
+onBeforeMount(() => {
   checkMode();
 });
 
 function checkMode() {
   if (route.path === '/pisos') {
-    buttonMode.housing = '';
-    buttonMode.partner = 'outline';
+    tabs[0].current = true;
+    tabs[1].current = false;
   } else {
-    buttonMode.partner = '';
-    buttonMode.housing = 'outline';
+    tabs[0].current = false;
+    tabs[1].current = true;
   }
 }
+
+const tabs = [
+  { name: 'Habitaciones', href: '/pisos', current: true },
+  { name: 'Compañeros', href: '/companeros', current: false },
+];
 
 const showDialog = ref(null);
 function closeDialog() {
@@ -56,7 +57,7 @@ function closeDialog() {
 
 <template>
   <base-card class="bg-color-surface-250 pb-0 shadow-2xl">
-    <div v-if="showDialog" class="fixed left-0 top-0 z-0 h-full w-full bg-color-surface-100">
+    <div v-if="showDialog" class="fixed left-0 top-0 z-10 h-full w-full bg-color-surface-100">
       <header>
         <nav>
           <base-button @click="closeDialog"
@@ -72,16 +73,32 @@ function closeDialog() {
       <base-card></base-card>
     </div>
 
-    <span class="flex items-center justify-center p-3">
-      <base-button link to="/pisos" :mode="buttonMode.housing">Habitaciones</base-button>
-      <base-button link to="/companeros" :mode="buttonMode.partner">Compañeros</base-button>
-    </span>
+    <nav class="isolate flex divide-x divide-gray-200 rounded-lg p-1 shadow" aria-label="Tabs">
+      <a
+        v-for="(tab, tabIdx) in tabs"
+        :key="tab.name"
+        :href="tab.href"
+        :class="[
+          tab.current ? 'text-gray-900' : 'text-gray-500 hover:text-gray-700',
+          tabIdx === 0 ? 'rounded-l-lg' : '',
+          tabIdx === tabs.length - 1 ? 'rounded-r-lg' : '',
+          'group relative min-w-0 flex-1 overflow-hidden bg-white p-4 text-center text-sm font-medium hover:bg-gray-50 focus:z-10',
+        ]"
+        :aria-current="tab.current ? 'page' : undefined"
+      >
+        <span>{{ tab.name }}</span>
+        <span
+          aria-hidden="true"
+          :class="[
+            tab.current ? 'bg-indigo-500' : 'bg-transparent',
+            'absolute inset-x-0 bottom-0 h-0.5',
+          ]"
+        />
+      </a>
+    </nav>
 
     <span class="flex items-center justify-center gap-4 p-3">
-      <div>
-        <!-- eslint-disable-next-line tailwindcss/no-custom-classname -->
-        <i class="fa-solid fa-filter fa-xl" @click="showDialog = true"></i>
-      </div>
+      <AdjustmentsHorizontalIcon class="m-2 h-8 w-8 cursor-pointer" @click="showDialog = true" />
       <base-like id="filter"></base-like>
     </span>
 

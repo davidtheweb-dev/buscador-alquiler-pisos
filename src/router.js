@@ -17,7 +17,7 @@ const PartnerEdit = () => import('./pages/partner/PartnerEdit.vue');
 const RequestsReceived = () => import('./pages/requests/RequestsReceived.vue');
 const MyAds = () => import('./pages/MyAds.vue');
 const UserAuth = () => import('./pages/auth/UserAuth.vue');
-const SettingOptions = () => import('./pages/SettingOptions.vue');
+const AboutUs = () => import('./pages/AboutUs.vue');
 const NotFound = () => import('./pages/NotFound.vue');
 
 const router = createRouter({
@@ -79,7 +79,7 @@ const router = createRouter({
     },
 
     { path: '/mis-anuncios', component: MyAds },
-    { path: '/preferencias', component: SettingOptions },
+    { path: '/sobre-nosotros', component: AboutUs },
     {
       path: '/solicitudes',
       component: RequestsReceived,

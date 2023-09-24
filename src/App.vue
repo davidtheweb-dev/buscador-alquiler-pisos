@@ -64,7 +64,7 @@ watch(didAutoLogout, (currentValue, oldValue) => {
 
 html {
   font-family: 'Roboto', sans-serif;
-  background-color: var(--color-surface-100);
+  @apply bg-white;
 }
 
 body {
